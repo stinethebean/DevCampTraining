@@ -15,9 +15,9 @@ In this lab, you will create a cloud development environment and build a cloud-h
 ##Exercises
 The hands-on lab includes the following exercises:
 1. <a href="#Exercise1">Obtain Office 365 and Azure subscriptions</a>
-2. <a href="#Exercise1">Create a Provider-Hosted App</a>
-3. <a href="#Exercise1">Access a Database using MVC5</a>
-4. <a href="#Exercise1">Deploy the App to Production</a>
+2. <a href="#Exercise2">Create a Provider-Hosted App</a>
+3. <a href="#Exercise3">Access a Database using MVC5</a>
+4. <a href="#Exercise4">Deploy the App to Production</a>
 
 <a name="Exercise1"></a>
 ##Exercise 1: Obtain Office 365 and Azure subscriptions
