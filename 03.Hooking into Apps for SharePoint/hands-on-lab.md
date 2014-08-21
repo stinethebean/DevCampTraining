@@ -7,7 +7,6 @@ In this lab, you will create apps that use both OAuth security and the cross-dom
 ##Objectives
 - Understand the OAuth flow in a Provider-Hosted app
 - Understand how to use the Cross-Domain Library in a Provider-Hosted app
-- 
 
 ##Prerequisites
 - Visual Studio 2013 for Windows 8
@@ -15,9 +14,9 @@ In this lab, you will create apps that use both OAuth security and the cross-dom
 - You must have [Fiddler] (http://www.telerik.com/fiddler) installed.
 
 ##Exercises
-The hands-on lab includes the following exercises:
-1. <a href="#Exercise1">OAuth in a Provider-Hosted App</a>
-2. <a href="#Exercise2">Cross-Domain Library in a Provider-Hosted App</a>
+The hands-on lab includes the following exercises:<br/>
+1. <a href="#Exercise1">OAuth in a Provider-Hosted App</a><br/>
+2. <a href="#Exercise2">Cross-Domain Library in a Provider-Hosted App</a><br/>
 
 <a name="Exercise1"></a>
 ##Exercise 1: OAuth in a Provider-Hosted App
@@ -214,12 +213,15 @@ Follow these steps to access a list in the app web.
     }());
     ```
 14. Open **Default.aspx** from the **DeepDiveCloudAppWeb** project.
-15. Add the following script reference in the **head** section.
+15. Add the following script references in the **head** section.
+
     ```
     <script src="../Scripts/jquery-1.9.1.js"></script>
     <script src="../Scripts/crossdomain.js"></script>
     ```
+
 16. Add an unordered list element to display the terms. The list element is shown in context below.
+
     ```
     <body>
     <form id="form1" runat="server">
@@ -230,6 +232,7 @@ Follow these steps to access a list in the app web.
     </form>
     </body>
     ```
+
 17. Press **F5** to debug the app.<br/>
      ![](img/19.png?raw=true "Figure 9")
 
