@@ -13,11 +13,11 @@ In this lab, you will create a cloud development environment and build a cloud-h
 - Visual Studio 2013 for Windows 8
 
 ##Exercises
-The hands-on lab includes the following exercises:
-1. <a href="#Exercise1">Obtain Office 365 and Azure subscriptions</a>
-2. <a href="#Exercise2">Create a Provider-Hosted App</a>
-3. <a href="#Exercise3">Access a Database using MVC5</a>
-4. <a href="#Exercise4">Deploy the App to Production</a>
+The hands-on lab includes the following exercises:<br/>
+1. <a href="#Exercise1">Obtain Office 365 and Azure subscriptions</a><br/>
+2. <a href="#Exercise2">Create a Provider-Hosted App</a><br/>
+3. <a href="#Exercise3">Access a Database using MVC5</a><br/>
+4. <a href="#Exercise4">Deploy the App to Production</a><br/>
 
 <a name="Exercise1"></a>
 ##Exercise 1: Obtain Office 365 and Azure subscriptions
