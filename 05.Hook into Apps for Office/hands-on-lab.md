@@ -107,17 +107,17 @@ Follow these steps to create the Azure Active Directory app.
 2. Click **Active Directory**.
 3. Click the Azure Active Directory associated with your subscription.
 4. Click **Applications**.<br/>
-     ![](img/01.png?raw=true "Figure 1")
+     ![](img/01.png?raw=true "Figure 14")
 5. Click **Add**.
 6. Click **Add an application my organization is developing**.<br/>
-     ![](img/02.png?raw=true "Figure 2")
-7. Name the new app **WordResearchApp**.
+     ![](img/02.png?raw=true "Figure 15")
+7. Name the new app **OutlookResearchApp**.
 8. Click the **arrow**.<br/>
-     ![](img/03.png?raw=true "Figure 3")
-9. Enter **https://localhost:44372/** in the **Sign-On URL** field.
-10. Enter **https://localhost:44372/WordReasearchApp** in the **App ID URI** field.
+     ![](img/12.png?raw=true "Figure 16")
+9. Enter **https://localhost:44366/** in the **Sign-On URL** field.
+10. Enter **https://localhost:44366/OutlookReasearchApp** in the **App ID URI** field.
 11. Click the **Checkmark**.<br/>
-     ![](img/04.png?raw=true "Figure 4")
+     ![](img/13.png?raw=true "Figure 17")
 
 Now you have created a new Azure Active Directory app.
 
@@ -125,32 +125,32 @@ Now you have created a new Azure Active Directory app.
 Follow these steps to configure the Azure Active Directory app.
 
 1. Click **Configure**.<br/>
-     ![](img/05.png?raw=true "Figure 5")
+     ![](img/05.png?raw=true "Figure 18")
 2. Locate and copy the **Client ID**. **Save** the value for later.<br/>
-     ![](img/06.png?raw=true "Figure 6")
+     ![](img/06.png?raw=true "Figure 19")
 3. In the **Keys** section, select **2 Years** for the duration.<br/>
-     ![](img/07.png?raw=true "Figure 7")
+     ![](img/07.png?raw=true "Figure 20")
 4. Click the **Save** button.<br/>
-     ![](img/08.png?raw=true "Figure 8")
+     ![](img/08.png?raw=true "Figure 21")
 5. After the settings save, copy the key. **Save** the value for later.<br/>
-     ![](img/09.png?raw=true "Figure 9")
-6. In the **Reply URL** section, add **https://localhost:44372/Home** and **https://localhost:44372/OAuth**.<br/>
-     ![](img/10.png?raw=true "Figure 10")
+     ![](img/09.png?raw=true "Figure 22")
+6. In the **Reply URL** section, add **https://localhost:44366/Home** and **https://localhost:44366/OAuth**.<br/>
+     ![](img/14.png?raw=true "Figure 23")
 7. Click the **Save** button.<br/>
-     ![](img/08.png?raw=true "Figure 11")
+     ![](img/08.png?raw=true "Figure 24")
 8. In the **Permissions to Other Applications** section, select **Office 365 SharePoint Online**.
 9. Grant **Create or Delete Items**, **Edit Items**, and **Read Items** permissions.<br/>
-     ![](img/11.png?raw=true "Figure 12")
+     ![](img/11.png?raw=true "Figure 25")
 10. Click the **Save** button.<br/>
-     ![](img/08.png?raw=true "Figure 13")
+     ![](img/08.png?raw=true "Figure 26")
 
 Now you have configured the Azure Active Directory app.
 
 ###Task 3 - Configure the MVC5 Web Application
 Follow these steps to configure the MVC5 Web Application.
 
-1. In Visual studio 2013, Open **Word.sln**, which is located in the **src** directory.
-2. Expand the **WordResearchTrackerWeb** project.
+1. In Visual studio 2013, Open **Outlook.sln**, which is located in the **src** directory.
+2. Expand the **OutlookResearchTrackerWeb** project.
 3. Open the **web.config** file.
   1. **Replace** the **ida:Tenant** setting with the appropriate value for your environment.
   2. **Replace** the **ida:ClientID** setting with the value you saved earlier.
@@ -164,12 +164,18 @@ Now the application is configured.
 ###Task 4 - Test the Application
 Follow these steps to test the application.
 
-1. Right click the **WordResearchTrackerWeb** project and select **Debug/Start New Instance**.
-2. Right click the **WordResearchTracker** project and select **Debug/Start New Instance**.
-3. When Word starts, log into Office 365 when prompted.
-4. When the app appears, select a research project.
-5. Select a research item.
-6. Insert the item into the current Word document.
+1. Right click the **OutlookResearchTrackerWeb** project and select **Debug/Start New Instance**.
+2. Right click the **OutlookResearchTracker** project and select **Debug/Start New Instance**.
+3. When prompted by the **Connect to Exchange E-mail Account** dialog, enter your credentials.
+4. Click **Connect**.
+5. When the **Outlook Web App** starts, you will need to locate an e-mail containing a hyperlink. (Note: In the current build, the hyperlink must be a literal value like http://www.microsoft.com).<br/>
+     ![](img/16.png?raw=true "Figure 27")
+6. Click **Research Tracker**.
+7. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.
+8. If you receive a second error notification, click **Start**.
+9. When the app starts, select a **Research Project**.
+10. Select a **Discoved Link**.
+11. Click **Add Link to project**.
 
 Now you have completed testing the application.
 

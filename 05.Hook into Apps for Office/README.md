@@ -1,18 +1,12 @@
-Module 00 - *MODULE-TITLE*
-======================
+Module 05 - HOOIKING INTO APPS FOR OFFICE
+=========================================
 
-> todo: description of the module
+This module deomnstrates the development of Apps for Office using Word and Outlook.
 
 ##Presentation
-View this module's accompanying [presentation](presentation.pptx).
+View this module's accompanying [presentation](05.Hook into Apps for Office.pptx).
 
 ##Hands On Lab
-> todo: description of the HOL & update the link below to be more descriptive
+The lab let's students configure and run Apps for Office using Word and Outlook.
 
 View this module's accompanying [hands on lab](hands-on-lab.md)
-
-> notes:
-> - update the module # & title in the heading
-> - use the **/src** folder where code for final solution should go
-> - use the **/img** folder where images in the HOL should go
-> - remove the block quotes form this document as they are used for "note-to-self" when complete
