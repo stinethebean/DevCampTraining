@@ -1,18 +1,13 @@
-Module 00 - *MODULE-TITLE*
-======================
+Module 03 - Hooking into Apps for SharePoint
+============================================
 
-> todo: description of the module
+This module covers developing Provider-Hosted apps, OAuth programming, and Cross-Domain Library programming.
 
 ##Presentation
-View this module's accompanying [presentation](presentation.pptx).
+View this module's accompanying [presentation](Hooking%20into%20Apps%20for%20SharePoint.pptx).
 
 ##Hands On Lab
-> todo: description of the HOL & update the link below to be more descriptive
+The lab creates apps that use both OAuth security and the cross-domain library.
 
 View this module's accompanying [hands on lab](hands-on-lab.md)
 
-> notes:
-> - update the module # & title in the heading
-> - use the **/src** folder where code for final solution should go
-> - use the **/img** folder where images in the HOL should go
-> - remove the block quotes form this document as they are used for "note-to-self" when complete
