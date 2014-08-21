@@ -53,18 +53,18 @@ Follow these steps to configure the Azure Active Directory app.
      ![](img/06.png?raw=true "Figure 6")
 3. In the **Keys** section, select **2 Years** for the duration.<br/>
      ![](img/07.png?raw=true "Figure 7")
-4. Click the **Save** button.<br/>
+4. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 8")
 5. After the settings save, copy the key. **Save** the value for later.<br/>
      ![](img/09.png?raw=true "Figure 9")
 6. In the **Reply URL** section, add **https://localhost:44372/Home** and **https://localhost:44372/OAuth**.<br/>
      ![](img/10.png?raw=true "Figure 10")
-7. Click the **Save** button.<br/>
+7. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 11")
 8. In the **Permissions to Other Applications** section, select **Office 365 SharePoint Online**.
 9. Grant **Create or Delete Items**, **Edit Items**, and **Read Items** permissions.<br/>
      ![](img/11.png?raw=true "Figure 12")
-10. Click the **Save** button.<br/>
+10. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 13")
 
 Now you have configured the Azure Active Directory app.
@@ -130,18 +130,18 @@ Follow these steps to configure the Azure Active Directory app.
      ![](img/06.png?raw=true "Figure 19")
 3. In the **Keys** section, select **2 Years** for the duration.<br/>
      ![](img/07.png?raw=true "Figure 20")
-4. Click the **Save** button.<br/>
+4. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 21")
 5. After the settings save, copy the key. **Save** the value for later.<br/>
      ![](img/09.png?raw=true "Figure 22")
 6. In the **Reply URL** section, add **https://localhost:44366/Home** and **https://localhost:44366/OAuth**.<br/>
      ![](img/14.png?raw=true "Figure 23")
-7. Click the **Save** button.<br/>
+7. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 24")
 8. In the **Permissions to Other Applications** section, select **Office 365 SharePoint Online**.
 9. Grant **Create or Delete Items**, **Edit Items**, and **Read Items** permissions.<br/>
      ![](img/11.png?raw=true "Figure 25")
-10. Click the **Save** button.<br/>
+10. Click the **Save** button.
      ![](img/08.png?raw=true "Figure 26")
 
 Now you have configured the Azure Active Directory app.
@@ -171,9 +171,9 @@ Follow these steps to test the application.
 5. When the **Outlook Web App** starts, you will need to locate an e-mail containing a hyperlink. (Note: In the current build, the hyperlink must be a literal value like http://www.microsoft.com).<br/>
      ![](img/16.png?raw=true "Figure 27")
 6. Click **Research Tracker**.
-7. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.
+7. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.<br/>
      ![](img/17.png?raw=true "Figure 28")
-8. If you receive a second error notification, click **Start**.
+8. If you receive a second error notification, click **Start**.<br/>
      ![](img/18.png?raw=true "Figure 28")
 9. When the app starts, select a **Research Project**.
 10. Select a **Discoved Link**.
