@@ -172,7 +172,9 @@ Follow these steps to test the application.
      ![](img/16.png?raw=true "Figure 27")
 6. Click **Research Tracker**.
 7. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.
+     ![](img/17.png?raw=true "Figure 28")
 8. If you receive a second error notification, click **Start**.
+     ![](img/18.png?raw=true "Figure 28")
 9. When the app starts, select a **Research Project**.
 10. Select a **Discoved Link**.
 11. Click **Add Link to project**.
