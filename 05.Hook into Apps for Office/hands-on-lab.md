@@ -1,90 +1,180 @@
-Module 00: *HANDS ON LAB TITLE*
-==========================
+Module 05: HOOKING INTO APPS FOR OFFICE
+=======================================
 
 ##Overview
-intro to lab bla bla bla
+In this lab, configure Apps for Office in Word and Outlook. The lab uses an existing application that can be found in the src folder.
 
 ##Objectives
-- bla
-- bla
-- bla
+- Learn to configure Windows Azure to support Apps for Office
+- Understand how to create a Word task pane app
+- Understand how to create an Outlook app
 
 ##Prerequisites
-- bla
-- bla
-- bla
+- Visual Studio 2013 for Windows 8
+- You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
+- You must have completed the lab associated with Module 4.
 
 ##Exercises
-The hands-on lab includes the following exercises:
-- [bla internal link > exercise in this doc](#exercise1)
-- [bla internal link > exercise in this doc](#exercise2)
-- [bla internal link > exercise in this doc](#exercise3)
+The hands-on lab includes the following exercises:<br/>
+1. <a href="#Exercise1">Configure a Word app</a><br/>
+2. <a href="#Exercise2">Configure an Outlook app</a><br/>
 
-<a name="exercise1"></a>
-##Exercise 1: bla bla bla
-intro to exercise bla bla bla
+<a name="Exercise1"></a>
+##Exercise 1: Configure a Word app
+In this exercise you will configure and run a Word app in a task pane.
 
-###Task 1 - bla bla bla
-intro to task bla bla bla
+###Task 1 - Create Azure Active Directory App
+Follow these steps to create the Azure Active Directory app.
 
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
+1. Log into the [Azure Portal](https://manage.windowsazure.com) as an administrator.
+2. Click **Active Directory**.
+3. Click the Azure Active Directory associated with your subscription.
+4. Click **Applications**.<br/>
+     ![](img/01.png?raw=true "Figure 1")
+5. Click **Add**.
+6. Click **Add an application my organization is developing**.<br/>
+     ![](img/02.png?raw=true "Figure 2")
+7. Name the new app **WordResearchApp**.
+8. Click the **arrow**.<br/>
+     ![](img/03.png?raw=true "Figure 3")
+9. Enter **https://localhost:44372/** in the **Sign-On URL** field.
+10. Enter **https://localhost:44372/WordReasearchApp** in the **App ID URI** field.
+11. Click the **Checkmark**.<br/>
+     ![](img/04.png?raw=true "Figure 4")
 
-summary of task bla bla bla
+Now you have created a new Azure Active Directory app.
 
-###Task 2 - bla bla bla
-intro to task bla bla bla
+###Task 2 - Configure the Azure Active Directory App
+Follow these steps to configure the Azure Active Directory app.
 
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
+1. Click **Configure**.<br/>
+     ![](img/05.png?raw=true "Figure 5")
+2. Locate and copy the **Client ID**. **Save** the value for later.<br/>
+     ![](img/06.png?raw=true "Figure 6")
+3. In the **Keys** section, select **2 Years** for the duration.<br/>
+     ![](img/07.png?raw=true "Figure 7")
+4. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 8")
+5. After the settings save, copy the key. **Save** the value for later.<br/>
+     ![](img/09.png?raw=true "Figure 9")
+6. In the **Reply URL** section, add **https://localhost:44372/Home** and **https://localhost:44372/OAuth**.<br/>
+     ![](img/10.png?raw=true "Figure 10")
+7. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 11")
+8. In the **Permissions to Other Applications** section, select **Office 365 SharePoint Online**.
+9. Grant **Create or Delete Items**, **Edit Items**, and **Read Items** permissions.<br/>
+     ![](img/11.png?raw=true "Figure 12")
+10. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 13")
 
-summary of task bla bla bla
+Now you have configured the Azure Active Directory app.
 
-<a name="exercise2"></a>
-##Exercise 2: bla bla bla
-intro to exercise bla bla bla
+###Task 3 - Configure the MVC5 Web Application
+Follow these steps to configure the MVC5 Web Application.
 
-###Task 1 - bla bla bla
-intro to task bla bla bla
+1. In Visual studio 2013, Open **Word.sln**, which is located in the **src** directory.
+2. Expand the **WordResearchTrackerWeb** project.
+3. Open the **web.config** file.
+  1. **Replace** the **ida:Tenant** setting with the appropriate value for your environment.
+  2. **Replace** the **ida:ClientID** setting with the value you saved earlier.
+  3. **Replace** the **ida:AppKey** setting with the value you saved earlier.
+  4. **Replace** the **ida:Password** setting with the same value you used in the **ida:AppKey** setting.
+  5. **Replace** the **ida:Resource** setting with the appropriate value for your environment.
+  6. **Replace** the **ida:SiteUrl** setting with the appropriate value for your environment.
 
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
+Now the application is configured.
 
-summary of task bla bla bla
+###Task 4 - Test the Application
+Follow these steps to test the application.
 
-###Task 2 - bla bla bla
-intro to task bla bla bla
+1. Right click the **WordResearchTrackerWeb** project and select **Debug/Start New Instance**.
+2. Right click the **WordResearchTracker** project and select **Debug/Start New Instance**.
+3. When Word starts, log into Office 365 when prompted.
+4. When the app appears, select a research project.
+5. Select a research item.
+6. Insert the item into the current Word document.
 
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
+Now you have completed testing the application.
 
-summary of task bla bla bla
+<a name="Exercise2"></a>
+##Exercise 2: Configure an Outlook app
+In this exercise you will configure and run an Outlook app in the mail client.
+
+###Task 1 - Create Azure Active Directory App
+Follow these steps to create the Azure Active Directory app.
+
+1. Log into the [Azure Portal](https://manage.windowsazure.com) as an administrator.
+2. Click **Active Directory**.
+3. Click the Azure Active Directory associated with your subscription.
+4. Click **Applications**.<br/>
+     ![](img/01.png?raw=true "Figure 1")
+5. Click **Add**.
+6. Click **Add an application my organization is developing**.<br/>
+     ![](img/02.png?raw=true "Figure 2")
+7. Name the new app **WordResearchApp**.
+8. Click the **arrow**.<br/>
+     ![](img/03.png?raw=true "Figure 3")
+9. Enter **https://localhost:44372/** in the **Sign-On URL** field.
+10. Enter **https://localhost:44372/WordReasearchApp** in the **App ID URI** field.
+11. Click the **Checkmark**.<br/>
+     ![](img/04.png?raw=true "Figure 4")
+
+Now you have created a new Azure Active Directory app.
+
+###Task 2 - Configure the Azure Active Directory App
+Follow these steps to configure the Azure Active Directory app.
+
+1. Click **Configure**.<br/>
+     ![](img/05.png?raw=true "Figure 5")
+2. Locate and copy the **Client ID**. **Save** the value for later.<br/>
+     ![](img/06.png?raw=true "Figure 6")
+3. In the **Keys** section, select **2 Years** for the duration.<br/>
+     ![](img/07.png?raw=true "Figure 7")
+4. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 8")
+5. After the settings save, copy the key. **Save** the value for later.<br/>
+     ![](img/09.png?raw=true "Figure 9")
+6. In the **Reply URL** section, add **https://localhost:44372/Home** and **https://localhost:44372/OAuth**.<br/>
+     ![](img/10.png?raw=true "Figure 10")
+7. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 11")
+8. In the **Permissions to Other Applications** section, select **Office 365 SharePoint Online**.
+9. Grant **Create or Delete Items**, **Edit Items**, and **Read Items** permissions.<br/>
+     ![](img/11.png?raw=true "Figure 12")
+10. Click the **Save** button.<br/>
+     ![](img/08.png?raw=true "Figure 13")
+
+Now you have configured the Azure Active Directory app.
+
+###Task 3 - Configure the MVC5 Web Application
+Follow these steps to configure the MVC5 Web Application.
+
+1. In Visual studio 2013, Open **Word.sln**, which is located in the **src** directory.
+2. Expand the **WordResearchTrackerWeb** project.
+3. Open the **web.config** file.
+  1. **Replace** the **ida:Tenant** setting with the appropriate value for your environment.
+  2. **Replace** the **ida:ClientID** setting with the value you saved earlier.
+  3. **Replace** the **ida:AppKey** setting with the value you saved earlier.
+  4. **Replace** the **ida:Password** setting with the same value you used in the **ida:AppKey** setting.
+  5. **Replace** the **ida:Resource** setting with the appropriate value for your environment.
+  6. **Replace** the **ida:SiteUrl** setting with the appropriate value for your environment.
+
+Now the application is configured.
+
+###Task 4 - Test the Application
+Follow these steps to test the application.
+
+1. Right click the **WordResearchTrackerWeb** project and select **Debug/Start New Instance**.
+2. Right click the **WordResearchTracker** project and select **Debug/Start New Instance**.
+3. When Word starts, log into Office 365 when prompted.
+4. When the app appears, select a research project.
+5. Select a research item.
+6. Insert the item into the current Word document.
+
+Now you have completed testing the application.
+
 
 ##Summary
 By completing this hands-on lab you learnt how to:
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
-- bla bla bla
+- Program OAuth in a Provider-Hosted app.
+- Utilize the Cross-Domain library in a Provider-Hosted app.
