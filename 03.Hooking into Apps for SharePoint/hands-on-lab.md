@@ -231,7 +231,7 @@ Follow these steps to access a list in the app web.
     </body>
     ```
 17. Press **F5** to debug the app.<br/>
-     ![](Images/09.png?raw=true "Figure 9")
+     ![](img/19.png?raw=true "Figure 9")
 
 Now you have read list items using the Cross-Domain Library
 
