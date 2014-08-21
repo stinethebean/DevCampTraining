@@ -1,4 +1,4 @@
-Module 03: *HOOKING INTO APPS FOR SHAREPOINT*
+Module 03: HOOKING INTO APPS FOR SHAREPOINT
 =============================================
 
 ##Overview

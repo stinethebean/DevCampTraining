@@ -1,4 +1,4 @@
-Module 02: *SETTING UP THE ENVIRONMENTS*
+Module 02: SETTING UP THE ENVIRONMENTS
 ========================================
 
 ##Overview
