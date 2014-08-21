@@ -1,18 +1,13 @@
-Module 00 - *MODULE-TITLE*
-======================
+Module 02 - *SETTING UP THE ENVIRONMENTS*
+=========================================
 
-> todo: description of the module
+> This module covers the creation of Office 365 and Windows Azure developer environments.
 
 ##Presentation
 View this module's accompanying [presentation](presentation.pptx).
 
 ##Hands On Lab
-> todo: description of the HOL & update the link below to be more descriptive
+> The hands-on lab walks the student through the creation of Office 365 and Windows Azure developer environments and their first SharePoint app.
 
 View this module's accompanying [hands on lab](hands-on-lab.md)
 
-> notes:
-> - update the module # & title in the heading
-> - use the **/src** folder where code for final solution should go
-> - use the **/img** folder where images in the HOL should go
-> - remove the block quotes form this document as they are used for "note-to-self" when complete
