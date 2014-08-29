@@ -18,7 +18,7 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 - [Eclipse with the Android Developer Tools](http://developer.android.com/sdk/index.html)
 - Android SDK with API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
 - You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
-- You must have completed Module XX and linked your Azure subscription with your O365 tenant.
+- You must have completed Module 04 and linked your Azure subscription with your O365 tenant.
 
 ##Exercises
 
