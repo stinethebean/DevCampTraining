@@ -124,8 +124,8 @@ In this task we will configure and launch the Android emulator, and deploy the a
     
     Internal storage should be at least 200mb, and no SD card is required.
 
-    ***Note:** if you select the x86 image, and have the [Intel HAXM driver][haxm-driver] installed then the Android emulator will be
-    emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.*
+    **Note:** if you select the x86 image, and have the [Intel HAXM driver][haxm-driver] installed then the Android emulator will be
+    emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.
 
 [haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
 
@@ -253,7 +253,7 @@ We're ready to launch the app now.
     ![](img/21_list_tasks_activity.png)
 
 
-That's it! You've successfully configured and deployed the **Tasks for O365 SharePoint" app. Try creating and updating
+That's it! You've successfully configured and deployed the "Tasks for O365 SharePoint" app. Try creating and updating
 some of the tasks in this list.
 
 Using the **Clear auth token** function from the menu on this screen will clear your current Access Token. Your next request

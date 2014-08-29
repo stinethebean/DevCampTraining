@@ -4,7 +4,7 @@ Module 06 - HOOKING INTO SHAREPOINT APIS WITH ANDROID
 This module demonstrates writing Android Apps to consume SharePoint APIs.
 
 ##Presentation
-View this module's accompanying [presentation](06.Hook into SharePoint APIs with Android.pptx).
+View this module's accompanying [presentation](06.Hook into SharePoint APIs with Android.pptx?raw=true).
 
 ##Hands On Lab
 The lab lets students configure and run an Android App which allows the user to edit items in a
