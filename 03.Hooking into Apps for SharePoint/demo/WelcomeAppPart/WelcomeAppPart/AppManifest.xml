@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created:cb85b80c-f585-40ff-8bfc-12ff4d0e34a9-->
+<App xmlns="http://schemas.microsoft.com/sharepoint/2012/app/manifest"
+     Name="WelcomeAppPart"
+     ProductID="{c2913596-5f61-427c-a546-4017a42f917f}"
+     Version="1.0.0.0"
+     SharePointMinVersion="16.0.0.0"
+>
+  <Properties>
+    <Title>WelcomeAppPart</Title>
+    <StartPage>  https://livelessonswelcome.azurewebsites.net/Pages/Default.aspx?{StandardTokens}</StartPage>
+  </Properties>
+
+  <AppPrincipal>
+    <RemoteWebApplication ClientId="221d0cae-6e45-4fa8-8b9c-a418a6377fb1" />
+  </AppPrincipal>
+</App>
