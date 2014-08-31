@@ -64,10 +64,11 @@ This demo is just a quick look at the code which goes into consuming the SharePo
 To prepare for the demo, do the steps in the lab up to the point where you can run the app.
 
 For the demo:
-1.  Navigate to com.microsoft.o365_tasks.data.TaskListItemDataSource
+
+01. Navigate to com.microsoft.o365_tasks.data.TaskListItemDataSource
 
     This class contains all the calls to the SharePoint API.
 
-2.  Navigate to com.microsoft.o365_tasks.sharepoint.SharepointListsClient2
+02. Navigate to com.microsoft.o365_tasks.sharepoint.SharepointListsClient2
 
-    This class extends SharepointListsClient and adds the ability to create lists from a template.
+    This class extends SharepointListsClient and adds a function for creating lists from a template.
