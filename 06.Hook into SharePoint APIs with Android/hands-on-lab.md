@@ -183,11 +183,11 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/12_create_application_1.png)
 
-07. For the Redirect Uri field enter "`http://android/redirect`".
+07. For the Redirect Uri field enter "`http://android/complete`".
 
     ![](img/12_create_application_2.png)
 
-08. When the app has been created, navigate to the Screen for that app.
+08. When the app has been created, navigate to the screen for that app.
 
     ![](img/13_navigate_to_app_page.png)
 
