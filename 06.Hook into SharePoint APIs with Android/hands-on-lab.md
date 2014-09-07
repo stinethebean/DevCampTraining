@@ -42,9 +42,13 @@ Follow these steps to get the source code ready to build on your machine.
 
     The android SDK install location will be referred to as `ANDROID_SDK`.
 
+    ![](img/101_eclipse_create_workspace_dialog.png)
+
 02. Start a git command prompt and navigate to your workspace.
 
         C:\> cd Android
+
+    ![102_cd_android.png](img/102_cd_android.png)
 
 03. Clone the **Office 365 SDK for Android** into your workspace from github, then checkout
     the revision we're targeting in this lab.
@@ -53,6 +57,10 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android> cd adal
         C:\Android\adal> git checkout v1.0.1
 
+    ![](img/103_clone_adal.png)
+
+    ![](img/104_checkout_adal_v101.png)
+
 04. Clone the **Azure AD Authentication Library for Android** into your workspace from github, then checkout
     the revision we're targeting in this lab.
 
@@ -60,14 +68,24 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android> cd o365-android-sdk
         C:\Android\o365-android-sdk> git checkout v1.0
 
+    ![](img/105_clone_o365_sdk.png)
+
+    ![](img/106_checkout_o365_sdk_v1.png)
+
 05. Clone the **Tasks for SharePoint O365** source code into your workspace from github.
   
         C:\Android> git clone https://github.com/OfficeDev/TODOGITPATHTOSOURCECODE.git o365-tasks
 
+    TODO: screencap
+
 06. Return to Eclipse to import the source code from your workspace.
 
 07. Select **File > Import**. Expand **General** and select **Existing Projects into Workspace**.
-    Click **Next**.
+    Finally, click **Next**.
+
+    ![](img/107_menu_import.png)
+
+    ![](img/108_existing_workspace.png)
 
 08. Under **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
     the workspace.
