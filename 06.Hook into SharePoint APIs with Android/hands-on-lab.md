@@ -1,4 +1,4 @@
-Module 06: *CONSUMING SHAREPOINT APIS WITH ANDROID*
+﻿Module 06: *CONSUMING SHAREPOINT APIS WITH ANDROID*
 ==========================
 
 ##Overview
@@ -37,7 +37,7 @@ Prepare the Android SDK by downloading Android API Level 19.
 
 01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
 
-    ![](img/201_launch_sdk_manager.png)
+    ![](img/0001_launch_sdk_manager.png)
 
 02. Install the following components from **Android 4.4.2 (API 19)**
 
@@ -46,14 +46,14 @@ Prepare the Android SDK by downloading Android API Level 19.
     - Intel x86 Atom System Image
     - Sources for Android SDK
 
-    ![](img/202_install_android_api_level_19.png)
+    ![](img/002_install_android_api_level_19.png)
 
 03. Click **Install packages...** and wait for the install to complete.
 
 **Note:** The android SDK install location will be referred to later using "`ANDROID_SDK`".
 By default it is included in the package with Eclipse:
 
-![](img/203_android_sdk_location.png)
+![](img/0003_android_sdk_location.png)
 
 
 ###Task 2 - Set up your Eclipse workspace
@@ -65,13 +65,13 @@ Follow these steps to get the source code ready to build on your machine.
 
     For the purposes of this this lab we will refer to the workspace path using "`C:\Android`".
 
-    ![](img/101_eclipse_create_workspace_dialog.png)
+    ![](img/0004_eclipse_create_workspace_dialog.png)
 
 02. Start a git command prompt and navigate to your Eclipse workspace.
 
         C:\> cd Android
 
-    ![102_cd_android.png](img/102_cd_android.png)
+    ![](img/0005_cd_android.png)
 
 03. Clone the **Office 365 SDK for Android** into your workspace from github, then checkout
     the revision we're targeting in this lab.
@@ -81,9 +81,9 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android\adal> git checkout v1.0.1
         C:\Android\adal> cd ..
 
-    ![](img/103_clone_adal.png)
+    ![](img/0006_clone_adal.png)
 
-    ![](img/104_checkout_adal_v101.png)
+    ![](img/0007_checkout_adal_v101.png)
 
 04. Clone the **Azure AD Authentication Library for Android** into your workspace from github, then checkout
     the revision we're targeting in this lab.
@@ -93,9 +93,9 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android\o365-android-sdk> git checkout v1.0
         C:\Android\o365-android-sdk> cd ..
 
-    ![](img/105_clone_o365_sdk.png)
+    ![](img/0008_clone_o365_sdk.png)
 
-    ![](img/106_checkout_o365_sdk_v1.png)
+    ![](img/0009_checkout_o365_sdk_v1.png)
 
 05. Clone the **Tasks for SharePoint O365** source code into your workspace from github.
   
@@ -108,9 +108,9 @@ Follow these steps to get the source code ready to build on your machine.
 07. Select **File > Import**. Expand **Android** and select **Existing Android Code Into Workspace**.
     Finally, click **Next**.
 
-    ![](img/107_menu_import.png)
+    ![](img/0010_menu_import.png)
 
-    ![](img/108_existing_workspace.png)
+    ![](img/0011_existing_workspace.png)
 
 08. For **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
     the workspace.
@@ -124,7 +124,7 @@ Follow these steps to get the source code ready to build on your machine.
 
     The rest of these projects are test and sample code and can be ignored.
 
-    ![](img/01_eclipse_import_code_dialog.png)
+    ![](img/0014_eclipse_import_code_dialog.png)
 
 09. Finally, click **Finish**
 
@@ -156,7 +156,7 @@ In this task we will configure and launch the Android emulator, and deploy the a
     
     Click **Create** to create a new virtual device.
 
-    ![](img/03_avd_manager.png)
+    ![](img/0015_avd_manager.png)
 
     **Note** please be patient - launching the emulator will take some time.
 
@@ -174,13 +174,13 @@ In this task we will configure and launch the Android emulator, and deploy the a
 
 [haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
 
-    ![](img/04_create_new_avd.png)
+    ![](img/0020_create_new_avd.png)
 
 04. Click **OK** to create the device.
 
 05. Dismiss the AVD manager. In the Package Explorer, right-click on **o365-tasks** and select **Debug as > Android Application**.
 
-    ![](img/05_start_as_android_app.png)
+    ![](img/0025_start_as_android_app.png)
 
     This will launch the Android Device Chooser.
 
@@ -188,17 +188,17 @@ In this task we will configure and launch the Android emulator, and deploy the a
     Select the AVD you created in the previous steps.
     Finally, select **OK**.
 
-    ![](img/06_android_device_chooser.png)
+    ![](img/0030_android_device_chooser.png)
 
 07. The android emulator will launch and Android will boot (this may take some time).
 
-    ![](img/07_emulator_launching.png)
+    ![](img/0035_emulator_launching.png)
 
 08. When the android emulator has started the Tasks app should be automatically deployed and launched. If it
     is not, try executing **Debug as > Android Application** again. This time, select the already-running emulator.
     There is no need to restart the emulator.
 
-    ![](img/07_emulator_running.png)
+    ![](img/0035_emulator_running.png)
 
 
 Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
@@ -212,48 +212,50 @@ In this task we will create an Application in Azure AD to represent our android 
 
 02. Navigate to the **Active Directory** extension.
 
-    ![](img/09_active_directory_extension.png)
+    ![](img/0045_active_directory_extension.png)
 
 03. Navigate to the AD instance for your O365 tenant.
 
-    ![](img/10_navigate_to_ad_instance.png)
+    ![](img/0050_navigate_to_ad_instance.png)
 
 04. Navigate to the **Applications** screen.
 
-    ![](img/11_navigate_to_applications.png)
+    ![](img/0055_navigate_to_applications.png)
 
 05. From the action bar at the bottom of the page, click **Add > Add an application my organization is developing**.
 
+    
+
 06. For the name field enter "Tasks for O365 SharePoint". For type select "Native client application". Finally, click **Next**.
 
-    ![](img/12_create_application_1.png)
+    ![](img/0060_create_application_1.png)
 
 07. For the Redirect Uri field enter "`http://android/complete`".
 
-    ![](img/12_create_application_2.png)
+    ![](img/0060_create_application_2.png)
 
 08. When the app has been created, navigate to the screen for that app.
 
-    ![](img/13_navigate_to_app_page.png)
+    ![](img/0065_navigate_to_app_page.png)
 
 09. And then to the **Configure** tab
 
-    ![](img/14_navigate_to_app_settings.png)
+    ![](img/0070_navigate_to_app_settings.png)
 
 10. Under the _Properties_ section copy the **Client Id**. Remember this value for later, as we will use it
     when we are configuring the app in the next step.
 
-    ![](img/15_copy_client_id.png)
+    ![](img/0075_copy_client_id.png)
 
 10. Under the _Permissions to other applications_ section add the following Delegated Permissions for "Office 365 SharePoint Online".
 
     - Create or delete items and lists in all site collections
 
-    ![](img/16_set_application_permissions.png)
+    ![](img/0080_set_application_permissions.png)
 
 11. Click **Save** to apply the changes.
 
-    ![](img/17_save_button.png)
+    ![](img/0085_save_button.png)
 
 
 Done! The **Client Id** we created above will be used to configure the Android app in the next task.
@@ -266,7 +268,7 @@ In this task we will configure the app to work agains your own O365 tenant.
 01. Return to Eclipse. Locate the Java class `com.microsoft.o365_tasks.Constants`. This can be found by expanding 
     the nodes **o365-tasks**, **src** and **com.microsoft.o365_tasks** in the Package Explorer.
 
-    ![](img/08_open_constants.png)
+    ![](img/0040_open_constants.png)
 
 02. Change the constants in this class to suit your own tenancy.
 
@@ -274,7 +276,7 @@ In this task we will configure the app to work agains your own O365 tenant.
     - Set **`AAD_CLIENT_ID`** to the Client Id obtained during Task 4
     - Set **`SHAREPOINT_URL`** to the root url for your O365 SharePoint instance.
 
-    ![](img/18_set_java_constants.png)
+    ![](img/0090_set_java_constants.png)
 
 
 ###Task 6 - Launch the application
@@ -286,16 +288,16 @@ We're ready to launch the app now.
 
 02. When the application launches, click **Sign in**.
 
-    ![](img/19_sign_in_1.png)
+    ![](img/0095_sign_in_1.png)
 
 03. You will be prompted to enter your sign-in credentials. Enter them and click **Sign in**.
 
-    ![](img/20_sign_in_2.png)
+    ![](img/0100_sign_in_2.png)
 
 04. If you authenticate successfully the app will automatically create a new Tasks list in SharePoint, and
     populate it with some example data.
 
-    ![](img/21_list_tasks_activity.png)
+    ![](img/0105_list_tasks_activity.png)
 
 
 That's it! You've successfully configured and deployed the "Tasks for O365 SharePoint" app. Try creating and updating
@@ -319,11 +321,11 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
 
 03. Right-click `menu` and select **New > Android XML file**.
 
-    ![](img/22_new_android_xml_file.png)
+    ![](img/0110_new_android_xml_file.png)
 
 04. Name the file `list_tasks_context`. The root element type should be `menu`. Click **Finish** to continue.
 
-    ![](img/23_new_android_xml_file_dialog.png)
+    ![](img/0115_new_android_xml_file_dialog.png)
 
 05. Click the `list_tasks_content.xml` tab to switch to XML mode, and paste in the following XML:
 
@@ -334,7 +336,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
             android:icon="@drawable/ic_action_discard"
             android:title="@string/action_delete" />
 
-    ![](img/24_edit_list_tasks_context_xml.png)
+    ![](img/0120_edit_list_tasks_context_xml.png)
 
     Save the file. This xml defines a button with the label "Delete" (defined in `res/values/strings.xml`) and the 
     id `action_delete`.
@@ -344,7 +346,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
     In this class we need to add a number of callbacks to inflate the context menu and hook up handler functions for
     the buttons defined in this menu.
 
-    ![](img/25_open_ListTasksActivity.png)
+    ![](img/0125_open_ListTasksActivity.png)
 
 07. In the `onCreate` function, just before the call to `optionsActionRefresh`, paste the following:
 
@@ -352,7 +354,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
 
     The result should look like this:
 
-    ![](img/26_update_onCreate.png)
+    ![](img/0130_update_onCreate.png)
 
     This function registers the `mListView` view for a context menu.
 
@@ -441,11 +443,11 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
 11. **Note:** before continuing be sure that all the correct types have been imported. Types which have not been imported 
     will be marked with a red squiggle automatically:
 
-    ![](img/27_eclipse_java_error.png)
+    ![](img/0135_eclipse_java_error.png)
 
     Eclipse will fix this for you automatically - hover over the error and select **Import**.
 
-    ![](img/28_eclipse_java_error_fix.png)
+    ![](img/0140_eclipse_java_error_fix.png)
 
 12. Repeat for any remaining missing type errors.
 
@@ -460,11 +462,11 @@ In this task we will test the "Delete" feature we just added.
 
 02. Long-press on any task in the list - a context menu will appear. Select **Delete**.
 
-    ![](img/29_delete_context_menu.png)
+    ![](img/0145_delete_context_menu.png)
 
 03. Tap **Delete** to confirm.
 
-    ![](img/30_delete_confirm_dialog.png)
+    ![](img/0150_delete_confirm_dialog.png)
 
 04. The item will be deleted and the view will refresh.
 
