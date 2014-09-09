@@ -158,6 +158,8 @@ In this task we will configure and launch the Android emulator, and deploy the a
 
     ![](img/03_avd_manager.png)
 
+    **Note** please be patient - launching the emulator will take some time.
+
 03. Fill out the dialog.
 
     - For **Device** select "Nexus 4"
