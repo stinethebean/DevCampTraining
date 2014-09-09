@@ -1,5 +1,5 @@
-Module 02: SETTING UP THE ENVIRONMENTS
-========================================
+Module 02 - Setting up the Environments
+=======================================
 
 ##Overview
 In this lab, you will create a cloud development environment and build a cloud-hosted app. The development environment will consist of a trial subscription to Office 365 and Azure.
@@ -53,7 +53,7 @@ In this exercise, you will create a Provider-Hosted app in the new development e
 ###Task 1 - Create the new project in Visual Studio 2013
 In this task, you will create a new project.
 
-1. Launch **Visual Studio 2013** as administrator. 
+1. Launch **Visual Studio 2013** as administrator.
 2. In Visual Studio select **File/New/Project**.
 3. In the New Project dialog:
   1. Select **Templates/Visual C#/Office/SharePoint/Apps**.
@@ -136,26 +136,26 @@ In this task, you will add some test data for the app.
       [HomePhone] [nvarchar](100) NULL,
       [EmailAddress] [nvarchar](100) NULL,
       CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED ([ID] ASC))
-     
+
      GO
-     
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Gordon', 'Hee', 'Adventure Works Cycles', '1(340)555-7748', '1(340)555-3737', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Allen', 'Blue Yonder Airlines', '1(203)555-0466', '1(203)555-0071', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('James', 'Alvord', 'City Power and Light', '1(518)555-6571', '1(518)555-8576', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Jeff', 'Phillips', 'Coho Vineyard', '1(270)555-1720', '1(270)555-7810', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Stefen', 'Hessee', 'Contoso, Ltd', '1(407)555-4851', '1(407)555-5411', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Christian', 'Hess', 'Fabrikam, Inc', '1(844)555-0550', '1(844)555-3522', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Cassie', 'Hicks', 'Fourth Coffee', '1(204)555-6648', '1(204)555-2831', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Chris', 'Preston', 'Litware, Inc', '1(407)555-7308', '1(407)555-1700', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Diane', 'Prescott', 'Lucerne Publishing', '1(323)555-3404', '1(323)555-7814', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Hillsdale', 'Margie Travel', '1(802)555-5583', '1(802)555-0246', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Ran', 'Yossi', 'Northwind Traders', '1(250)555-4824', '1(250)555-3653', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Arlene', 'Huff', 'Proseware, Inc', '1(248)555-1267', '1(248)555-0302', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Julia', 'Isla', 'School of Fine Art', '1(270)555-5347', '1(270)555-3401', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Rodrigo', 'Ready', 'Southridge Video', '1(808)555-1110', '1(808)555-4310', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Shu', 'Ito', 'Trey Research', '1(844)555-5428', '1(844)555-2117', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('David', 'Jaffe', 'Wingtip Toys', '1(340)555-4478', '1(340)555-1010', 'someone@example.com') 
-     
+
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Gordon', 'Hee', 'Adventure Works Cycles', '1(340)555-7748', '1(340)555-3737', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Allen', 'Blue Yonder Airlines', '1(203)555-0466', '1(203)555-0071', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('James', 'Alvord', 'City Power and Light', '1(518)555-6571', '1(518)555-8576', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Jeff', 'Phillips', 'Coho Vineyard', '1(270)555-1720', '1(270)555-7810', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Stefen', 'Hessee', 'Contoso, Ltd', '1(407)555-4851', '1(407)555-5411', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Christian', 'Hess', 'Fabrikam, Inc', '1(844)555-0550', '1(844)555-3522', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Cassie', 'Hicks', 'Fourth Coffee', '1(204)555-6648', '1(204)555-2831', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Chris', 'Preston', 'Litware, Inc', '1(407)555-7308', '1(407)555-1700', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Diane', 'Prescott', 'Lucerne Publishing', '1(323)555-3404', '1(323)555-7814', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Hillsdale', 'Margie Travel', '1(802)555-5583', '1(802)555-0246', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Ran', 'Yossi', 'Northwind Traders', '1(250)555-4824', '1(250)555-3653', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Arlene', 'Huff', 'Proseware, Inc', '1(248)555-1267', '1(248)555-0302', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Julia', 'Isla', 'School of Fine Art', '1(270)555-5347', '1(270)555-3401', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Rodrigo', 'Ready', 'Southridge Video', '1(808)555-1110', '1(808)555-4310', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Shu', 'Ito', 'Trey Research', '1(844)555-5428', '1(844)555-2117', 'someone@example.com')
+     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('David', 'Jaffe', 'Wingtip Toys', '1(340)555-4478', '1(340)555-1010', 'someone@example.com')
+
      GO
    ```
 8. Click **Run**.
@@ -205,7 +205,7 @@ In this task, you will create a new controller to work with the test data.
   1. Select **MVC5 Controller with views using Entity Framework**.
   2. Click **Add**.<br/>
        ![](img/14.png?raw=true "Figure 16")
-  3. Select **Customer** as the Model Class. 
+  3. Select **Customer** as the Model Class.
   4. Select **AzureCloudDataEntities** as the Data Context Class.
   5. Click **Add**.<br/>
        ![](img/15.png?raw=true "Figure 17")
@@ -294,7 +294,7 @@ Now your app is published to the catalog.
 In this task, you will add the app from the catalog to a SharePoint site.
 
 1. Navigate to a site in your O365 tenancy.
-2. Click **Site Contents**. (**NOTE:** If you are using the Developer site, it may have an older version of the app still installed from testing. You must remove the app from the site AND remove the entry from the “Apps in Testing” list or the new app will not install.)
+2. Click **Site Contents**. (**NOTE:** If you are using the Developer site, it may have an older version of the app still installed from testing. You must remove the app from the site AND remove the entry from the ï¿½Apps in Testingï¿½ list or the new app will not install.)
 3. Click **Add an App**.
 4. Click **From Your Organization**.<br/>
        ![](img/32.png?raw=true "Figure 24")

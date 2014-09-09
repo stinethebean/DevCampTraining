@@ -1,5 +1,5 @@
-Module 03: HOOKING INTO APPS FOR SHAREPOINT
-=============================================
+Module 03 - Hooking into Apps for SharePoint
+============================================
 
 ##Overview
 In this lab, you will create apps that use both OAuth security and the cross-domain library. You will examine the security flow to better understand the available options.
@@ -25,7 +25,7 @@ In this exercise you create a new provider-hosted app and examine the OAuth flow
 ###Task 1 - Create the new solution in Visual Studio 2013
 Follow these steps to create a new project.
 
-1. Launch **Visual Studio 2013** as administrator. 
+1. Launch **Visual Studio 2013** as administrator.
 2. In Visual Studio select **File/New/Project**.
 3. In the New Project dialog:
   1. Select **Templates/Visual C#/Office/SharePoint/Apps**.
@@ -44,7 +44,7 @@ Follow these steps to create a new project.
   7. Click **Finish**.<br/>
      ![](img/04.png?raw=true "Figure 4")
   8. When prompted, log in using your O365 administrator credentials.
-  9. After the new project is created, set breaskpoints in **HomeController.cs** as shown.<br/>
+  9. After the new project is created, set breakpoints in **HomeController.cs** as shown.<br/>
     ![](img/05.png?raw=true "Figure 5")
 
 Now you have a new app created.
@@ -91,7 +91,7 @@ In this exercise you use the cross-domain library to access a list in the app we
 ###Task 1 - Create the new ASP.NET Web Forms app project in Visual Studio 2013
 Follow these steps to create a new project.
 
-1. Launch **Visual Studio 2013** as administrator. 
+1. Launch **Visual Studio 2013** as administrator.
 2. In Visual Studio select **File/New/Project**.
 3. In the New Project dialog:
   1. Select **Templates/Visual C#/Office/SharePoint/Apps**.
@@ -111,7 +111,7 @@ Follow these steps to create a new project.
      ![](img/15.png?raw=true "Figure 4")
   8. When prompted, log in using your O365 administrator credentials.
   9. Open **Default.aspx.cs** from the **DeepDiveCloudAppWeb** project.
-  10. **Delete** the code that is used to obtain the host web title so your code appears as follows:<br/> 
+  10. **Delete** the code that is used to obtain the host web title so your code appears as follows:<br/>
      ![](img/16.png?raw=true "Figure 5")
 
 Now you have created a new ASP.NET Web Forms app project.
@@ -165,7 +165,7 @@ Follow these steps to access a list in the app web.
         "use strict";
 
         jQuery(function () {
- 
+
             //Get Host and App web URLS
             var appWebUrl = "";
             var spHostUrl = "";
@@ -242,4 +242,3 @@ Now you have read list items using the Cross-Domain Library
 By completing this hands-on lab you learnt how to:
 - Program OAuth in a Provider-Hosted app.
 - Utilize the Cross-Domain library in a Provider-Hosted app.
-
