@@ -35,8 +35,6 @@ In this exercise you will set up your Eclipse workspace and then configure and r
 ###Task 1 - Preparation
 Prepare the Android SDK by downloading Android API Level 19.
 
-**Note:** The android SDK install location will be referred to later as `ANDROID_SDK`.
-
 01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
 
     ![](img/201_launch_sdk_manager.png)
@@ -52,6 +50,10 @@ Prepare the Android SDK by downloading Android API Level 19.
 
 03. Click **Install packages...** and wait for the install to complete.
 
+**Note:** The android SDK install location will be referred to later using "`ANDROID_SDK`".
+By default it is included in the package with Eclipse:
+
+![](img/203_android_sdk_location.png)
 
 
 ###Task 2 - Set up your Eclipse workspace
@@ -103,22 +105,22 @@ Follow these steps to get the source code ready to build on your machine.
 
 06. Return to Eclipse to import the source code from your workspace.
 
-07. Select **File > Import**. Expand **General** and select **Existing Projects into Workspace**.
+07. Select **File > Import**. Expand **Android** and select **Existing Android Code Into Workspace**.
     Finally, click **Next**.
 
     ![](img/107_menu_import.png)
 
     ![](img/108_existing_workspace.png)
 
-08. Under **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
+08. For **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
     the workspace.
 
-08. Click **Deselect all** to clear all selections, then select the following projects:
+08. Click **Deselect All** to clear all selections, then select the following projects:
 
-    - `AuthenticationActivity`
-    - `o365-tasks`
-    - `office-365-base-sdk`
-    - `office-365-lists-sdk`
+    - `adal\src`
+    - `o365-android-sdk\sdk\office-365-base-sdk`
+    - `o365-android-sdk\sdk\office-365-lists-sdk`
+    - `o365-tasks\src`
 
     The rest of these projects are test and sample code and can be ignored.
 
