@@ -16,7 +16,7 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 
 - [Git version control tool](http://git-scm.com)
 - [Eclipse with the Android Developer Tools](http://developer.android.com/sdk/index.html)
-- Android SDK with API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
+- Android API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
 - You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
 - You must have completed Module 04 and linked your Azure subscription with your O365 tenant.
 
@@ -32,19 +32,40 @@ The hands-on lab includes the following exercises:
 In this exercise you will set up your Eclipse workspace and then configure and run the
 **Tasks for SharePoint O365** Android app.
 
-###Task 1 - Set up your Eclipse workspace
+###Task 1 - Preparation
+Prepare the Android SDK by downloading Android API Level 19.
+
+**Note:** The android SDK install location will be referred to later as `ANDROID_SDK`.
+
+01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
+
+    ![](img/201_launch_sdk_manager.png)
+
+02. Install the following components from **Android 4.4.2 (API 19)**
+
+    - SDK Platform
+    - ARM EABI v7a System Image
+    - Intel x86 Atom System Image
+    - Sources for Android SDK
+
+    ![](img/202_install_android_api_level_19.png)
+
+03. Click **Install packages...** and wait for the install to complete.
+
+
+
+###Task 2 - Set up your Eclipse workspace
 Follow these steps to get the source code ready to build on your machine.
 
-01. Start Eclipse and create a new workspace. Remember where you create your workspace
-    as we will be working within it extensively.
 
-    In this lab we will create the workspace in the folder `C:\Android`.
+01. Launch Eclipse and create a new workspace (if you have not already done so).
+    Remember where you create your workspace as we will be working within it extensively.
 
-    The android SDK install location will be referred to as `ANDROID_SDK`.
+    For the purposes of this this lab we will refer to the workspace path using "`C:\Android`".
 
     ![](img/101_eclipse_create_workspace_dialog.png)
 
-02. Start a git command prompt and navigate to your workspace.
+02. Start a git command prompt and navigate to your Eclipse workspace.
 
         C:\> cd Android
 
@@ -56,6 +77,7 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android> git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
         C:\Android> cd adal
         C:\Android\adal> git checkout v1.0.1
+        C:\Android\adal> cd ..
 
     ![](img/103_clone_adal.png)
 
@@ -67,6 +89,7 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android> git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
         C:\Android> cd o365-android-sdk
         C:\Android\o365-android-sdk> git checkout v1.0
+        C:\Android\o365-android-sdk> cd ..
 
     ![](img/105_clone_o365_sdk.png)
 
@@ -123,7 +146,7 @@ Follow these steps to get the source code ready to build on your machine.
 In this task we created an Eclipse workspace, copied our code into it and got it into a working state.
 
 
-###Task 2 - Create and launch the emulator
+###Task 3 - Create and launch the emulator
 
 In this task we will configure and launch the Android emulator, and deploy the app.
 
@@ -419,6 +442,8 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
     Eclipse will fix this for you automatically - hover over the error and select **Import**.
 
     ![](img/28_eclipse_java_error_fix.png)
+
+12. Repeat for any remaining missing type errors.
 
 
 That should be it! We've just added the ability for the user to delete a task item directly from the List Tasks activity.
