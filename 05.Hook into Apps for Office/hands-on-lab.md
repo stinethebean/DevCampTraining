@@ -1,5 +1,5 @@
-Module 05 - Hooking into Apps for Office
-========================================
+Module 05 - Hook into Apps for Office
+=====================================
 
 ##Overview
 In this lab, configure Apps for Office in Word and Outlook. The lab uses an existing application that can be found in the src folder.

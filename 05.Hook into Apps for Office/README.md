@@ -1,5 +1,5 @@
-Module 05 - Hooking into Apps for Office
-========================================
+Module 05 - Hook into Apps for Office
+=====================================
 
 This module demonstrates the development of Apps for Office using Word and Outlook.
 
