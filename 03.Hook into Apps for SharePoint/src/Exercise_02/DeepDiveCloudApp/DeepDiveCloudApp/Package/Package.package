@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="24ee2c6c-4489-4934-8f1b-40effd760af3" solutionId="24ee2c6c-4489-4934-8f1b-40effd760af3" resetWebServer="false" sharePointProductVersion="16.0" name="DeepDiveCloudApp" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="358a6abb-622d-438c-83e0-1ca5ceb17ead" />
+  </features>
+</package>
