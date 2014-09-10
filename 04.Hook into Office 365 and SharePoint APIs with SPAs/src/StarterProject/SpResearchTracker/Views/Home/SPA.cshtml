@@ -1,0 +1,19 @@
+﻿@{
+  ViewBag.Title = "SPA";
+}
+
+<input type="hidden" id="__RequestVerificationToken" value="@TokenHeaderValue()" />
+
+@section scripts {
+
+  @functions{
+
+    public string TokenHeaderValue()
+    {
+      string cookieToken, formToken;
+      AntiForgery.GetTokens(null, out cookieToken, out formToken);
+      return cookieToken + ":" + formToken;
+    }
+
+  }
+}
