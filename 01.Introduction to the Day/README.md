@@ -1,18 +1,14 @@
-Module 00 - *MODULE-TITLE*
-======================
+Module 01 - Introduction to the Day
+===================================
 
-> todo: description of the module
+This module covers an introduction to the day's DevCamp content, a demonstration of each project created in the DevCamp and an overview of Office 365 Development.
 
 ##Presentation
-View this module's accompanying [presentation](presentation.pptx).
+View this module's accompanying [presentation](Introduction to the Day.pptx).
 
-##Hands On Lab
-> todo: description of the HOL & update the link below to be more descriptive
-
-View this module's accompanying [hands on lab](hands-on-lab.md)
-
-> notes:
-> - update the module # & title in the heading
-> - use the **/src** folder where code for final solution should go
-> - use the **/img** folder where images in the HOL should go
-> - remove the block quotes form this document as they are used for "note-to-self" when complete
+##Demos
+Presenter instruction scripts used for the demonstrations performed in this module:
+1. [Module 2 demo script](demos/script-module02.md)
+1. [Module 3 demo script](demos/script-module03.md)
+1. [Module 4 demo script](demos/script-module04.md)
+1. [Module 5 demo script](demos/script-module05.md)
