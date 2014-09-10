@@ -5,13 +5,13 @@ Module 05 - Hook into Apps for Office
 In this lab, configure Apps for Office in Word and Outlook. The lab uses an existing application that can be found in the src folder.
 
 ##Objectives
-- Learn to configure Windows Azure to support Apps for Office
+- Learn to configure Microsoft Azure to support Apps for Office
 - Understand how to create a Word task pane app
 - Understand how to create an Outlook app
 
 ##Prerequisites
 - Visual Studio 2013 for Windows 8
-- You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
+- You must have an Office 365 tenant and Microsoft Azure subscription to complete this lab.
 - You must have completed the lab associated with Module 4.
 
 ##Exercises
