@@ -540,7 +540,7 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
 
     ![](img/0180_add_missing_imports.png)
 
-09. At the bottom of the class add the following block:
+09. At the bottom of the `ListTasksActivity` class add the following block:
     
         private static class PreferencesWrapper {
             private static final String PREFS_FILTER_COMPLETED = "filter_completed";
@@ -568,17 +568,19 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
 
         private PreferencesWrapper mPreferences;
 
-    And initialize it in the constructor:
+    The result should look like this:
+
+    ![](img/0185_add_preferences_member_variable.png)
+
+12. Next, initialize the variable in the "`onCreate`" function:
 
         mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
 
     The result should look like this:
 
-    ![](img/0185_add_preferences_member_variable.png)
-
     ![](img/0190_initialize_preferences.png)
 
-11. In the "`onCreateOptionsMenu`" function we must retrieve and initialize the `action_filter_completed` checkbox we
+13. In the "`onCreateOptionsMenu`" function we must retrieve and initialize the `action_filter_completed` checkbox we
     defined earlier. Add the following line before the final `return`.
 
         menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
@@ -587,7 +589,7 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
 
     ![](img/0195_initialize_action_filter_completed.png)
 
-12. In the "`onOptionsItemSelected`" function we must add code to handle taps on the new menu option. Add the following
+14. In the "`onOptionsItemSelected`" function we must add code to handle taps on the new menu option. Add the following
     switch case:
 
         case R.id.action_filter_completed:
@@ -598,7 +600,7 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
 
     ![](img/0200_handle_action_filter_completed.png)
 
-13. Next add the "`optionsActionFilterCompleted`" function which will handle updating the `action_filter_completed` menu
+15. Next add the "`optionsActionFilterCompleted`" function which will handle updating the `action_filter_completed` menu
     item and refreshing the screen.
 
         private void optionsActionFilterCompleted(MenuItem item) {   
@@ -609,7 +611,7 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
             optionsActionRefresh();
         }
 
-14. Finally, navigate to the "`refresh``" function and add the following code to the "`doInBackground`" inner function:
+16. Finally, navigate to the "`refresh``" function and add the following code to the "`doInBackground`" inner function:
 
         Query query = new Query();
         if (mPreferences.getFilterCompleted()) {
