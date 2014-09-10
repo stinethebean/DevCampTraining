@@ -25,7 +25,8 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 The hands-on lab includes the following exercises:
 
 - [Set up your workspace and configure and run the Android app](#exercise1)
-- [Add a feature to the app](#exercise2)
+- [Add a "delete" shortcup feature to the app](#exercise2)
+- [Add a "filter" feature to the app](#exercise3)
 
 <a name="exercise1"></a>
 ##Exercise 1: Set up your workspace and configure and run the Android app
@@ -222,32 +223,35 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/0055_navigate_to_applications.png)
 
-05. From the action bar at the bottom of the page, click **Add > Add an application my organization is developing**.
+05. From the action bar at the bottom of the page, click **Add**. Then click **Add an application my organization is developing**.
 
-    
+    ![](img/0056_add_new_application.png)
 
-06. For the name field enter "Tasks for O365 SharePoint". For type select "Native client application". Finally, click **Next**.
+    ![](img/0057_create_native_application.png)
+
+06. For the name field enter "Tasks for O365 SharePoint". For type select "Native client application", then click **Next**.
 
     ![](img/0060_create_application_1.png)
 
-07. For the Redirect Uri field enter "`http://android/complete`".
+07. For the Redirect Uri field enter "`http://android/complete`", then click **Next**.
 
     ![](img/0060_create_application_2.png)
 
-08. When the app has been created, navigate to the screen for that app.
+08.  When the app has been created, navigate to the screen for that app. **Note:** this may happen automatically.
 
     ![](img/0065_navigate_to_app_page.png)
 
-09. And then to the **Configure** tab
+09. Switch to the **Configure** tab
 
     ![](img/0070_navigate_to_app_settings.png)
 
-10. Under the _Properties_ section copy the **Client Id**. Remember this value for later, as we will use it
+10. Scroll down to the _Properties_ section and copy the **Client Id**. Remember this value for later, as we will use it
     when we are configuring the app in the next step.
 
     ![](img/0075_copy_client_id.png)
 
-10. Under the _Permissions to other applications_ section add the following Delegated Permissions for "Office 365 SharePoint Online".
+10. Scroll down to the to the _Permissions to other applications_ section and add the following Delegated Permissions 
+    for "Office 365 SharePoint Online".
 
     - Create or delete items and lists in all site collections
 
@@ -283,8 +287,8 @@ In this task we will configure the app to work agains your own O365 tenant.
 
 We're ready to launch the app now.
 
-01. Once again, use **Debug as > Android Application** to launch the application. If the emulator is already 
-    running, there is no need to restart it.
+01. Once again, right-click on **o365-tasks** and use **Debug as > Android Application** to launch the application.
+    If the emulator is already running there is no need to restart it.
 
 02. When the application launches, click **Sign in**.
 
@@ -308,7 +312,7 @@ to the server (e.g. when you refresh the list or create a new task) will trigger
 
 
 <a name="exercise2"></a>
-##Exercise 2: Add a feature to the app
+##Exercise 2: Add a "delete" shortcup feature to the app
 
 In this exercise we will add a "Delete" context action to the List Tasks activity.
 
@@ -327,7 +331,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
 
     ![](img/0115_new_android_xml_file_dialog.png)
 
-05. Click the `list_tasks_content.xml` tab to switch to XML mode, and paste in the following XML:
+05. Click the `list_tasks_context.xml` tab to switch to XML mode, and paste in the following XML:
 
         <item
             android:id="@+id/action_delete"
@@ -347,6 +351,19 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
     the buttons defined in this menu.
 
     ![](img/0125_open_ListTasksActivity.png)
+
+07. At the top of the file, add the following imports:
+        
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
+        import android.view.ContextMenu;
+        import android.view.ContextMenu.ContextMenuInfo;
+        import android.widget.AdapterView.AdapterContextMenuInfo;
+
+    The result should look like this:
+
+    ![0128_add_missing_imports.png](img/0128_add_missing_imports.png)
+
 
 07. In the `onCreate` function, just before the call to `optionsActionRefresh`, paste the following:
 
@@ -412,7 +429,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
     This function handles launching a confirmation dialog for the user. If the user selects the "Delete" button, then
     we ensure that the user is still authenticated and invoke `deleteTask`.
 
-12. Finally, add this block:
+11. Finally, add this block:
     
         protected void deleteTask(final TaskModel model) {
            //Launch a background task to delete the current task
@@ -440,25 +457,23 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
     This function launches an "in progress" dialog and deletes the given task via the API. When finished it starts
     a refresh.
 
-11. **Note:** before continuing be sure that all the correct types have been imported. Types which have not been imported 
-    will be marked with a red squiggle automatically:
+12. **Note:** before continuing make sure that there are not errors in the file.
+    Errors will be marked with a red squiggle automatically:
 
     ![](img/0135_eclipse_java_error.png)
 
-    Eclipse will fix this for you automatically - hover over the error and select **Import**.
+    If you find any errors, hover the mouse over them to see if Eclipse can provide a quick fix:
 
     ![](img/0140_eclipse_java_error_fix.png)
 
-12. Repeat for any remaining missing type errors.
 
-
-That should be it! We've just added the ability for the user to delete a task item directly from the List Tasks activity.
+Done! We've just added the ability for the user to delete a task item directly from the List Tasks activity.
 
 ###Task 2 - Test the new Delete feature
 
 In this task we will test the "Delete" feature we just added.
 
-01. Start debugging the app with **Debug as > Android Application**. When the app launches, sign in.
+01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
 
 02. Long-press on any task in the list - a context menu will appear. Select **Delete**.
 
@@ -472,12 +487,170 @@ In this task we will test the "Delete" feature we just added.
 
 Done! You've successfully added a feature to this app.
 
+
+<a name="exercise3"></a>
+##Exercise 3: Add a "filter" feature to the app
+In this exercise we will add a "Filter" option to the List Tasks activity.
+
+###Task 1 - Write the new filter feature
+
+01. Return to Eclipse.
+
+02. First we will update the List Tasks activity options menu.
+    Navigate to the "`list_tasks_options.xml`" menu template.
+
+    ![](img/0155_open_list_tasks_options_xml.png)
+
+03. Switch to the XML view.
+
+    ![](img/0160_switch_to_xml_view.png)
+
+04. Add the following XML:
+
+        <item
+            android:id="@+id/action_filter_completed"
+            android:orderInCategory="800"
+            android:showAsAction="never"
+            android:checkable="true"
+            android:title="@string/action_filter_completed" />
+
+    The result should look like this:
+
+    ![](img/0165_add_menu_item_xml.png)
+
+05. Navigate to the "`strings.xml`" resouce file and switch to the XML view.
+
+    ![](img/0170_open_strings_xml.png)
+
+06. Add the following XML:
+
+        <string name="action_filter_completed">Filter completed tasks</string>
+
+    The result should look like this:
+
+    ![](img/0175_add_new_string_resource.png)
+
+07. Navigate back to the java class `com.microsoft.o365_tasks.ListTasksActivity`. Add the following import
+    statements to the top of the file:
+        
+        import com.microsoft.office365.Query;
+        import android.content.SharedPreferences;
+
+    The result should look like this:
+
+    ![](img/0180_add_missing_imports.png)
+
+09. At the bottom of the class add the following block:
+    
+        private static class PreferencesWrapper {
+            private static final String PREFS_FILTER_COMPLETED = "filter_completed";
+            private SharedPreferences mPreferences;
+            public PreferencesWrapper(SharedPreferences preferences) {
+                mPreferences = preferences;
+            }
+            public boolean getFilterCompleted() {
+                return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
+            }
+            public void setFilterCompleted(boolean completed) {
+                mPreferences.edit()
+                            .putBoolean(PREFS_FILTER_COMPLETED, completed)
+                            .apply();
+            }
+        }
+
+    This internal static class wraps the android `SharedPreferences` utility to give us a nice strongly-typed
+    interface.
+
+    **Note:** this block must be pasted **inside** the final brace in the file - Java does not support multiple
+    seperate class definitions per file.
+
+10. At the top of the class add the following member variable:
+
+        private PreferencesWrapper mPreferences;
+
+    And initialize it in the constructor:
+
+        mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
+
+    The result should look like this:
+
+    ![](img/0185_add_preferences_member_variable.png)
+
+    ![](img/0190_initialize_preferences.png)
+
+11. In the "`onCreateOptionsMenu`" function we must retrieve and initialize the `action_filter_completed` checkbox we
+    defined earlier. Add the following line before the final `return`.
+
+        menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
+
+    The result should look like this:
+
+    ![](img/0195_initialize_action_filter_completed.png)
+
+12. In the "`onOptionsItemSelected`" function we must add code to handle taps on the new menu option. Add the following
+    switch case:
+
+        case R.id.action_filter_completed:
+            optionsActionFilterCompleted(item);
+            return true;
+
+    The result should look like this:
+
+    ![](img/0200_handle_action_filter_completed.png)
+
+13. Next add the "`optionsActionFilterCompleted`" function which will handle updating the `action_filter_completed` menu
+    item and refreshing the screen.
+
+        private void optionsActionFilterCompleted(MenuItem item) {   
+            boolean flag = !item.isChecked();
+            item.setChecked(flag);
+            mPreferences.setFilterCompleted(flag);
+            //refresh
+            optionsActionRefresh();
+        }
+
+14. Finally, navigate to the "`refresh``" function and add the following code to the "`doInBackground`" inner function:
+
+        Query query = new Query();
+        if (mPreferences.getFilterCompleted()) {
+            query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
+        }
+        
+    Change the `getTasksByQuery` function call to pass the new `query` variable in argument.
+
+    The result should look like this:
+
+    ![](img/0205_update_refresh_function.png)
+
+
+Done! These changes add a filter on the `PercentComplete` field to the OData query sent to SharePoint when the
+"Filter completed tasks" option is checked. This filters out any tasks which have been marked as 100% complete.
+
+Note that this setting is automatically persisted thanks to our use of the Android `SharedPreferences` class.
+
+
+###Task 2 - Test the new Filter function
+
+In this task we will test the "Filter" function we just implemented.
+
+01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
+
+02. When the List Tasks activity has loaded, tap the **Options menu** button in the top-right.
+    Next, tap **Filter completed tasks** to confirm.
+
+    ![](img/0210_invoke_filter_completed_tasks.png)
+
+04. The view will refresh, and all "completed" tasks will be filtered out. Repeating the operation will disable
+    the filtering.
+
+
 ##Summary
 
-By completing this hands-on lab you learnt:
+By completing this hands-on lab you have learnt:
 
 01. Some of the basics of Android development.
 
-02. How to authenticate for O365 SharePoint via Azure AD from an Android app.
+02. How to use the 0365 SharePoint Lists API for Android 
 
-03. How to communicate with the O365 SharePoint REST APIs from an Android app.
+03. How to filter queries with the 0365 SharePoint Lists API for Android 
+
