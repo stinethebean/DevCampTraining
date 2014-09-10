@@ -1,5 +1,5 @@
 Dev Camp Training Content
-===============
+=========================
 This GitHub repo houses all of the content for the Dev Camp event. You are welcome to use this content as you wish.
 
 - Module 1: [Introduction to the Day](01.Introduction to the Day)
