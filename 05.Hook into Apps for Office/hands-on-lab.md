@@ -12,7 +12,7 @@ In this lab, configure Apps for Office in Word and Outlook. The lab uses an exis
 ##Prerequisites
 - Visual Studio 2013 for Windows 8
 - You must have an Office 365 tenant and Microsoft Azure subscription to complete this lab.
-- You must have completed the lab associated with Module 4.
+- You must have completed the lab associated with Module 2.
 
 ##Exercises
 The hands-on lab includes the following exercises:<br/>
