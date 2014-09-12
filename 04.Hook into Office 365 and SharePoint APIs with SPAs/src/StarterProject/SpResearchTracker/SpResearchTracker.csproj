@@ -226,6 +226,7 @@
     <Content Include="App\services\datacontext.breeze.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\animation.css" />
     <Content Include="Content\Site.css" />
     <None Include="Properties\PublishProfiles\SpResearchTracker.pubxml" />
     <Content Include="Scripts\datajs-1.1.3.js" />
