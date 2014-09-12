@@ -756,7 +756,7 @@ In this task you will add code to existing JavaScript and HTML files to implemen
         </tbody>
         ````
 
-    1. Finally, find the empty `<div>' that will be used for the modal dialog and add the **include** controller to include a modal dialog view:
+    1. Finally, find the empty `<div>` that will be used for the modal dialog and add the **include** controller to include a modal dialog view:
 
         ````xml
         <div data-ng-include="'/App/projects/detailEdit.html'"></div>
@@ -942,14 +942,13 @@ In this task you added code to existing JavaScript and HTML files to implement t
 ###Task 4 - Test the Application
 Follow these steps to test the application.
 
-1. Right-click the the project in Visual Studio and select **Debug/Start**.
-2. When prompted, login to Azure AD using your Office 365 credentials.
-3. On the homepage for the SPA, click the **PROJECT LIST** link.
-4. This page display all projects that reside in the Project list in the SharePoint site. At first there won't be any projects...
-5. Click the **new projects** link to open the **Create New Project** dialog.
-6. Enter the name for a project and click **save**.
-7. The view page should show the new project, as will the project list page.
-8. Create a new more projects, then do a hard-refresh in your browser to force the SPA to clear it's local cache and retrieve the values from the SharePoint list again. This ensures data has been saved to the SharePoint list. You can also confirm this by navigating to the list in your SharePoint site.
+1. When prompted, login to Azure AD using your Office 365 credentials.
+1. On the homepage for the SPA, click the **PROJECT LIST** link.
+1. This page display all projects that reside in the Project list in the SharePoint site. At first there won't be any projects...
+1. Click the **new projects** link to open the **Create New Project** dialog.
+1. Enter the name for a project and click **save**.
+1. The view page should show the new project, as will the project list page.
+1. Create a new more projects, then do a hard-refresh in your browser to force the SPA to clear it's local cache and retrieve the values from the SharePoint list again. This ensures data has been saved to the SharePoint list. You can also confirm this by navigating to the list in your SharePoint site.
 
 Now you have completed testing the application.
 
