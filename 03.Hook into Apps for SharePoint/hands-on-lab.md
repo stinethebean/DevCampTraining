@@ -128,39 +128,37 @@ Follow these steps to access a list in the app web.
 6. Select **Custom List**.
 7. Click **Finish**.<br/>
        ![](img/18.png?raw=true "Figure 8")
-8. Open the **Elements.xml** file associated with the new list instance **DeepDiveCloudApp/Terma/Elements.xml**.
+8. Open the **Elements.xml** file associated with the new list instance **DeepDiveCloudApp/Terms/Elements.xml**.
 9. Add the following XML inside the **ListInstance** element to pre-populate the list with data.
 
-    ```
-
-        <Data>
-          <Rows>
-            <Row>
-              <Field Name="Title">SharePoint-Hosted App</Field>
-            </Row>
-            <Row>
-              <Field Name="Title">Provider-Hosted App</Field>
-            </Row>
-            <Row>
-              <Field Name="Title">Microsoft Azure</Field>
-            </Row>
-            <Row>
-              <Field Name="Title">Office 365</Field>
-            </Row>
-            <Row>
-              <Field Name="Title">SharePoint Online</Field>
-            </Row>
-          </Rows>
-        </Data>
-
-    ```
+    ````xml
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">SharePoint-Hosted App</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Provider-Hosted App</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Microsoft Azure</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Office 365</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">SharePoint Online</Field>
+        </Row>
+      </Rows>
+    </Data>
+    ````
 
 10. Right click the **Scripts** folder in the **DeepDiveCloudAppWeb** project and select **Add/New/JavaScript File**.
 11. Name the new file **crossdomain**.
 12. Click **OK**.
 13. **Add** the following code to **crossdomain.js** to read the Terms list items.
-    ```
 
+    ````javascript
     (function () {
         "use strict";
 
@@ -211,18 +209,19 @@ Follow these steps to access a list in the app web.
         });
 
     }());
-    ```
+    ````
+
 14. Open **Default.aspx** from the **DeepDiveCloudAppWeb** project.
 15. Add the following script references in the **head** section.
 
-    ```
+    ````xml
     <script src="../Scripts/jquery-1.9.1.js"></script>
     <script src="../Scripts/crossdomain.js"></script>
-    ```
+    ````
 
 16. Add an unordered list element to display the terms. The list element is shown in context below.
 
-    ```
+    ````xml
     <body>
     <form id="form1" runat="server">
         <div id="chrome_ctrl_placeholder"></div>
@@ -231,12 +230,12 @@ Follow these steps to access a list in the app web.
         </div>
     </form>
     </body>
-    ```
+    ````
 
 17. Press **F5** to debug the app.<br/>
      ![](img/19.png?raw=true "Figure 9")
 
-Now you have read list items using the Cross-Domain Library
+Now you have read list items using the Cross-Domain Library.
 
 ##Summary
 By completing this hands-on lab you learnt how to:
