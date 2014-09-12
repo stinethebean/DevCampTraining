@@ -1,18 +1,12 @@
-Module 00 - *MODULE-TITLE*
-======================
+Module 04 - Hook into Office 365 and SharePoint with Single Page Apps
+=====================================================================
 
-> todo: description of the module
+This module demonstrates how to create a single page app (SPA) deployed to Microsoft Azure and leverage Azure AD apps for single sign-on with Office 365.
 
 ##Presentation
-View this module's accompanying [presentation](presentation.pptx).
+View this module's accompanying [presentation](04.Hook into O365 with SPH and SPA.pptx).
 
 ##Hands On Lab
-> todo: description of the HOL & update the link below to be more descriptive
+This lab enables students to take an existing ASP.NET application, configure it with an Azure AD app & create a single page application that reads and writes data to SharePoint in Office 365.
 
 View this module's accompanying [hands on lab](hands-on-lab.md)
-
-> notes:
-> - update the module # & title in the heading
-> - use the **/src** folder where code for final solution should go
-> - use the **/img** folder where images in the HOL should go
-> - remove the block quotes form this document as they are used for "note-to-self" when complete
