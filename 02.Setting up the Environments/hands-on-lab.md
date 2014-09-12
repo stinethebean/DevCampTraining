@@ -1,5 +1,5 @@
-Module 02: SETTING UP THE ENVIRONMENTS
-========================================
+Module 02 - Setting up the Environments
+=======================================
 
 ##Overview
 In this lab, you will create a cloud development environment and build a cloud-hosted app. The development environment will consist of a trial subscription to Office 365 and Azure.
@@ -29,22 +29,22 @@ Follow these steps to sign up for an Office 365 developer subscription.
 1. Navigate to the [Office Dev Center](http://msdn.microsoft.com/en-us/library/office/fp179924(v=office.15).aspx)
 2. Under the heading **Sign up for an Office 365 Developer Site** click **Try It Free**.<br/>
   ![](img/1.png?raw=true "Figure 1")
-3. Fill out the form to obtain your trial O365 subscription.
+3. Fill out the form to obtain your trial Office 365 subscription.
 4. When completed, you will have a developer site in the [subscription].sharepoint.com domain located at the root of your subscription (e.g. https://mysubscription.sharepoint.com)
 
 You now have an Office 365 developer subscription to use with the remaining labs.
 
-###Task 2 - Sign up for a Windows Azure trial subscription
+###Task 2 - Sign up for a Microsoft Azure trial subscription
 Follow these steps to sign up for an Azure trial subscription.
 
-1. Navigate to the [Azure Portal](https://manage.windowsazure.com)
-2. If prompted, log in using the credentials you created for your O365 subscription.
+1. Navigate to the [Azure Management Portal](https://manage.windowsazure.com)
+2. If prompted, log in using the credentials you created for your Office 365 subscription.
 3. After logging in, you should see a screen notifying you that you do not have a subscription<br/>
    ![](img/2.png?raw=true "Figure 2")
-4. Click Sign Up for Windows Azure.
+4. Click Sign Up for Microsoft Azure.
 5. Fill out the form to obtain your free trial.
 
-You now have a Windows Azure trial subscription to use with the remaining labs.
+You now have a Microsoft Azure trial subscription to use with the remaining labs.
 
 <a name="Exercise2"></a>
 ##Exercise 2: Create a Provider-Hosted App
@@ -53,7 +53,7 @@ In this exercise, you will create a Provider-Hosted app in the new development e
 ###Task 1 - Create the new project in Visual Studio 2013
 In this task, you will create a new project.
 
-1. Launch **Visual Studio 2013** as administrator. 
+1. Launch **Visual Studio 2013** as administrator.
 2. In Visual Studio select **File/New/Project**.
 3. In the New Project dialog:
   1. Select **Templates/Visual C#/Office/SharePoint/Apps**.
@@ -68,10 +68,10 @@ In this task, you will create a new project.
   4. Select **ASP.NET MVC Web Application**.
   5. Click **Next**.<br/>
      ![](img/5.png?raw=true "Figure 5")
-  6. Select the option labeled **Use Windows Azure Access Control Service (for SharePoint cloud apps)**.
+  6. Select the option labeled **Use Microsoft Azure Access Control Service (for SharePoint cloud apps)**.
   7. Click **Finish**.<br/>
      ![](img/6.png?raw=true "Figure 6")
-  8. When prompted, log in using your O365 administrator credentials.
+  8. When prompted, log in using your Office 365 administrator credentials.
 
 You now have a new Provider-Hosted app project.
 
@@ -79,7 +79,7 @@ You now have a new Provider-Hosted app project.
 In this task, you will test the app you created.
 
 1. Press F5 to begin debugging.
-2. When prompted, log in using your O365 administrator credentials.
+2. When prompted, log in using your Office 365 administrator credentials.
 3. When prompted, click **Trust it**.<br/>
      ![](img/7.png?raw=true "Figure 7")
 4. Verify that the app home page shows and that it properly welcomes you by name.<br/>
@@ -94,7 +94,7 @@ In this exercise, you will add additional functionality to the app to read data 
 ###Task 1 - Create a Web Site and SQL Azure database
 In this task, you will create an Azure Web Role and SQL Azure database for the app.
 
-1. Log into the [Azure Portal](https://manage.windowsazure.com) as an administrator.
+1. Log into the [Azure Management Portal](https://manage.windowsazure.com) as an administrator.
 2. Click **Web Sites**.
 3. Click **New**.
 4. Click **Custom Create**.<br/>
@@ -126,38 +126,40 @@ In this task, you will add some test data for the app.
 5. If prompted, select to manage the **AzureCloudData** database.
 6. Log in to the database server using the credentials you created earlier.
 7. Paste the contents of the following script into the query window.  
-   ```
-     CREATE TABLE [dbo].[Customers](
-      [ID] [int] IDENTITY(1,1) NOT NULL,
-      [FirstName] [nvarchar](100) NOT NULL,
-      [LastName] [nvarchar](100) NOT NULL,
-      [Company] [nvarchar](100) NULL,
-      [WorkPhone] [nvarchar](100) NULL,
-      [HomePhone] [nvarchar](100) NULL,
-      [EmailAddress] [nvarchar](100) NULL,
-      CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED ([ID] ASC))
-     
-     GO
-     
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Gordon', 'Hee', 'Adventure Works Cycles', '1(340)555-7748', '1(340)555-3737', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Allen', 'Blue Yonder Airlines', '1(203)555-0466', '1(203)555-0071', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('James', 'Alvord', 'City Power and Light', '1(518)555-6571', '1(518)555-8576', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Jeff', 'Phillips', 'Coho Vineyard', '1(270)555-1720', '1(270)555-7810', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Stefen', 'Hessee', 'Contoso, Ltd', '1(407)555-4851', '1(407)555-5411', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Christian', 'Hess', 'Fabrikam, Inc', '1(844)555-0550', '1(844)555-3522', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Cassie', 'Hicks', 'Fourth Coffee', '1(204)555-6648', '1(204)555-2831', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Chris', 'Preston', 'Litware, Inc', '1(407)555-7308', '1(407)555-1700', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Diane', 'Prescott', 'Lucerne Publishing', '1(323)555-3404', '1(323)555-7814', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Hillsdale', 'Margie Travel', '1(802)555-5583', '1(802)555-0246', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Ran', 'Yossi', 'Northwind Traders', '1(250)555-4824', '1(250)555-3653', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Arlene', 'Huff', 'Proseware, Inc', '1(248)555-1267', '1(248)555-0302', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Julia', 'Isla', 'School of Fine Art', '1(270)555-5347', '1(270)555-3401', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Rodrigo', 'Ready', 'Southridge Video', '1(808)555-1110', '1(808)555-4310', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Shu', 'Ito', 'Trey Research', '1(844)555-5428', '1(844)555-2117', 'someone@example.com') 
-     INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('David', 'Jaffe', 'Wingtip Toys', '1(340)555-4478', '1(340)555-1010', 'someone@example.com') 
-     
-     GO
-   ```
+
+   ````sql
+   CREATE TABLE [dbo].[Customers](
+    [ID] [int] IDENTITY(1,1) NOT NULL,
+    [FirstName] [nvarchar](100) NOT NULL,
+    [LastName] [nvarchar](100) NOT NULL,
+    [Company] [nvarchar](100) NULL,
+    [WorkPhone] [nvarchar](100) NULL,
+    [HomePhone] [nvarchar](100) NULL,
+    [EmailAddress] [nvarchar](100) NULL,
+    CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED ([ID] ASC))
+
+   GO
+
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Gordon', 'Hee', 'Adventure Works Cycles', '1(340)555-7748', '1(340)555-3737', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Allen', 'Blue Yonder Airlines', '1(203)555-0466', '1(203)555-0071', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('James', 'Alvord', 'City Power and Light', '1(518)555-6571', '1(518)555-8576', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Jeff', 'Phillips', 'Coho Vineyard', '1(270)555-1720', '1(270)555-7810', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Stefen', 'Hessee', 'Contoso, Ltd', '1(407)555-4851', '1(407)555-5411', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Christian', 'Hess', 'Fabrikam, Inc', '1(844)555-0550', '1(844)555-3522', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Cassie', 'Hicks', 'Fourth Coffee', '1(204)555-6648', '1(204)555-2831', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Chris', 'Preston', 'Litware, Inc', '1(407)555-7308', '1(407)555-1700', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Diane', 'Prescott', 'Lucerne Publishing', '1(323)555-3404', '1(323)555-7814', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Michael', 'Hillsdale', 'Margie Travel', '1(802)555-5583', '1(802)555-0246', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Ran', 'Yossi', 'Northwind Traders', '1(250)555-4824', '1(250)555-3653', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Arlene', 'Huff', 'Proseware, Inc', '1(248)555-1267', '1(248)555-0302', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Julia', 'Isla', 'School of Fine Art', '1(270)555-5347', '1(270)555-3401', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Rodrigo', 'Ready', 'Southridge Video', '1(808)555-1110', '1(808)555-4310', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('Shu', 'Ito', 'Trey Research', '1(844)555-5428', '1(844)555-2117', 'someone@example.com')
+   INSERT INTO Customers (FirstName, LastName, Company, WorkPhone, HomePhone, EmailAddress) Values('David', 'Jaffe', 'Wingtip Toys', '1(340)555-4478', '1(340)555-1010', 'someone@example.com')
+
+   GO
+   ````
+
 8. Click **Run**.
 
 You now have test data in your SQL Azure database.
@@ -205,7 +207,7 @@ In this task, you will create a new controller to work with the test data.
   1. Select **MVC5 Controller with views using Entity Framework**.
   2. Click **Add**.<br/>
        ![](img/14.png?raw=true "Figure 16")
-  3. Select **Customer** as the Model Class. 
+  3. Select **Customer** as the Model Class.
   4. Select **AzureCloudDataEntities** as the Data Context Class.
   5. Click **Add**.<br/>
        ![](img/15.png?raw=true "Figure 17")
@@ -218,7 +220,7 @@ In this task, you will use the test data in the app.
 1. In the **AzureCloudApp** project, double-click the **AppManifest.xml** file.
 2. Update the Start Page to be **AzureCloudAppAWeb/Customers**.
 3. Press **F5** to begin debugging.
-4. When prompted, log in using your O365 administrator credentials.
+4. When prompted, log in using your Office 365 administrator credentials.
 5. When prompted, click **Trust it**.
 6. Verify that the customer data appears in the app.
 
@@ -226,12 +228,12 @@ Now you have a working app with test data.
 
 <a name="Exercise4"></a>
 ##Exercise 4: Deploy the App to Production
-In this exercise, you will deploy the database and app to the O365/Azure environment.
+In this exercise, you will deploy the database and app to the Office 365/Azure environment.
 
 ###Task 1 - Register the app in Office 365
 In this task, you will register the new app with SharePoint.
 
-1. Log into the O365 developer site as an administrator
+1. Log into the Office 365 developer site as an administrator
 2. From the developer site, navigate to **/_layouts/15/appregnew.aspx**.
 3. Click **Generate** next to Client ID.
 4. Click **Generate** next to Client Secret.
@@ -249,14 +251,14 @@ In this task, you will register the new app with SharePoint.
 
 Now your app is register with SharePoint
 
-###Task 2 - Publish the remote web to Windows Azure.
-In this task, you will publish the web project to the Windows Azure web site.
+###Task 2 - Publish the remote web to Microsoft Azure.
+In this task, you will publish the web project to the Microsoft Azure web site.
 
 1. Right click the **AzureCloudAppWeb** project and select **Publish**.
-2. Click **Windows Azure Web Sites**.
+2. Click **Microsoft Azure Web Sites**.
 3. When prompted, select to deploy the remote web to the existing Azure web site you created earlier.
 4. Publish the remote web.
-5. Return to the [Azure Management portal](https://manage.windowsazure.com).
+5. Return to the [Azure Management Portal](https://manage.windowsazure.com).
 6. Click **Web Sites**.
 7. Select your Azure Web Site.
 8. Click **Configure**.
@@ -265,7 +267,7 @@ In this task, you will publish the web project to the Windows Azure web site.
 11. Click **Save**.<br/>
        ![](img/28.png?raw=true "Figure 20")
 
-Now your web is published to Windows Azure.
+Now your web is published to Microsoft Azure.
 
 ###Task 3 - Publish the app to SharePoint.
 In this task, you will publish the app project to the SharePoint catalog.
@@ -275,7 +277,7 @@ In this task, you will publish the app project to the SharePoint catalog.
 3. Enter the **Start URL** and **Client ID** for the app.
 4. Click **Finish**.<br/>
        ![](img/29.png?raw=true "Figure 21")
-5. Return to the O365 tenant and select **Admin/SharePoint**.<br/>
+5. Return to the Office 365 tenant and select **Admin/SharePoint**.<br/>
        ![](img/30.png?raw=true "Figure 22")
 6. Click **Apps/App Catalog**.<br/>
        ![](img/31.png?raw=true "Figure 23")
@@ -293,8 +295,8 @@ Now your app is published to the catalog.
 ###Task 4 - Add the app to a SharePoint site.
 In this task, you will add the app from the catalog to a SharePoint site.
 
-1. Navigate to a site in your O365 tenancy.
-2. Click **Site Contents**. (**NOTE:** If you are using the Developer site, it may have an older version of the app still installed from testing. You must remove the app from the site AND remove the entry from the “Apps in Testing” list or the new app will not install.)
+1. Navigate to a site in your Office 365 tenancy.
+2. Click **Site Contents**. (**NOTE:** If you are using the Developer site, it may have an older version of the app still installed from testing. You must remove the app from the site AND remove the entry from the ï¿½Apps in Testingï¿½ list or the new app will not install.)
 3. Click **Add an App**.
 4. Click **From Your Organization**.<br/>
        ![](img/32.png?raw=true "Figure 24")
@@ -308,9 +310,9 @@ Now your app is running in SharePoint!
 ##Summary
 By completing this hands-on lab you learnt how to:
 - Provision an Office 365 developer tenancy.
-- Provision a Windows Azure subscription.
+- Provision a Microsoft Azure subscription.
 - Create a Provider-Hosted app.
 - Utilize an Entity Framework model with SQL Azure data.
-- Publish the remote web to Windows Azure.
+- Publish the remote web to Microsoft Azure.
 - Publish an app to SharePoint.
 - Add a SharePoint app to a site.

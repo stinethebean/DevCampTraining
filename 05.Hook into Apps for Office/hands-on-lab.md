@@ -1,18 +1,18 @@
-Module 05: HOOKING INTO APPS FOR OFFICE
-=======================================
+Module 05 - Hook into Apps for Office
+=====================================
 
 ##Overview
 In this lab, configure Apps for Office in Word and Outlook. The lab uses an existing application that can be found in the src folder.
 
 ##Objectives
-- Learn to configure Windows Azure to support Apps for Office
+- Learn to configure Microsoft Azure to support Apps for Office
 - Understand how to create a Word task pane app
 - Understand how to create an Outlook app
 
 ##Prerequisites
 - Visual Studio 2013 for Windows 8
-- You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
-- You must have completed the lab associated with Module 4.
+- You must have an Office 365 tenant and Microsoft Azure subscription to complete this lab.
+- You must have completed the lab associated with Module 2.
 
 ##Exercises
 The hands-on lab includes the following exercises:<br/>
@@ -26,7 +26,7 @@ In this exercise you will configure and run a Word app in a task pane.
 ###Task 1 - Create Azure Active Directory App
 Follow these steps to create the Azure Active Directory app.
 
-1. Log into the [Azure Portal](https://manage.windowsazure.com) as an administrator.
+1. Log into the [Azure Management Portal](https://manage.windowsazure.com) as an administrator.
 2. Click **Active Directory**.
 3. Click the Azure Active Directory associated with your subscription.
 4. Click **Applications**.<br/>
@@ -103,7 +103,7 @@ In this exercise you will configure and run an Outlook app in the mail client.
 ###Task 1 - Create Azure Active Directory App
 Follow these steps to create the Azure Active Directory app.
 
-1. Log into the [Azure Portal](https://manage.windowsazure.com) as an administrator.
+1. Log into the [Azure Management Portal](https://manage.windowsazure.com) as an administrator.
 2. Click **Active Directory**.
 3. Click the Azure Active Directory associated with your subscription.
 4. Click **Applications**.<br/>
@@ -176,7 +176,7 @@ Follow these steps to test the application.
 8. If you receive a second error notification, click **Start**.<br/>
      ![](img/18.png?raw=true "Figure 28")
 9. When the app starts, select a **Research Project**.
-10. Select a **Discoved Link**.
+10. Select a **Discovered Link**.
 11. Click **Add Link to project**.
 
 Now you have completed testing the application.
