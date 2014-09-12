@@ -1,8 +1,25 @@
-﻿(function () {
+﻿/*
+ * role: view controller
+ * desc: controller for the dashboard view
+ */
+(function () {
   'use strict';
 
-  // INSERT CODE BELOW THIS LINE
+  // define controller
+  var controllerId = 'dashboard';
+  angular.module('app').controller(controllerId,
+    ['$route', 'common', dashboard]);
 
-  // INSERT CODE ABOVE THIS LINE
+  // create controller
+  function dashboard($route, common) {
+    var vm = this;
+    vm.thisView = "dashboard view";
 
+    // init controller
+    init();
+
+    function init() {
+      common.activateController([], controllerId);
+    }
+  }
 })();
