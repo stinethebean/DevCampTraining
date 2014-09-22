@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.o365_todo.MainActivity" >
+    
+    <item
+        android:id="@+id/action_add_new"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/action_add_new" />
+      
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/action_refresh" />
+    
+    <item
+        android:id="@+id/action_filter_completed"
+        android:orderInCategory="800"
+        android:showAsAction="never"
+        android:checkable="true"
+        android:title="@string/action_filter_completed" />
+
+    <item
+        android:id="@+id/action_clear_token"
+        android:orderInCategory="900"
+        android:showAsAction="never"
+        android:title="@string/action_clear_token" />
+    
+</menu>

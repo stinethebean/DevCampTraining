@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:columnCount="3" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_gravity="left|top"
+        android:layout_row="0"
+        android:text="@string/placeholder"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/completed_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_gravity="center_vertical|right"
+        android:layout_row="0"
+        android:layout_rowSpan="3"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:contentDescription="@string/placeholder"
+        android:src="@drawable/ic_checkbox_checked" />
+
+    <LinearLayout
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_li_start_date" />
+
+        <TextView
+            android:id="@+id/startDate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textColor="#040404"
+            android:textSize="15sp"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_li_due_date" />
+
+        <TextView
+            android:id="@+id/dueDate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textColor="#040404"
+            android:textSize="15sp"
+            android:typeface="sans" />
+    </LinearLayout>
+
+</GridLayout>

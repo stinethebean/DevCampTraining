@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    <!-- Merging into a LinearLayout -->
+
+    <Button
+        android:id="@+id/launch_picker"
+        style="@android:style/Widget.DeviceDefault.Light.Spinner"
+        android:minHeight="38dip"
+        android:text="@string/placeholder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+    
+    <ImageButton
+        android:id="@+id/clear_picker"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="#01ffffff"
+        android:contentDescription="@string/placeholder"
+        android:focusable="false"
+        android:minHeight="38dip"
+        android:minWidth="38dip"
+        android:scaleType="center"
+        android:src="@drawable/ic_clear_holo_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</merge>
