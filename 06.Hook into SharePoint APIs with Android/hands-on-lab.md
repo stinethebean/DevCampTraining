@@ -47,7 +47,7 @@ Prepare the Android SDK by downloading Android API Level 19.
     - Intel x86 Atom System Image
     - Sources for Android SDK
 
-    ![](img/002_install_android_api_level_19.png)
+    ![](img/0002_install_android_api_level_19.png)
 
 03. Click **Install packages...** and wait for the install to complete.
 
@@ -80,7 +80,6 @@ Follow these steps to get the source code ready to build on your machine.
         C:\Android> git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
         C:\Android> cd adal
         C:\Android\adal> git checkout v1.0.1
-        C:\Android\adal> cd ..
 
     ![](img/0006_clone_adal.png)
 
@@ -89,29 +88,36 @@ Follow these steps to get the source code ready to build on your machine.
 04. Clone the **Azure AD Authentication Library for Android** into your workspace from github, then checkout
     the revision we're targeting in this lab.
 
+        C:\Android\adal> cd ..
         C:\Android> git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
         C:\Android> cd o365-android-sdk
         C:\Android\o365-android-sdk> git checkout v1.0
-        C:\Android\o365-android-sdk> cd ..
 
     ![](img/0008_clone_o365_sdk.png)
 
     ![](img/0009_checkout_o365_sdk_v1.png)
 
-05. Clone the **Tasks for SharePoint O365** source code into your workspace from github.
-  
-        C:\Android> git clone https://github.com/OfficeDev/TODOGITPATHTOSOURCECODE.git o365-tasks
+05. Copy the `o365-tasks` folder from `src` directory of this hands-on lab into your workspace. This
+    contains the source code for the **Tasks for SharePoint O365** app.
 
-    TODO: screencap
+    **Copy from hands-on lab:**
 
-06. Return to Eclipse to import the source code from your workspace.
+    ![](img/0010_copy_o365_tasks.png)
 
-07. Select **File > Import**. Expand **Android** and select **Existing Android Code Into Workspace**.
+    **Paste into workspace:**
+
+    ![](img/0011_paste_o365_tasks.png)
+
+06. Next we will return to Eclipse to import the source code from your workspace.
+
+    Select **File > Import**.
+
+    ![](img/0012_menu_import.png)
+
+07. Expand **Android** and select **Existing Android Code Into Workspace**.
     Finally, click **Next**.
 
-    ![](img/0010_menu_import.png)
-
-    ![](img/0011_existing_workspace.png)
+    ![](img/0013_existing_workspace.png)
 
 08. For **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
     the workspace.
@@ -123,9 +129,9 @@ Follow these steps to get the source code ready to build on your machine.
     - `o365-android-sdk\sdk\office-365-lists-sdk`
     - `o365-tasks\src`
 
-    The rest of these projects are test and sample code and can be ignored.
-
     ![](img/0014_eclipse_import_code_dialog.png)
+
+    The rest of these projects are test and sample code and can be ignored.
 
 09. Finally, click **Finish**
 
@@ -134,11 +140,19 @@ Follow these steps to get the source code ready to build on your machine.
 
         C:\Android> powershell adal\src\libs\getLibs.ps1
 
-11. Copy `ANDROID_SDK\extras\android\support\v4\android-support-v4.jar` into `C:\Android\adal\src\libs`.
+    ![](img/0015_download_gson.png)
+
+11. Copy `%ANDROID_SDK%\extras\android\support\v4\android-support-v4.jar` into `C:\Android\adal\src\libs`.
+
+    (Where **`%ANDROID_SDK%`** refers to the location of the Android SDK on your machine)
+
+    ![](img/0016_copy_v4_support_lib.png)
 
 13. Execute the "`C:\Android\o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1`" script to download Guava 16.0.1.
 
         C:\Android> powershell o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1
+
+    ![](img/0017_download_guava.png)
 
 14. Return to Eclipse and press **F5** to refresh. Wait a moment as Eclipse re-compiles the code. If everything
     has been done correctly, then there should be no more red entries in the **Problems** window.
@@ -157,7 +171,7 @@ In this task we will configure and launch the Android emulator, and deploy the a
     
     Click **Create** to create a new virtual device.
 
-    ![](img/0015_avd_manager.png)
+    ![](img/0019_avd_manager.png)
 
     **Note** please be patient - launching the emulator will take some time.
 
