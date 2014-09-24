@@ -1,0 +1,119 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditTaskActivity" >
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+	
+	    <TableLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <TableRow
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:text="@string/edit_task_title_label" />
+	
+	            <EditText
+	                android:id="@+id/title_text"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:ems="10"
+	                android:inputType="text" />
+	            
+	        </TableRow>
+	
+	        <TableRow
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:text="@string/edit_task_start_date_label" />
+	
+	            <com.microsoft.o365_tasks.controls.DatePickerControl
+	                android:id="@+id/start_date_picker"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1" />
+	
+	        </TableRow>
+	
+	        <TableRow
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+	
+	            <TextView
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:text="@string/edit_task_due_date_label" />
+	
+	            <com.microsoft.o365_tasks.controls.DatePickerControl
+	                android:id="@+id/due_date_picker"
+	                android:layout_width="fill_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1" />
+	
+	        </TableRow>
+	        
+	        <TableRow
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" >
+	            
+	            <TextView
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center_vertical"
+	                android:text="@string/edit_task_completed_label" />
+	            
+	            <CheckBox
+	                android:id="@+id/completed_checkbox"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content" />
+	            
+	        </TableRow>
+	        
+	    </TableLayout>
+    
+    </ScrollView>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_cancel" />
+
+        <Button
+            android:id="@+id/ok_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_ok" />
+        
+    </LinearLayout>
+    
+</RelativeLayout>
