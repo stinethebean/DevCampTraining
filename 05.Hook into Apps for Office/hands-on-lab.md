@@ -23,7 +23,14 @@ The hands-on lab includes the following exercises:<br/>
 ##Exercise 1: Configure a Word app
 In this exercise you will configure and run a Word app in a task pane.
 
-###Task 1 - Create Azure Active Directory App
+###Task 1 - Create a Research References List
+Follow these steps to create a Research References List to hold links to pages.
+
+1. Log into SharePoint Online using your **Organizational Account**.
+2. On the site where the **Research Projects** list was created by the previous lab, create a new **Links** list named **Research References**.
+3. After the list is created, add a new column to the list named **Project** as a **Single line of text**.
+
+###Task 2 - Create Azure Active Directory App
 Follow these steps to create the Azure Active Directory app.
 
 1. Log into the [Azure Management Portal](https://manage.windowsazure.com) as an administrator.
@@ -44,7 +51,7 @@ Follow these steps to create the Azure Active Directory app.
 
 Now you have created a new Azure Active Directory app.
 
-###Task 2 - Configure the Azure Active Directory App
+###Task 3 - Configure the Azure Active Directory App
 Follow these steps to configure the Azure Active Directory app.
 
 1. Click **Configure**.<br/>
@@ -69,7 +76,7 @@ Follow these steps to configure the Azure Active Directory app.
 
 Now you have configured the Azure Active Directory app.
 
-###Task 3 - Configure the MVC5 Web Application
+###Task 4 - Configure the MVC5 Web Application
 Follow these steps to configure the MVC5 Web Application.
 
 1. In Visual studio 2013, Open **Word.sln**, which is located in the **src** directory.
@@ -84,7 +91,7 @@ Follow these steps to configure the MVC5 Web Application.
 
 Now the application is configured.
 
-###Task 4 - Test the Application
+###Task 5 - Test the Application
 Follow these steps to test the application.
 
 1. Right click the **WordResearchTrackerWeb** project and select **Debug/Start New Instance**.
