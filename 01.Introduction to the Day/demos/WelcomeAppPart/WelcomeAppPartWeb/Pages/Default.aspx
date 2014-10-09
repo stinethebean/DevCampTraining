@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    Please return to the SharePoint site and insert an app part
     </div>
     </form>
 </body>
