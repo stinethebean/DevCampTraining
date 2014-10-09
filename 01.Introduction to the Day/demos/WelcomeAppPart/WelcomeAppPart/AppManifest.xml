@@ -8,10 +8,10 @@
 >
   <Properties>
     <Title>WelcomeAppPart</Title>
-    <StartPage>  https://livelessonswelcome.azurewebsites.net/Pages/Default.aspx?{StandardTokens}</StartPage>
+    <StartPage>~remoteAppUrl/Pages/Default.aspx?{StandardTokens}</StartPage>
   </Properties>
 
   <AppPrincipal>
-    <RemoteWebApplication ClientId="221d0cae-6e45-4fa8-8b9c-a418a6377fb1" />
+    <RemoteWebApplication ClientId="*" />
   </AppPrincipal>
 </App>
