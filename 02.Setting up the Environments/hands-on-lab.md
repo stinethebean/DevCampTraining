@@ -218,7 +218,7 @@ Now you have a new controller for the test data.
 In this task, you will use the test data in the app.
 
 1. In the **AzureCloudApp** project, double-click the **AppManifest.xml** file.
-2. Update the Start Page to be **AzureCloudAppAWeb/Customers**.
+2. Update the Start Page to be **AzureCloudAppWeb/Customers**.
 3. Press **F5** to begin debugging.
 4. When prompted, log in using your Office 365 administrator credentials.
 5. When prompted, click **Trust it**.
