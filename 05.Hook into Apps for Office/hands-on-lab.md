@@ -112,7 +112,7 @@ Follow these steps to test the application.
 Now you have completed testing the application.
 
 <a name="Exercise2"></a>
-##Exercise 1: Configure a Word app
+##Exercise 2: Configure a Word app
 In this exercise you will configure and run a Word app in a task pane.
 
 ###Task 1 - Create Azure Active Directory App
