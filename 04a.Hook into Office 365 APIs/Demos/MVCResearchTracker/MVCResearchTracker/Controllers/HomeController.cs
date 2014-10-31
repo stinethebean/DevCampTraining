@@ -21,6 +21,14 @@ namespace MVCResearchTracker.Controllers
     public class HomeController : Controller
     {
         private const string spSite = "https://[tenancy].sharepoint.com";
+        private const string discoResource = "https://api.office.com/discovery/";
+        private const string discoEndpoint = "https://api.office.com/discovery/v1.0/me/";
+
+        /// <summary>
+        /// Use the DiscoveryClient to get the Contacts and Files endpoints
+        /// </summary>
+        /// <param name="code">The authorization code to use when getting an access token</param>
+        /// <returns></returns>
         public async Task<ActionResult> Index(string code)
         {
             AuthenticationContext authContext = new AuthenticationContext(
@@ -38,7 +46,7 @@ namespace MVCResearchTracker.Controllers
             if (disco == null && code == null)
             {
                 Uri redirectUri = authContext.GetAuthorizationRequestURL(
-                    "https://api.office.com/discovery/",
+                    discoResource,
                     creds.ClientId,
                     new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
                     UserIdentifier.AnyUser,
@@ -51,7 +59,7 @@ namespace MVCResearchTracker.Controllers
             if (disco == null && code != null)
             {
 
-                disco = new DiscoveryClient(new Uri("https://api.office.com/discovery/v1.0/me/"), async () =>
+                disco = new DiscoveryClient(new Uri(discoEndpoint), async () =>
                 {
 
                     var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
@@ -71,10 +79,30 @@ namespace MVCResearchTracker.Controllers
             Helpers.SaveInCache("ContactsDiscoveryResult", contactsDisco);
             Helpers.SaveInCache("FilesDiscoveryResult", filesDisco);
 
-            return RedirectToAction("Contacts");
+            List<MyDiscovery> discoveries = new List<MyDiscovery>(){
+                new MyDiscovery(){
+                    Capability = "Contacts",
+                    EndpointUri = contactsDisco.ServiceEndpointUri.OriginalString,
+                    ResourceId = contactsDisco.ServiceResourceId,
+                    Version = contactsDisco.ServiceApiVersion
+                },
+                new MyDiscovery(){
+                    Capability = "My Files",
+                    EndpointUri = filesDisco.ServiceEndpointUri.OriginalString,
+                    ResourceId = filesDisco.ServiceResourceId,
+                    Version = filesDisco.ServiceApiVersion
+                }
+            };
+
+            return View(discoveries);
 
         }
 
+        /// <summary>
+        /// Use the OutlookServicesClient to get Exchange contacts
+        /// </summary>
+        /// <param name="code">The authorization code to use when getting an access token</param>
+        /// <returns></returns>
         public async Task<ActionResult> Contacts(string code)
         {
             AuthenticationContext authContext = new AuthenticationContext(
@@ -85,10 +113,13 @@ namespace MVCResearchTracker.Controllers
                 ConfigurationManager.AppSettings["ida:ClientID"],
                 ConfigurationManager.AppSettings["ida:Password"]);
 
+            //Get the discovery information that was saved earlier
             CapabilityDiscoveryResult cdr = Helpers.GetFromCache("ContactsDiscoveryResult") as CapabilityDiscoveryResult;
 
+            //Get a client, if this page was already visited
             OutlookServicesClient outlookClient = Helpers.GetFromCache("OutlookClient") as OutlookServicesClient;
 
+            //Get an authorization code if needed
             if (outlookClient == null && cdr != null && code == null)
             {
                 Uri redirectUri = authContext.GetAuthorizationRequestURL(
@@ -101,6 +132,7 @@ namespace MVCResearchTracker.Controllers
                 return Redirect(redirectUri.ToString());
             }
 
+            //Create the OutlookServicesClient
             if (outlookClient == null && cdr != null && code != null)
             {
 
@@ -118,6 +150,7 @@ namespace MVCResearchTracker.Controllers
                 Helpers.SaveInCache("OutlookClient", outlookClient);
             }
 
+            //Get the contacts
             var contactsResults = await outlookClient.Me.Contacts.ExecuteAsync();
             List<MyContact> contactList = new List<MyContact>();
 
@@ -136,13 +169,20 @@ namespace MVCResearchTracker.Controllers
                 });
             }
 
+            //Save the contacts
             Helpers.SaveInCache("ContactList", contactList);
 
-            return RedirectToAction("Documents");
+            //Show the contacts
+            return View(contactList);
 
         }
 
-        public async Task<ActionResult> Documents(string code)
+        /// <summary>
+        /// Use the SharePointClient to get OneDrive for Business Files
+        /// </summary>
+        /// <param name="code">The authorization code to use when getting an access token</param>
+        /// <returns></returns>
+        public async Task<ActionResult> Files(string code)
         {
             AuthenticationContext authContext = new AuthenticationContext(
                ConfigurationManager.AppSettings["ida:AuthorizationUri"] + "/common",
@@ -152,10 +192,13 @@ namespace MVCResearchTracker.Controllers
                 ConfigurationManager.AppSettings["ida:ClientID"],
                 ConfigurationManager.AppSettings["ida:Password"]);
 
+            //Get the discovery information that was saved earlier
             CapabilityDiscoveryResult cdr = Helpers.GetFromCache("FilesDiscoveryResult") as CapabilityDiscoveryResult;
 
+            //Get a client, if this page was already visited
             SharePointClient sharepointClient = Helpers.GetFromCache("SharePointClient") as SharePointClient;
 
+            //Get an authorization code, if needed
             if (sharepointClient == null && cdr != null && code == null)
             {
                 Uri redirectUri = authContext.GetAuthorizationRequestURL(
@@ -168,6 +211,7 @@ namespace MVCResearchTracker.Controllers
                 return Redirect(redirectUri.ToString());
             }
 
+            //Create the SharePointClient
             if (sharepointClient == null && cdr != null && code != null)
             {
 
@@ -185,7 +229,7 @@ namespace MVCResearchTracker.Controllers
                 Helpers.SaveInCache("SharePointClient", sharepointClient);
             }
 
-
+            //Get the files
             var filesResults = await sharepointClient.Files.ExecuteAsync();
 
             var fileList = new List<MyFile>();
@@ -200,15 +244,23 @@ namespace MVCResearchTracker.Controllers
                 });
             }
 
-
+            //Save the files
             Helpers.SaveInCache("FileList", fileList);
 
-            return RedirectToAction("Projects");
+            //Show the files
+            return View(fileList);
 
         }
 
+        /// <summary>
+        /// Display a form for creating a new Project
+        /// </summary>
+        /// <param name="submitModel">The new project data submitted from the form</param>
+        /// <param name="code">The authorization code to use when getting an access token</param>
+        /// <returns></returns>
         public async Task<ActionResult> Projects(ViewModel submitModel, string code)
         {
+            //If the New Project form needs to be displayed
             if (submitModel.Project == null && code == null)
             {
                 ViewModel formModel = new ViewModel();
@@ -216,11 +268,12 @@ namespace MVCResearchTracker.Controllers
                 formModel.Files = Helpers.GetFromCache("FileList") as List<MyFile>;
                 return View(formModel);
             }
+            // A new project was submitted
             else
             {
                 if (submitModel.Project != null)
                 {
-                    Helpers.SaveInCache("SubmitModel", submitModel); 
+                    Helpers.SaveInCache("SubmitModel", submitModel);
                 }
 
                 AuthenticationContext authContext = new AuthenticationContext(
@@ -231,6 +284,7 @@ namespace MVCResearchTracker.Controllers
                     ConfigurationManager.AppSettings["ida:ClientID"],
                     ConfigurationManager.AppSettings["ida:Password"]);
 
+                //Get an authorization code, if necessary
                 if (code == null)
                 {
                     Uri redirectUri = authContext.GetAuthorizationRequestURL(
@@ -244,7 +298,7 @@ namespace MVCResearchTracker.Controllers
                 }
                 else
                 {
-
+                    //Get the access token
                     var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
                         code,
                         new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
@@ -252,10 +306,13 @@ namespace MVCResearchTracker.Controllers
 
                     string accessToken = authResult.AccessToken;
 
+                    //Build SharePoint RESTful API endpoint for the list items
                     StringBuilder requestUri = new StringBuilder()
                       .Append(spSite)
                       .Append("/_api/web/lists/getbyTitle('Research Projects')/items");
 
+                    //Create an XML message with the new project data
+                    //This message will be POSTED to the SharePoint API endpoint
                     XNamespace atom = "http://www.w3.org/2005/Atom";
                     XNamespace d = "http://schemas.microsoft.com/ado/2007/08/dataservices";
                     XNamespace m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
@@ -280,6 +337,7 @@ namespace MVCResearchTracker.Controllers
 
                     StringContent requestData = new StringContent(message.ToString());
 
+                    //POST the data to the endpoint
                     HttpClient client = new HttpClient();
                     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUri.ToString());
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -288,6 +346,7 @@ namespace MVCResearchTracker.Controllers
                     request.Content = requestData;
                     HttpResponseMessage response = await client.SendAsync(request);
 
+                    //Show the Finished screen
                     return RedirectToAction("Finished");
                 }
             }
