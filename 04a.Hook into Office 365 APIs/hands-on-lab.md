@@ -462,24 +462,33 @@ Follow these steps to retrieve Exchange contacts.
   3. Click **Add**.<br/>
   ![](img/27.png?raw=true "Figure 27") 
 4. **Locate** the **Create New** **ActionLink** that looks like this:
+
   ```HTML
   <p>
       @Html.ActionLink("Create New", "Create")
   </p>
+
   ```
+
 5. **Modify** the **ActionLink** to appear as follows:
+
   ```HTML
   <div>
       @Html.ActionLink("Get Files", "Files")
   </div>
+
   ```
+
 6. **Delete** the following code from the view:
+
   ```HTML
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
+
   ```
 7. Press **F5** to begin debugging.
 8. When the discovered enpoints appear, click **Get Contacts**.
