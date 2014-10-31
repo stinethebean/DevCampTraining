@@ -151,7 +151,7 @@ Follow these steps to add connected services to the MVC5 web application project
     ![](img/23.png?raw=true "Figure 23")
 4. Click **App Properties**.
 5. **Delete** the Redirect Uri that uses *http** leaving in place the one that uses **https**.
-6. Click **Apply**.
+6. Click **Apply**.<br/>
   ![](img/24a.png?raw=true "Figure 24a") 
 7. Click **OK**.<br/>
   ![](img/24.png?raw=true "Figure 24") 
