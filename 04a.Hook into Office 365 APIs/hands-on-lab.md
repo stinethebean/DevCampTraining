@@ -367,7 +367,11 @@ Follow these steps to use the Discovery Service to locate endpoints for Exchnage
   </div>
   ```
 4. Press **F5** to debug the project.
-5. When prompted, 
+5. When prompted, log in with your **Organizational Account**.
+6. When prompted, click **OK** in the consent dialog.<br/>
+  ![](img/25.png?raw=true "Figure 25") 
+7. You should now see discovered endpoints for **Contacts** and **Files**.<br/>
+  ![](img/26.png?raw=true "Figure 26") 
 
 By completing this lab, you learnt to
 - Use Office 365 APIs in a web application
