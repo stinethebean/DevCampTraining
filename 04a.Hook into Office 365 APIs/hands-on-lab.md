@@ -18,6 +18,7 @@ In this lab, you will create a web application that uses the Office 365 APIs. Th
 The hands-on lab includes the following exercises:<br/>
 1. <a href="#Exercise1">Prepare Data Sources</a><br/>
 2. <a href="#Exercise2">Create an MVC5 Web Application</a><br/>
+3. <a href="#Exercise3">Configure a Single Sign-On MVC5 Web Application</a><br/>
 
 <a name="Exercise1"></a>
 ##Exercise 1: Prepare Data Sources
@@ -810,6 +811,17 @@ Follow these steps to create a new Project using the contacts and files you retr
 14. Stop debugging.
 
 You now have a working solution to add projects to your SharePoint list that uses information from your contacts and files.
+
+<a name="Exercise3"></a>
+##Exercise 3: Configure a Single Sign-On MVC5 Web Application
+In this exercise, you will configure a sample that uses Azure AD for sign-in using the OpenID Connect protocol, and then calls a Office 365 API under the signed-in user's identity using tokens obtained via OAuth 2.0.
+
+###Task 1 - Configure the sample
+Follow these steps to configure the sample.
+
+1. Navigate to the [O365-WebApp-MultiTenant](https://github.com/OfficeDev/O365-WebApp-MultiTenant) repository and follow the directions.
+
+Now you have a working single sign-on application.
 
 By completing this lab, you learnt to
 - Use Office 365 APIs in a web application
