@@ -491,13 +491,325 @@ Follow these steps to retrieve Exchange contacts.
 
   ```
 7. Press **F5** to begin debugging.
-8. When the discovered enpoints appear, click **Get Contacts**.
+8. When the discovered endpoints appear, click **Get Contacts**.
 9. You should now see your Exchange contacts.<br/>
   ![](img/28.png?raw=true "Figure 28")
 10. Stop debugging.
 
+Now you have retrieved Exchange contacts.
+
+###Task 7 - Retrieve Files
+Follow these steps to retrieve OneDrive for Business files.
+
+1. **Replace** the **Files** method in the **HomeController** with the following code:
+  ```C#
+        public async Task<ActionResult> Files(string code)
+        {
+            AuthenticationContext authContext = new AuthenticationContext(
+               ConfigurationManager.AppSettings["ida:AuthorizationUri"] + "/common",
+               true);
+
+            ClientCredential creds = new ClientCredential(
+                ConfigurationManager.AppSettings["ida:ClientID"],
+                ConfigurationManager.AppSettings["ida:Password"]);
+
+            //Get the discovery information that was saved earlier
+            CapabilityDiscoveryResult cdr = Helpers.GetFromCache("FilesDiscoveryResult") as CapabilityDiscoveryResult;
+
+            //Get a client, if this page was already visited
+            SharePointClient sharepointClient = Helpers.GetFromCache("SharePointClient") as SharePointClient;
+
+            //Get an authorization code, if needed
+            if (sharepointClient == null && cdr != null && code == null)
+            {
+                Uri redirectUri = authContext.GetAuthorizationRequestURL(
+                    cdr.ServiceResourceId,
+                    creds.ClientId,
+                    new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                    UserIdentifier.AnyUser,
+                    string.Empty);
+
+                return Redirect(redirectUri.ToString());
+            }
+
+            //Create the SharePointClient
+            if (sharepointClient == null && cdr != null && code != null)
+            {
+
+                sharepointClient = new SharePointClient(cdr.ServiceEndpointUri, async () =>
+                {
+
+                    var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
+                        code,
+                        new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                        creds);
+
+                    return authResult.AccessToken;
+                });
+
+                Helpers.SaveInCache("SharePointClient", sharepointClient);
+            }
+
+            //Get the files
+            var filesResults = await sharepointClient.Files.ExecuteAsync();
+
+            var fileList = new List<MyFile>();
+
+            foreach (var file in filesResults.CurrentPage.Where(f => f.Name != "Shared with Everyone").OrderBy(e => e.Name))
+            {
+                fileList.Add(new MyFile
+                {
+                    Id = file.Id,
+                    Name = file.Name,
+                    Url = file.WebUrl
+                });
+            }
+
+            //Save the files
+            Helpers.SaveInCache("FileList", fileList);
+
+            //Show the files
+            return View(fileList);
+
+        }
+  ```
+2. Right click within the body of the **Files** method and select **Add View** from the context menu.
+3. In the **Add View** dialog:
+  1. Select **List** as the **Template**.
+  2. Select **MyFile** as the **Model Class**.
+  3. Click **Add**.<br/>
+  ![](img/29.png?raw=true "Figure 29") 
+4. **Locate** the **Create New** **ActionLink** that looks like this:
+
+  ```HTML
+  <p>
+      @Html.ActionLink("Create New", "Create")
+  </p>
+
+  ```
+
+5. **Modify** the **ActionLink** to appear as follows:
+
+  ```HTML
+  <div>
+      @Html.ActionLink("Create New Project", "Projects")
+  </div>
+
+  ```
+
+6. **Delete** the following code from the view:
+
+  ```HTML
+
+       <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+
+  ```
+7. Press **F5** to begin debugging.
+8. When the discovered endpoints appear, click **Get Contacts**.
+9. When the contacts appear, click **Get Files**.
+9. You should now see your OneDrive for Business files.<br/>
+  ![](img/30.png?raw=true "Figure 30")
+10. Stop debugging.
+
+Now you have retrieved OneDrive for Business files.
+
+###Task 8 - Create a new Project
+Follow these steps to create a new Project using the contacts and files you retrieved.
+
+1. **Replace** the **Projects** method in the **HomeController** with the following code:
+  ```C#
+        public async Task<ActionResult> Projects(ViewModel submitModel, string code)
+        {
+            //If the New Project form needs to be displayed
+            if (submitModel.Project == null && code == null)
+            {
+                ViewModel formModel = new ViewModel();
+                formModel.Contacts = Helpers.GetFromCache("ContactList") as List<MyContact>;
+                formModel.Files = Helpers.GetFromCache("FileList") as List<MyFile>;
+                return View(formModel);
+            }
+            // A new project was submitted
+            else
+            {
+                if (submitModel.Project != null)
+                {
+                    Helpers.SaveInCache("SubmitModel", submitModel);
+                }
+
+                AuthenticationContext authContext = new AuthenticationContext(
+                   ConfigurationManager.AppSettings["ida:AuthorizationUri"] + "/common",
+                   true);
+
+                ClientCredential creds = new ClientCredential(
+                    ConfigurationManager.AppSettings["ida:ClientID"],
+                    ConfigurationManager.AppSettings["ida:Password"]);
+
+                //Get an authorization code, if necessary
+                if (code == null)
+                {
+                    Uri redirectUri = authContext.GetAuthorizationRequestURL(
+                        spSite,
+                        creds.ClientId,
+                        new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                        UserIdentifier.AnyUser,
+                        string.Empty);
+
+                    return Redirect(redirectUri.ToString());
+                }
+                else
+                {
+                    //Get the access token
+                    var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
+                        code,
+                        new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                        creds);
+
+                    string accessToken = authResult.AccessToken;
+
+                    //Build SharePoint RESTful API endpoint for the list items
+                    StringBuilder requestUri = new StringBuilder()
+                      .Append(spSite)
+                      .Append("/_api/web/lists/getbyTitle('Research Projects')/items");
+
+                    //Create an XML message with the new project data
+                    //This message will be POSTED to the SharePoint API endpoint
+                    XNamespace atom = "http://www.w3.org/2005/Atom";
+                    XNamespace d = "http://schemas.microsoft.com/ado/2007/08/dataservices";
+                    XNamespace m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
+
+                    submitModel = Helpers.GetFromCache("SubmitModel") as ViewModel;
+                    string description = (Helpers.GetFromCache("FileList") as List<MyFile>).Where(f => f.Url == submitModel.Project.DocumentLink).First().Name;
+                    string url = submitModel.Project.DocumentLink;
+                    string title = submitModel.Project.Title;
+                    string owner = submitModel.Project.Owner;
+
+                    XElement message = new XElement(atom + "entry",
+                        new XAttribute(XNamespace.Xmlns + "d", d),
+                        new XAttribute(XNamespace.Xmlns + "m", m),
+                        new XElement(atom + "category", new XAttribute("term", "SP.Data.Research_x0020_ProjectsListItem"), new XAttribute("scheme", "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme")),
+                        new XElement(atom + "content", new XAttribute("type", "application/xml"),
+                            new XElement(m + "properties",
+                                new XElement(d + "Statement", new XAttribute(m + "type", "SP.FieldUrlValue"),
+                                    new XElement(d + "Description", description),
+                                    new XElement(d + "Url", url)),
+                                new XElement(d + "Title", title),
+                                new XElement(d + "Owner", owner))));
+
+                    StringContent requestData = new StringContent(message.ToString());
+
+                    //POST the data to the endpoint
+                    HttpClient client = new HttpClient();
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUri.ToString());
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    requestData.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/atom+xml");
+                    request.Content = requestData;
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                    //Show the Finished screen
+                    return RedirectToAction("Finished");
+                }
+            }
 
 
+        }
+  ```
+2. Right click within the body of the **Projects** method and select **Add View** from the context menu.
+3. In the **Add View** dialog:
+  1. Select **Create** as the **Template**.
+  2. Select **ViewModel** as the **Model Class**.
+  3. Click **Add**.<br/>
+  ![](img/31.png?raw=true "Figure 31") 
+4. **Replace** all of the generated code with the following code:
+  ```HTML
+
+  @model MVCResearchTracker.Models.ViewModel
+
+  @{
+      ViewBag.Title = "Add Project";
+  }
+  
+  <h2>Add Project</h2>
+  
+  
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Add Project</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Project.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Project.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Project.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Project.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Project.Owner, new SelectList(Model.Contacts, "DisplayName", "DisplayName"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Project.Owner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Project.DocumentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Project.DocumentLink, new SelectList(Model.Files, "Url", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Project.DocumentName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+  }
+
+  <div>
+      @Html.ActionLink("Cancel", "Index")
+  </div>
+
+  @section Scripts {
+      @Scripts.Render("~/bundles/jqueryval")
+  }
+
+
+  ```
+5. Right click within the body of the **Finished** method and select **Add View** from the context menu.
+6. Click **Add**.<br/>
+7. **Replace** all of the code in the view with the following code:
+  ```HTML
+  @{
+      ViewBag.Title = "Finished";
+  }
+  
+  <h2>Project Added</h2>
+  <div>
+      @Html.ActionLink("Start Over", "Index")
+  </div>
+  
+  ```
+8. Press **F5** to begin debugging.
+9. When the discovered endpoints appear, click **Get Contacts**.
+10. When the contacts appear, click **Get Files**.
+11. When the files appear, click **Create New Project**.
+12. Fill in the new project form and click **Create**.<br/>
+  ![](img/32.png?raw=true "Figure 32") 
+13. You should receive the message that your project was added.
+14. Stop debugging.
+
+You now have a working solution to add projects to your SharePoint list that uses information from your contacts and files.
 
 By completing this lab, you learnt to
 - Use Office 365 APIs in a web application
