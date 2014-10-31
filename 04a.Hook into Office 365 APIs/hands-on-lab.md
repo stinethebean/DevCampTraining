@@ -110,7 +110,12 @@ Follow these steps to create a new MVC5 web application project.
   6. When prompted, sign into Azure Active Directory with your **Organizational Account**.
   7. Click **OK**.<br/>
     ![](img/19.png?raw=true "Figure 19")
-5. Press **F5** to test your application security by logging in with your **Organizational Account**.
+5. In the **Solution Explorer**, right click the **MVCResearchTracker** project and select **Properties**.
+6. Click **Web**.
+7. Select the **Start URL** option as the **Start Action**.
+8. **Copy** the value from the **Project URL** field into the **Start URL** field. This value should be an endpoint that uses **https**.<br/>
+  ![](img/19a.png?raw=true "Figure 19a")
+9. Press **F5** to test your application security by logging in with your **Organizational Account**.
  
 Now you have an ASP.NET MVC web application secured with an Organizational Account.
 
@@ -150,7 +155,7 @@ Follow these steps to add connected services to the MVC5 web application project
   16. Click **Apply**.<br/>
     ![](img/23.png?raw=true "Figure 23")
 4. Click **App Properties**.
-5. **Delete** the Redirect Uri that uses *http** leaving in place the one that uses **https**.
+5. **Delete** the Redirect Uri that uses **http** leaving in place the one that uses **https**.
 6. Click **Apply**.<br/>
   ![](img/24a.png?raw=true "Figure 24a") 
 7. Click **OK**.<br/>
