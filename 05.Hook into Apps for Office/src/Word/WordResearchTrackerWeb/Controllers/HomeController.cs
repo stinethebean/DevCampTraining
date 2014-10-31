@@ -1,6 +1,4 @@
-﻿using Microsoft.Office365.OAuth;
-using Microsoft.Office365.SharePoint;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -12,10 +10,6 @@ namespace WordResearchTrackerWeb.Controllers
     {
         static readonly string ServiceResourceId = ConfigurationManager.AppSettings["ida:resource"];
         static readonly Uri ServiceEndpointUri = new Uri(ConfigurationManager.AppSettings["ida:SiteURL"] + "/_api/");
-
-        // Do not make static in Web apps; store it in session or in a cookie instead
-        static string _lastLoggedInUser;
-        static DiscoveryContext _discoveryContext;
 
         private IResearchRepository _repository;
 
@@ -35,48 +29,9 @@ namespace WordResearchTrackerWeb.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(string authType)
         {
-            if (authType == "O365")
-            {
-                try
-                {
-                    if (_discoveryContext == null)
-                    {
-                        _discoveryContext = await DiscoveryContext.CreateAsync();
-                    }
-                    var dcr = await _discoveryContext.DiscoverResourceAsync(ServiceResourceId);
-                    _lastLoggedInUser = dcr.UserId;
-                    string accessToken = (await _discoveryContext.AuthenticationContext.AcquireTokenByRefreshTokenAsync(new SessionCache().Read("RefreshToken"), new Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential(_discoveryContext.AppIdentity.ClientId, _discoveryContext.AppIdentity.ClientSecret), ServiceResourceId)).AccessToken;
-
-                    OAuthController.SaveAccessTokenInCache(ServiceResourceId, accessToken, DateTime.Now.AddMinutes(10).ToString());
-                    return new RedirectResult("/Home/App");
-                }
-                catch (RedirectRequiredException ex)
-                {
-                    return Redirect(ex.RedirectUri.ToString());
-                }
-
-            }
-            else
-            {
-                string redirectUri = this.Request.Url.GetLeftPart(UriPartial.Authority).ToString() + "/Home/App";
-                string authorizationUrl = OAuthController.GetAuthorizationUrl(ServiceResourceId, new Uri(redirectUri));
-                return new RedirectResult(authorizationUrl);
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> O365API()
-        {
-            if (_discoveryContext == null)
-            {
-                _discoveryContext = await DiscoveryContext.CreateAsync();
-            }
-            var dcr = await _discoveryContext.DiscoverResourceAsync(ServiceResourceId);
-            _lastLoggedInUser = dcr.UserId;
-            string accessToken = (await _discoveryContext.AuthenticationContext.AcquireTokenByRefreshTokenAsync(new SessionCache().Read("RefreshToken"), new Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential(_discoveryContext.AppIdentity.ClientId, _discoveryContext.AppIdentity.ClientSecret), ServiceResourceId)).AccessToken;
-
-            OAuthController.SaveAccessTokenInCache(ServiceResourceId, accessToken, DateTime.Now.AddMinutes(10).ToString());
-            return new RedirectResult("/Home/App");
+            string redirectUri = this.Request.Url.GetLeftPart(UriPartial.Authority).ToString() + "/Home/App";
+            string authorizationUrl = OAuthController.GetAuthorizationUrl(ServiceResourceId, new Uri(redirectUri));
+            return new RedirectResult(authorizationUrl);
         }
 
         /// <summary>
