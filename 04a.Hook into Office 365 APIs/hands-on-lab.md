@@ -372,6 +372,123 @@ Follow these steps to use the Discovery Service to locate endpoints for Exchnage
   ![](img/25.png?raw=true "Figure 25") 
 7. You should now see discovered endpoints for **Contacts** and **Files**.<br/>
   ![](img/26.png?raw=true "Figure 26") 
+8. Stop debugging.
+
+Now you have completed coding the Discovery Service.
+
+###Task 6 - Retrieve Contacts
+Follow these steps to retrieve Exchange contacts.
+
+1. **Replace** the **Contacts** method in the **HomeController** with the following code:
+  ```C#
+        public async Task<ActionResult> Contacts(string code)
+        {
+            AuthenticationContext authContext = new AuthenticationContext(
+               ConfigurationManager.AppSettings["ida:AuthorizationUri"] + "/common",
+               true);
+
+            ClientCredential creds = new ClientCredential(
+                ConfigurationManager.AppSettings["ida:ClientID"],
+                ConfigurationManager.AppSettings["ida:Password"]);
+
+            //Get the discovery information that was saved earlier
+            CapabilityDiscoveryResult cdr = Helpers.GetFromCache("ContactsDiscoveryResult") as CapabilityDiscoveryResult;
+
+            //Get a client, if this page was already visited
+            OutlookServicesClient outlookClient = Helpers.GetFromCache("OutlookClient") as OutlookServicesClient;
+
+            //Get an authorization code if needed
+            if (outlookClient == null && cdr != null && code == null)
+            {
+                Uri redirectUri = authContext.GetAuthorizationRequestURL(
+                    cdr.ServiceResourceId,
+                    creds.ClientId,
+                    new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                    UserIdentifier.AnyUser,
+                    string.Empty);
+
+                return Redirect(redirectUri.ToString());
+            }
+
+            //Create the OutlookServicesClient
+            if (outlookClient == null && cdr != null && code != null)
+            {
+
+                outlookClient = new OutlookServicesClient(cdr.ServiceEndpointUri, async () =>
+                {
+
+                    var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
+                        code,
+                        new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                        creds);
+
+                    return authResult.AccessToken;
+                });
+
+                Helpers.SaveInCache("OutlookClient", outlookClient);
+            }
+
+            //Get the contacts
+            var contactsResults = await outlookClient.Me.Contacts.ExecuteAsync();
+            List<MyContact> contactList = new List<MyContact>();
+
+            foreach (var contact in contactsResults.CurrentPage.OrderBy(c => c.Surname))
+            {
+                contactList.Add(new MyContact
+                {
+                    Id = contact.Id,
+                    GivenName = contact.GivenName,
+                    Surname = contact.Surname,
+                    DisplayName = contact.Surname + ", " + contact.GivenName,
+                    CompanyName = contact.CompanyName,
+                    EmailAddress1 = contact.EmailAddresses.FirstOrDefault().Address,
+                    BusinessPhone1 = contact.BusinessPhones.FirstOrDefault(),
+                    HomePhone1 = contact.HomePhones.FirstOrDefault()
+                });
+            }
+
+            //Save the contacts
+            Helpers.SaveInCache("ContactList", contactList);
+
+            //Show the contacts
+            return View(contactList);
+
+        }
+  ```
+2. Right click within the body of the **Contacts** method and select **Add View** from the context menu.
+3. In the **Add View** dialog:
+  1. Select **List** as the **Template**.
+  2. Select **MyContact** as the **Model Class**.
+  3. Click **Add**.<br/>
+  ![](img/27.png?raw=true "Figure 27") 
+4. **Locate** the **Create New** **ActionLink** that looks like this:
+  ```HTML
+  <p>
+      @Html.ActionLink("Create New", "Create")
+  </p>
+  ```
+5. **Modify** the **ActionLink** to appear as follows:
+  ```HTML
+  <div>
+      @Html.ActionLink("Get Files", "Files")
+  </div>
+  ```
+6. **Delete** the following code from the view:
+  ```HTML
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+  ```
+7. Press **F5** to begin debugging.
+8. When the discovered enpoints appear, click **Get Contacts**.
+9. You should now see your Exchange contacts.<br/>
+  ![](img/28.png?raw=true "Figure 28")
+10. Stop debugging.
+
+
+
 
 By completing this lab, you learnt to
 - Use Office 365 APIs in a web application
