@@ -149,7 +149,11 @@ Follow these steps to add connected services to the MVC5 web application project
   15. Check **Read Items in All Site Collections**.
   16. Click **Apply**.<br/>
     ![](img/23.png?raw=true "Figure 23")
-3. Click **OK**.<br/>
+4. Click **App Properties**.
+5. **Delete** the Redirect Uri that uses *http** leaving in place the one that uses **https**.
+6. Click **Apply**.
+  ![](img/24a.png?raw=true "Figure 24a") 
+7. Click **OK**.<br/>
   ![](img/24.png?raw=true "Figure 24") 
 
 Now you have connected services available to your web application.
@@ -160,189 +164,205 @@ Follow these steps to some required supporting files that are already coded for 
 1. In the **Solution Explorer**, right click the **Models** folder and select **Add/Existing Item**.
 2. Navigate to the folder **src\Lab Files\Models**.
 3. Select all of the files in the folder and click **Add**.
+4. In the **Solution Explorer**, right click the **Utils** folder and select **Add/Existing Item**.
+5. Navigate to the folder **src\Lab Files\Utils**.
+6. Select the **Helper.cs** file in the folder and click **Add**.
 
 Now you have some pre-coded supporting files in the project.
 
-###Task 4 - Code the Repository Class
-Follow these steps to fill in some missing code in the project for reading and writing using the Office 365 APIs.
+###Task 4 - Stub Out the Home Controller code
+Follow these steps to add methods to the Home Controller that you will fill out throughout the lab.
 
-1. In the **Models** folder, locate and open the **ProjectRepository.cs** file.
-2. At the top of the file, update the **SiteUrl** member with your tenancy information.
-3. Add the following code to the **GetMyContacts** method to retrieve contacts from Exchange.
+1. In the **Solution Explorer**, expand the **Controllers** folder, and open **HomeController.cs** for editing.
+2. **Replace** all of the code with the following:
 
   ```C#
-            var client = await EnsureExchangeClientCreated();
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Web;
+  using System.Web.Mvc;
+  using Microsoft.IdentityModel.Clients.ActiveDirectory;
+  using Microsoft.Office365.Discovery;
+  using Microsoft.Office365.OutlookServices;
+  using System.Configuration;
+  using System.Threading.Tasks;
+  using MVCResearchTracker.Utils;
+  using MVCResearchTracker.Models;
+  using Microsoft.Office365.SharePoint.CoreServices;
+  using System.Text;
+  using System.Xml.Linq;
+  using System.Net.Http;
+  using System.Net.Http.Headers;
 
-            var contactsResults = await client.Me.Contacts.ExecuteAsync();
+  namespace MVCResearchTracker.Controllers
+  {
+      public class HomeController : Controller
+      {
+          private const string spSite = "https://[tenancy].sharepoint.com";
+          private const string discoResource = "https://api.office.com/discovery/";
+          private const string discoEndpoint = "https://api.office.com/discovery/v1.0/me/";
 
-            var contactList = new List<MyContact>();
+          public async Task<ActionResult> Index(string code)
+          {
+              return View();
+          }
 
-            foreach (var contact in contactsResults.CurrentPage.OrderBy(c => c.Surname))
+          public async Task<ActionResult> Contacts(string code)
+          {
+              return View();
+          }
+
+          public async Task<ActionResult> Files(string code)
+          {
+              return View();
+          }
+
+          public async Task<ActionResult> Projects(ViewModel submitModel, string code)
+          {
+              return View();
+          }
+
+          public ActionResult Finished()
+          {
+              return View();
+          }
+      }
+  }
+
+  ```
+3. **Replace** the placeholder **[tenancy]** with the name of your SharePoint tenancy.
+
+Now you have code placeholders in the Home Controller.
+
+###Task 5 - Code the Discovery Service
+Follow these steps to use the Discovery Service to locate endpoints for Exchnage contacts and OneDrive for Business files.
+
+1. **Replace** the **Index** method in the **HomeController** with the following code:
+  ```C#
+        public async Task<ActionResult> Index(string code)
+        {
+            AuthenticationContext authContext = new AuthenticationContext(
+               ConfigurationManager.AppSettings["ida:AuthorizationUri"] + "/common",
+               true);
+
+            ClientCredential creds = new ClientCredential(
+                ConfigurationManager.AppSettings["ida:ClientID"],
+                ConfigurationManager.AppSettings["ida:Password"]);
+
+            DiscoveryClient disco = Helpers.GetFromCache("DiscoveryClient") as DiscoveryClient;
+
+            //Redirect to login page if we do not have an 
+            //authorization code for the Discovery service
+            if (disco == null && code == null)
             {
-                contactList.Add(new MyContact
-                {
-                    Id = contact.Id,
-                    GivenName = contact.GivenName,
-                    Surname = contact.Surname,
-                    DisplayName = contact.Surname + ", " + contact.GivenName,
-                    CompanyName = contact.CompanyName,
-                    EmailAddress1 = contact.EmailAddress1,
-                    BusinessPhone1 = contact.BusinessPhone1,
-                    HomePhone1 = contact.HomePhone1
-                });
+                Uri redirectUri = authContext.GetAuthorizationRequestURL(
+                    discoResource,
+                    creds.ClientId,
+                    new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                    UserIdentifier.AnyUser,
+                    string.Empty);
+
+                return Redirect(redirectUri.ToString());
             }
-            return contactList;
 
-  ```
-4. Add the following code to the **GetMyFiles** method to retrieve documents from OneDrive for Business.
-
-  ```C#
-            var client = await EnsureFilesClientCreated();
-
-            var filesResults = await client.Files["Shared with Everyone"].ToFolder().Children.ExecuteAsync();
-
-            var fileList = new List<MyFile>();
-
-            foreach (var file in filesResults.CurrentPage.OrderBy(e => e.Name))
+            //Create a DiscoveryClient using the authorization code
+            if (disco == null && code != null)
             {
-                fileList.Add(new MyFile
+
+                disco = new DiscoveryClient(new Uri(discoEndpoint), async () =>
                 {
-                    Id = file.Id,
-                    Name = file.Name,
-                    Url = file.Url
+
+                    var authResult = await authContext.AcquireTokenByAuthorizationCodeAsync(
+                        code,
+                        new Uri(Request.Url.AbsoluteUri.Split('?')[0]),
+                        creds);
+
+                    return authResult.AccessToken;
                 });
+
             }
-            return fileList;
+
+            //Discover required capabilities
+            CapabilityDiscoveryResult contactsDisco = await disco.DiscoverCapabilityAsync("Contacts");
+            CapabilityDiscoveryResult filesDisco = await disco.DiscoverCapabilityAsync("MyFiles");
+
+            Helpers.SaveInCache("ContactsDiscoveryResult", contactsDisco);
+            Helpers.SaveInCache("FilesDiscoveryResult", filesDisco);
+
+            List<MyDiscovery> discoveries = new List<MyDiscovery>(){
+                new MyDiscovery(){
+                    Capability = "Contacts",
+                    EndpointUri = contactsDisco.ServiceEndpointUri.OriginalString,
+                    ResourceId = contactsDisco.ServiceResourceId,
+                    Version = contactsDisco.ServiceApiVersion
+                },
+                new MyDiscovery(){
+                    Capability = "My Files",
+                    EndpointUri = filesDisco.ServiceEndpointUri.OriginalString,
+                    ResourceId = filesDisco.ServiceResourceId,
+                    Version = filesDisco.ServiceApiVersion
+                }
+            };
+
+            return View(discoveries);
+
+        }
   ```
-
-5. Add the following code to the **CreateProject** method to add a new project to the Research Projects list.
-
-  ```C#
-            StringBuilder requestUri = new StringBuilder()
-                 .Append(this.SiteUrl)
-                 .Append("/_api/web/lists/getbyTitle('Research Projects')/items");
-
-            string accessToken = GetFromCache("UpdateToken") as string;
-
-            XNamespace atom = "http://www.w3.org/2005/Atom";
-            XNamespace d = "http://schemas.microsoft.com/ado/2007/08/dataservices";
-            XNamespace m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
-
-            XElement message = new XElement(atom + "entry",
-                new XAttribute(XNamespace.Xmlns + "d", d),
-                new XAttribute(XNamespace.Xmlns + "m", m),
-                new XElement(atom + "category", new XAttribute("term", "SP.Data.Research_x0020_ProjectsListItem"), new XAttribute("scheme", "http://schemas.microsoft.com/ado/2007/08/dataservices/scheme")),
-                new XElement(atom + "content", new XAttribute("type", "application/xml"),
-                    new XElement(m + "properties",
-                        new XElement(d + "Statement", new XAttribute(m + "type", "SP.FieldUrlValue"),
-                            new XElement(d + "Description", documentName),
-                            new XElement(d + "Url", documentLink)),
-                        new XElement(d + "Title", projectTitle),
-                        new XElement(d + "Owner", projectOwner))));
-
-            StringContent requestData = new StringContent(message.ToString());
-
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUri.ToString());
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            requestData.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/atom+xml");
-            request.Content = requestData;
-            HttpResponseMessage response = await client.SendAsync(request);
-            return true;
-  ```
-
-Now the Repository Class is coded to use the Office 365 APIs.
-
-###Task 5 - Create a View for adding Projects
-Follow these steps to create a new view that will support adding projects.
-
-1. In the **Solution Explorer**, expand the **Controllers** folder and open **ProjectController.cs**.
-2. Right click inside the **Index** method and select **Add View**.
-3. In the **Add View** dialog:
-  1. Select **Create** for the **Template**.
-  2. Select **ViewModel** as the **Model Class**.
-  3. Click **Add**.<br/>
-    ![](img/25.png?raw=true "Figure 25") 
-4. **Replace** all of the code in the view with the following:
-
+2. In the **Solution Explorer**, expand the **Views\Home** folder and open **Index.cshtml** for editing.
+3. **Replace** the code with the following code:
   ```HTML
-  @model MVCResearchTracker.Models.ViewModel
+  @model IEnumerable<MVCResearchTracker.Models.MyDiscovery>
 
   @{
-      ViewBag.Title = "Add Project";
+      ViewBag.Title = "Discoveries";
   }
   
-  <h2>Add Project</h2>
+  <h2>Discoveries</h2>
   
   
-  @using (Html.BeginForm()) 
-  {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Add Project</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+  <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Capability)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndpointUri)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResourceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th></th>
+    </tr>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Project.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Project.Owner, new SelectList(Model.Contacts, "DisplayName", "DisplayName"), new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Project.Owner, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Project.DocumentName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Project.DocumentLink, new SelectList(Model.Files, "Url", "Name"), new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Project.DocumentName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+  @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capability)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndpointUri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResourceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+    </tr>
   }
+
+  </table>
 
   <div>
-      @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Get Contacts", "Contacts")
   </div>
-
-  @section Scripts {
-      @Scripts.Render("~/bundles/jqueryval")
-  }
-
   ```
-
-Now you have finished creating a view for adding projects
-
-###Task 6 - Test the Project
-Follow these steps to test your project.
-
-1. Press **F5** to begin debugging.
-2. When prompted, log in with your **Organizational Account**.
-3. When the application starts, manually navigate to **/Project** by typing in the address bar.
-4. In the **Add Project** form:
-  1. Name the new project **My New Project**.
-  2. Select an **Owner**.
-  3. Select an associated **Statement Document**.
-  4. Click **Create**.<br/>
-    ![](img/26.png?raw=true "Figure 26") 
-5. Open a new browser window and navigate to your **Research projects** list in SharePoint.
-6. Verify that the new project was successfully added.
-  ![](img/27.png?raw=true "Figure 27") 
+4. Press **F5** to debug the project.
+5. When prompted, 
 
 By completing this lab, you learnt to
 - Use Office 365 APIs in a web application
