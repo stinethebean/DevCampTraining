@@ -56,12 +56,10 @@ Follow these steps to upload a project statement to your OneDrive for Business l
   ![](img/06.png?raw=true "Figure 6")
 3. If you are presented with the welcome screen, simply click **Next**.<br/>
   ![](img/07.png?raw=true "Figure 7")
-4. Click the **Shared with Everyone** folder.<br/>
-  ![](img/08.png?raw=true "Figure 8")
-5. Click **Upload**.<br/>
+4. Click **Upload**.<br/>
   ![](img/09.png?raw=true "Figure 9")
-6. Locate the **ProjectStatement.docx** file, which can be found in the **src/Lab Files/Docs** folder.
-7. Select the file and click **Open**.<br/>
+5. Locate the **ProjectStatement.docx** file, which can be found in the **src/Lab Files/Docs** folder.
+6. Select the file and click **Open**.<br/>
   ![](img/10.png?raw=true "Figure 10")
 
 Now you have a document available in OneDrive for Business.
