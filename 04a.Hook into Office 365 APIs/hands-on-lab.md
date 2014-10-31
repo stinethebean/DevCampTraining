@@ -160,9 +160,6 @@ Follow these steps to some required supporting files that are already coded for 
 1. In the **Solution Explorer**, right click the **Models** folder and select **Add/Existing Item**.
 2. Navigate to the folder **src\Lab Files\Models**.
 3. Select all of the files in the folder and click **Add**.
-4. Right click the **Controllers** folder and select **Add/Existing Item**.
-5. Navigate to the folder **src\Lab Files\Controllers**.
-6. Select the file in the folder and click **Add**.
 
 Now you have some pre-coded supporting files in the project.
 
