@@ -15,7 +15,8 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 ##Prerequisites
 
 - [Git version control tool](http://git-scm.com)
-- [Android Studio](http://developer.android.com/sdk/index.html)
+- [Eclipse with the Android Developer Tools](http://developer.android.com/sdk/index.html)
+- Android API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
 - You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
 - You must have completed Module 04 and linked your Azure subscription with your O365 tenant.
 
@@ -35,7 +36,9 @@ In this exercise you will set up your Eclipse workspace and then configure and r
 ###Task 1 - Preparation
 Prepare the Android SDK by downloading Android API Level 19.
 
-01. Launch Android Studio. Launch the Android SDK Manager via **Configure > SDK Manager**
+01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
+
+    ![](img/0001_launch_sdk_manager.png)
 
 02. Install the following components from **Android 4.4.2 (API 19)**
 
@@ -49,23 +52,23 @@ Prepare the Android SDK by downloading Android API Level 19.
 03. Click **Install packages...** and wait for the install to complete.
 
 **Note:** The android SDK install location will be referred to later using "`ANDROID_SDK`".
-By default it is included in the package with Android Studio:
+By default it is included in the package with Eclipse:
 
 ![](img/0003_android_sdk_location.png)
 
 
-###Task 2 - Set up your Android Studio workspace
+###Task 2 - Set up your Eclipse workspace
 Follow these steps to get the source code ready to build on your machine.
 
 
-01. Launch Android Studio and create a new workspace (if you have not already done so).
+01. Launch Eclipse and create a new workspace (if you have not already done so).
     Remember where you create your workspace as we will be working within it extensively.
 
     For the purposes of this this lab we will refer to the workspace path using "`C:\Android`".
 
     ![](img/0004_eclipse_create_workspace_dialog.png)
 
-02. Start a git command prompt and navigate to your Android Studio workspace.
+02. Start a git command prompt and navigate to your Eclipse workspace.
 
         C:\> cd Android
 
@@ -105,7 +108,7 @@ Follow these steps to get the source code ready to build on your machine.
 
     ![](img/0011_paste_o365_tasks.png)
 
-06. Next we will return to Android Studio to import the source code from your workspace.
+06. Next we will return to Eclipse to import the source code from your workspace.
 
     Select **File > Import**.
 
@@ -151,13 +154,13 @@ Follow these steps to get the source code ready to build on your machine.
 
     ![](img/0017_download_guava.png)
 
-14. Return to Android Studio and press **F5** to refresh. Wait a moment as it re-compiles the code. If everything
+14. Return to Eclipse and press **F5** to refresh. Wait a moment as Eclipse re-compiles the code. If everything
     has been done correctly, then there should be no more red entries in the **Problems** window.
 
     If there are any remaining error messages in the **Problems** window, please troubleshoot them before continuing.
 
 
-In this task we created an Android Studio workspace, copied our code into it and got it into a working state.
+In this task we created an Eclipse workspace, copied our code into it and got it into a working state.
 
 
 ###Task 3 - Create and launch the emulator
@@ -280,7 +283,7 @@ Done! The **Client Id** we created above will be used to configure the Android a
 
 In this task we will configure the app to work agains your own O365 tenant.
 
-01. Return to Android Studio. Locate the Java class `com.microsoft.o365_tasks.Constants`. This can be found by expanding 
+01. Return to Eclipse. Locate the Java class `com.microsoft.o365_tasks.Constants`. This can be found by expanding 
     the nodes **o365-tasks**, **src** and **com.microsoft.o365_tasks** in the Package Explorer.
 
     ![](img/0040_open_constants.png)
@@ -329,7 +332,7 @@ In this exercise we will add a "Delete" context action to the List Tasks activit
 
 ###Task 1 - Write the new Delete feature
 
-01. Return to Android Studio.
+01. Return to Eclipse.
 
 02. First we will create a "menu template" which defines the items in our new context menu.
     In the Package Explorer, expand the `res/menu` folders.
@@ -505,7 +508,7 @@ In this exercise we will add a "Filter" option to the List Tasks activity.
 
 ###Task 1 - Write the new filter feature
 
-01. Return to Android Studio.
+01. Return to Eclipse.
 
 02. First we will update the List Tasks activity options menu.
     Navigate to the "`list_tasks_options.xml`" menu template.
