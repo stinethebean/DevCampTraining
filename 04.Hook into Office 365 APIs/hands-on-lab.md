@@ -165,7 +165,7 @@ Follow these steps to add connected services to the MVC5 web application project
 Now you have connected services available to your web application.
 
 ###Task 3 - Add Pre-coded Files to the Project
-Follow these steps to some required supporting files that are already coded for you.
+Follow these steps to add some required supporting files that are already coded for you.
 
 1. In the **Solution Explorer**, right click the **Models** folder and select **Add/Existing Item**.
 2. Navigate to the folder **src\Lab Files\Models**.
@@ -367,13 +367,17 @@ Follow these steps to use the Discovery Service to locate endpoints for Exchnage
     @Html.ActionLink("Get Contacts", "Contacts")
   </div>
   ```
-4. Press **F5** to debug the project.
-5. When prompted, log in with your **Organizational Account**.
-6. When prompted, click **OK** in the consent dialog.<br/>
+4. In the Solution Explorer, right click the **MVCResearchTracker** project node.
+5. Select **Manage NuGet Packages**.
+6. In the NuGet Package Manager, search for **ADAL**.
+7. Install the **Active Directory Authentication Library**.
+8. Press **F5** to debug the project.
+9. When prompted, log in with your **Organizational Account**.
+10. When prompted, click **OK** in the consent dialog.<br/>
   ![](img/25.png?raw=true "Figure 25") 
-7. You should now see discovered endpoints for **Contacts** and **Files**.<br/>
+11. You should now see discovered endpoints for **Contacts** and **Files**.<br/>
   ![](img/26.png?raw=true "Figure 26") 
-8. Stop debugging.
+12. Stop debugging.
 
 Now you have completed coding the Discovery Service.
 
