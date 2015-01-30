@@ -94,20 +94,19 @@ Now the application is configured.
 ###Task 5 - Test the Application
 Follow these steps to test the application.
 
-1. Right click the **OutlookResearchTrackerWeb** project and select **Debug/Start New Instance**.
-2. Right click the **OutlookResearchTracker** project and select **Debug/Start New Instance**.
-3. When prompted by the **Connect to Exchange E-mail Account** dialog, enter your credentials.
-4. Click **Connect**.
-5. When the **Outlook Web App** starts, you will need to locate an e-mail containing a hyperlink. (Note: In the current build, the hyperlink must be a literal value like http://www.microsoft.com).<br/>
+1. Press **F5** to start debugging.
+2. When prompted by the **Connect to Exchange E-mail Account** dialog, enter your credentials.
+3. Click **Connect**.
+4. When the **Outlook Web App** starts, you will need to locate an e-mail containing a hyperlink. (Note: In the current build, the hyperlink must be a literal value like http://www.microsoft.com).<br/>
      ![](img/16.png?raw=true "Figure 27")
-6. Click **Research Tracker**.
-7. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.<br/>
+5. Click **Research Tracker**.
+6. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.<br/>
      ![](img/17.png?raw=true "Figure 28")
-8. If you receive a second error notification, click **Start**.<br/>
+7. If you receive a second error notification, click **Start**.<br/>
      ![](img/18.png?raw=true "Figure 28")
-9. When the app starts, select a **Research Project**.
-10. Select a **Discovered Link**.
-11. Click **Add Link to project**.
+8. When the app starts, select a **Research Project**.
+9. Select a **Discovered Link**.
+10. Click **Add Link to project**.
 
 Now you have completed testing the application.
 
