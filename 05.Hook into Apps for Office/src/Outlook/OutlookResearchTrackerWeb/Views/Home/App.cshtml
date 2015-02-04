@@ -97,7 +97,7 @@
 
                         //load the list
                         var item = Office.cast.item.toItemRead(Office.context.mailbox.item);
-                        var matches = item.getRegExMatches().Link;
+                        var matches = item.getEntitiesByType(Office.MailboxEnums.EntityType.Url);
                         for (var i = 0; i < matches.length; i++) {
                             $("#referenceLink").append("<option value='" + matches[i] + "'>" + matches[i] + "</option>");
                         }

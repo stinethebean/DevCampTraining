@@ -97,7 +97,7 @@ Follow these steps to test the application.
 1. Press **F5** to start debugging.
 2. When prompted by the **Connect to Exchange E-mail Account** dialog, enter your credentials.
 3. Click **Connect**.
-4. When the **Outlook Web App** starts, you will need to locate an e-mail containing a hyperlink. (Note: In the current build, the hyperlink must be a literal value like http://www.microsoft.com).<br/>
+4. When the **Outlook Web App** starts, you will need to locate an e-mail containing one or more hyperlinks.<br/>
      ![](img/16.png?raw=true "Figure 27")
 5. Click **Research Tracker**.
 6. If you receive an **App Error**, click **Retry**. A 401 error can occur during debugging if the app does not load fast enough.<br/>

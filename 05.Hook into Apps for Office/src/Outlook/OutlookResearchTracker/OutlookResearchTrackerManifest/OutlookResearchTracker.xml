@@ -22,7 +22,7 @@
   <Permissions>ReadItem</Permissions>
   <Rule xsi:type="RuleCollection" Mode="And">
     <Rule xsi:type="ItemIs" ItemType="Message"/>
-    <Rule xsi:type="ItemHasRegularExpressionMatch" PropertyName="BodyAsPlaintext" RegExName="Link" RegExValue="(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)"/>
+    <Rule xsi:type="ItemHasKnownEntity" EntityType="Url"/>
   </Rule>
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
 </OfficeApp>
