@@ -247,7 +247,7 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/0060_create_application_1.png)
 
-07. For the Redirect Uri field enter "`http://android/complete`", then click **Next**.
+07. For the Redirect Uri field enter "`http://android/complete`", then click **Done**.
 
     ![](img/0060_create_application_2.png)
 
@@ -264,14 +264,22 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/0075_copy_client_id.png)
 
-10. Scroll down to the to the _Permissions to other applications_ section and add the following Delegated Permissions 
-    for "Office 365 SharePoint Online".
+10. Scroll down to the to the _Permissions to other applications_ section and click **Add application**.
 
-    - Create or delete items and lists in all site collections
+    ![](img/0076_add_application.png)
+
+11. From the **Show** drop down, select "Microsoft Apps". From the list below click **Add** on "Office 365 SharePoint Online".
+    The application appears in the _Selected_ list on the right-hand side. Click **Done** to continue.
+
+    ![](img/0077_add_o365_sharepoint.png)
+
+12. Add the following Delegated Permissions for "Office 365 SharePoint Online".
+
+    - _Create or delete items and lists in all site collections_
 
     ![](img/0080_set_application_permissions.png)
 
-11. Click **Save** to apply the changes.
+13. Click **Save** to apply the changes.
 
     ![](img/0085_save_button.png)
 
