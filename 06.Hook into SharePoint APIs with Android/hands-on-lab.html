@@ -1,0 +1,1673 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  width: 45em;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 30px;
+}
+
+@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAYcAA0AAAAACjQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABMAAAABwAAAAca8vGTk9TLzIAAAFMAAAARAAAAFZG1VHVY21hcAAAAZAAAAA+AAABQgAP9AdjdnQgAAAB0AAAAAQAAAAEACICiGdhc3AAAAHUAAAACAAAAAj//wADZ2x5ZgAAAdwAAADRAAABEKyikaNoZWFkAAACsAAAAC0AAAA2AtXoA2hoZWEAAALgAAAAHAAAACQHngNFaG10eAAAAvwAAAAQAAAAEAwAACJsb2NhAAADDAAAAAoAAAAKALIAVG1heHAAAAMYAAAAHwAAACABEAB2bmFtZQAAAzgAAALBAAAFu3I9x/Nwb3N0AAAF/AAAAB0AAAAvaoFvbwAAAAEAAAAAzBdyYwAAAADP2IQvAAAAAM/bz7t4nGNgZGFgnMDAysDB1Ml0hoGBoR9CM75mMGLkYGBgYmBlZsAKAtJcUxgcPsR8iGF2+O/AEMPsznAYKMwIkgMA5REMOXicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChED+h5j//yEk/3KoSgZGNgYYk4GRCUgwMaACRoZhDwCs7QgGAAAAIgKIAAAAAf//AAJ4nHWMMQrCQBBF/0zWrCCIKUQsTDCL2EXMohYGSSmorScInsRGL2DOYJe0Ntp7BK+gJ1BxF1stZvjz/v8DRghQzEc4kIgKwiAppcA9LtzKLSkdNhKFY3HF4lK69ExKslx7Xa+vPRVS43G98vG1DnkDMIBUgFN0MDXflU8tbaZOUkXUH0+U27RoRpOIyCKjbMCVejwypzJJG4jIwb43rfl6wbwanocrJm9XFYfskuVC5K/TPyczNU7b84CXcbxks1Un6H6tLH9vf2LRnn8Ax7A5WQAAAHicY2BkYGAA4teL1+yI57f5ysDNwgAC529f0kOmWRiYVgEpDgYmEA8AUzEKsQAAAHicY2BkYGB2+O/AEMPCAAJAkpEBFbAAADgKAe0EAAAiAAAAAAQAAAAEAAAAAAAAKgAqACoAiAAAeJxjYGRgYGBhsGFgYgABEMkFhAwM/xn0QAIAD6YBhwB4nI1Ty07cMBS9QwKlQapQW3VXySvEqDCZGbGaHULiIQ1FKgjWMxknMfLEke2A+IJu+wntrt/QbVf9gG75jK577Lg8K1qQPCfnnnt8fX1NRC/pmjrk/zprC+8D7tBy9DHgBXoWfQ44Av8t4Bj4Z8CLtBL9CniJluPXASf0Lm4CXqFX8Q84dOLnMB17N4c7tBo1AS/Qi+hTwBH4rwHHwN8DXqQ30XXAS7QaLwSc0Gn8NuAVWou/gFmnjLrEaEh9GmDdDGgL3B4JsrRPDU2hTOiMSuJUIdKQQayiAth69r6akSSFqIJuA19TrzCIaY8sIoxyrNIrL//pw7A2iMygkX5vDj+G+kuoLdX4GlGK/8Lnlz6/h9MpmoO9rafrz7ILXEHHaAx95s9lsI7AHNMBWEZHULnfAXwG9/ZqdzLI08iuwRloXE8kfhXYAvE23+23DU3t626rbs8/8adv+9DWknsHp3E17oCf+Z48rvEQNZ78paYM38qfk3v/u3l3u3GXN2Dmvmvpf1Srwk3pB/VSsp512bA/GG5i2WJ7wu430yQ5K3nFGiOqgtmSB5pJVSizwaacmUZzZhXLlZTq8qGGFY2YcSkqbth6aW1tRmlaCFs2016m5qn36SbJrqosG4uMV4aP2PHBmB3tjtmgN2izkGQyLWprekbIntJFing32a5rKWCN/SdSoga45EJykyQ7asZvHQ8PTm6cslIpwyeyjbVltNikc2HTR7YKh9LBl9DADC0U/jLcBZDKrMhUBfQBvXRzLtFtjU9eNHKin0x5InTqb8lNpfKv1s1xHzTXRqgKzek/mb7nB8RZTCDhGEX3kK/8Q75AmUM/eLkfA+0Hi908Kx4eNsMgudg5GLdRD7a84npi+YxNr5i5KIbW5izXas7cHXIMAau1OueZhfj+cOcP3P8MNIWLyYOBuxL6DRylJ4cAAAB4nGNgYoAALjDJyIAOWMCiTIxMLDmZedkABtIBygAAAA==) format('woff');
+}
+
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code {
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body .octicon {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .anchor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  display: inline-block;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+.markdown-body .highlight {
+  background: #fff;
+}
+
+.markdown-body .highlight .h {
+  color: #333;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.markdown-body .highlight .mf,
+.markdown-body .highlight .mh,
+.markdown-body .highlight .mi,
+.markdown-body .highlight .mo,
+.markdown-body .highlight .il,
+.markdown-body .highlight .m {
+  color: #945277;
+}
+
+.markdown-body .highlight .s,
+.markdown-body .highlight .sb,
+.markdown-body .highlight .sc,
+.markdown-body .highlight .sd,
+.markdown-body .highlight .s2,
+.markdown-body .highlight .se,
+.markdown-body .highlight .sh,
+.markdown-body .highlight .si,
+.markdown-body .highlight .sx,
+.markdown-body .highlight .s1 {
+  color: #df5000;
+}
+
+.markdown-body .highlight .kc,
+.markdown-body .highlight .kd,
+.markdown-body .highlight .kn,
+.markdown-body .highlight .kp,
+.markdown-body .highlight .kr,
+.markdown-body .highlight .kt,
+.markdown-body .highlight .k,
+.markdown-body .highlight .o {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .kt {
+  color: #458;
+}
+
+.markdown-body .highlight .c,
+.markdown-body .highlight .cm,
+.markdown-body .highlight .c1 {
+  color: #998;
+  font-style: italic;
+}
+
+.markdown-body .highlight .cp,
+.markdown-body .highlight .cs,
+.markdown-body .highlight .cp .h {
+  color: #999;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .cs {
+  font-style: italic;
+}
+
+.markdown-body .highlight .n {
+  color: #333;
+}
+
+.markdown-body .highlight .na,
+.markdown-body .highlight .nv,
+.markdown-body .highlight .vc,
+.markdown-body .highlight .vg,
+.markdown-body .highlight .vi {
+  color: #008080;
+}
+
+.markdown-body .highlight .nb {
+  color: #0086B3;
+}
+
+.markdown-body .highlight .nc {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .no {
+  color: #094e99;
+}
+
+.markdown-body .highlight .ni {
+  color: #800080;
+}
+
+.markdown-body .highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nf {
+  color: #945277;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nn {
+  color: #555;
+}
+
+.markdown-body .highlight .nt {
+  color: #000080;
+}
+
+.markdown-body .highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+
+.markdown-body .highlight .gd {
+  color: #000;
+  background-color: #fdd;
+}
+
+.markdown-body .highlight .gd .x {
+  color: #000;
+  background-color: #faa;
+}
+
+.markdown-body .highlight .ge {
+  font-style: italic;
+}
+
+.markdown-body .highlight .gr {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .gh {
+  color: #999;
+}
+
+.markdown-body .highlight .gi {
+  color: #000;
+  background-color: #dfd;
+}
+
+.markdown-body .highlight .gi .x {
+  color: #000;
+  background-color: #afa;
+}
+
+.markdown-body .highlight .go {
+  color: #888;
+}
+
+.markdown-body .highlight .gp {
+  color: #555;
+}
+
+.markdown-body .highlight .gs {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gt {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .ow {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .w {
+  color: #bbb;
+}
+
+.markdown-body .highlight .sr {
+  color: #017936;
+}
+
+.markdown-body .highlight .ss {
+  color: #8b467f;
+}
+
+.markdown-body .highlight .bp {
+  color: #999;
+}
+
+.markdown-body .highlight .gc {
+  color: #999;
+  background-color: #EAF2F5;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #000;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+}
+
+.markdown-body .highlight .pl-coc,
+.markdown-body .highlight .pl-entm,
+.markdown-body .highlight .pl-eoa,
+.markdown-body .highlight .pl-mai .pl-sf,
+.markdown-body .highlight .pl-pdv,
+.markdown-body .highlight .pl-sc,
+.markdown-body .highlight .pl-sr,
+.markdown-body .highlight .pl-v,
+.markdown-body .highlight .pl-vpf {
+  color: #0086b3;
+}
+
+.markdown-body .highlight .pl-eoac,
+.markdown-body .highlight .pl-mdht,
+.markdown-body .highlight .pl-mi1,
+.markdown-body .highlight .pl-mri,
+.markdown-body .highlight .pl-va,
+.markdown-body .highlight .pl-vpu {
+  color: #008080;
+}
+
+.markdown-body .highlight .pl-c,
+.markdown-body .highlight .pl-pdc {
+  color: #b4b7b4;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-k,
+.markdown-body .highlight .pl-ko,
+.markdown-body .highlight .pl-kolp,
+.markdown-body .highlight .pl-mc,
+.markdown-body .highlight .pl-mr,
+.markdown-body .highlight .pl-ms,
+.markdown-body .highlight .pl-s,
+.markdown-body .highlight .pl-sok,
+.markdown-body .highlight .pl-st {
+  color: #6e5494;
+}
+
+.markdown-body .highlight .pl-ef,
+.markdown-body .highlight .pl-enf,
+.markdown-body .highlight .pl-enm,
+.markdown-body .highlight .pl-entc,
+.markdown-body .highlight .pl-eoi,
+.markdown-body .highlight .pl-sf,
+.markdown-body .highlight .pl-smc {
+  color: #d12089;
+}
+
+.markdown-body .highlight .pl-ens,
+.markdown-body .highlight .pl-eoai,
+.markdown-body .highlight .pl-kos,
+.markdown-body .highlight .pl-mh .pl-pdh,
+.markdown-body .highlight .pl-mp,
+.markdown-body .highlight .pl-pde,
+.markdown-body .highlight .pl-stp {
+  color: #458;
+}
+
+.markdown-body .highlight .pl-enti {
+  color: #d12089;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cce,
+.markdown-body .highlight .pl-enc,
+.markdown-body .highlight .pl-kou,
+.markdown-body .highlight .pl-mq {
+  color: #f93;
+}
+
+.markdown-body .highlight .pl-mp1 .pl-sf {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cos,
+.markdown-body .highlight .pl-ent,
+.markdown-body .highlight .pl-md,
+.markdown-body .highlight .pl-mdhf,
+.markdown-body .highlight .pl-ml,
+.markdown-body .highlight .pl-pdc1,
+.markdown-body .highlight .pl-pds,
+.markdown-body .highlight .pl-s1,
+.markdown-body .highlight .pl-scp,
+.markdown-body .highlight .pl-sol {
+  color: #df5000;
+}
+
+.markdown-body .highlight .pl-c1,
+.markdown-body .highlight .pl-cn,
+.markdown-body .highlight .pl-pse,
+.markdown-body .highlight .pl-pse .pl-s2,
+.markdown-body .highlight .pl-vi {
+  color: #a31515;
+}
+
+.markdown-body .highlight .pl-mb,
+.markdown-body .highlight .pl-pdb {
+  color: #df5000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mi,
+.markdown-body .highlight .pl-pdi {
+  color: #6e5494;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-ms1 {
+  background-color: #f5f5f5;
+}
+
+.markdown-body .highlight .pl-mdh,
+.markdown-body .highlight .pl-mdi {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mdr {
+  color: #0086b3;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-s2 {
+  color: #333;
+}
+
+.markdown-body .highlight .pl-ii {
+  background-color: #df5000;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-ib {
+  background-color: #f93;
+}
+
+.markdown-body .highlight .pl-id {
+  background-color: #a31515;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-iu {
+  background-color: #b4b7b4;
+}
+
+.markdown-body .highlight .pl-mo {
+  color: #969896;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  float: left;
+  margin: 0.3em 0 0.25em -1.6em;
+  vertical-align: middle;
+}</style><title>hands-on-lab</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-module-06-consuming-sharepoint-apis-with-android" class="anchor" href="#module-06-consuming-sharepoint-apis-with-android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Module 06: <em>CONSUMING SHAREPOINT APIS WITH ANDROID</em>
+</h1>
+
+<h2>
+<a id="user-content-overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>The lab lets students configure and run an Android App which allows the user to edit items in a
+SharePoint Task list. The lab also has instructions for adding a new feature to the App.</p>
+
+<h2>
+<a id="user-content-objectives" class="anchor" href="#objectives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objectives</h2>
+
+<ul>
+<li>Learn how to authenticate with Azure AD from Android using the <strong>Azure Active Directory AuthenticationLibrary (ADAL) for Android</strong>
+</li>
+<li>Learn how to consume SharePoint APIs from Android using the <strong>Office 365 SDK for Android</strong>
+</li>
+<li>Implement a new feature in the Android App</li>
+</ul>
+
+<h2>
+<a id="user-content-prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ul>
+<li><a href="http://git-scm.com">Git version control tool</a></li>
+<li><a href="http://developer.android.com/sdk/index.html">Eclipse with the Android Developer Tools</a></li>
+<li>Android API Level 19 installed <a href="http://developer.android.com/tools/help/sdk-manager.html">using the Android SDK Manager</a>
+</li>
+<li>You must have an Office 365 tenant and Windows Azure subscription to complete this lab.</li>
+<li>You must have completed Module 04 and linked your Azure subscription with your O365 tenant.</li>
+</ul>
+
+<h2>
+<a id="user-content-exercises" class="anchor" href="#exercises" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercises</h2>
+
+<p>The hands-on lab includes the following exercises:</p>
+
+<ul>
+<li><a href="#exercise1">Set up your workspace and configure and run the Android app</a></li>
+<li><a href="#exercise2">Add a "delete" shortcup feature to the app</a></li>
+<li><a href="#exercise3">Add a "filter" feature to the app</a></li>
+</ul>
+
+<p><a name="user-content-exercise1"></a></p>
+
+<h2>
+<a id="user-content-exercise-1-set-up-your-workspace-and-configure-and-run-the-android-app" class="anchor" href="#exercise-1-set-up-your-workspace-and-configure-and-run-the-android-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise 1: Set up your workspace and configure and run the Android app</h2>
+
+<p>In this exercise you will set up your Eclipse workspace and then configure and run the
+<strong>Tasks for SharePoint O365</strong> Android app.</p>
+
+<h3>
+<a id="user-content-task-1---preparation" class="anchor" href="#task-1---preparation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 1 - Preparation</h3>
+
+<p>Prepare the Android SDK by downloading Android API Level 19.</p>
+
+<ol>
+<li>
+<p>Launch Eclipse. Launch the Android SDK Manager via <strong>Window &gt; Android SDK Manager</strong></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0001_launch_sdk_manager.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0001_launch_sdk_manager.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Install the following components from <strong>Android 4.4.2 (API 19)</strong></p>
+
+<ul>
+<li>SDK Platform</li>
+<li>ARM EABI v7a System Image</li>
+<li>Intel x86 Atom System Image</li>
+<li>Sources for Android SDK</li>
+</ul>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0002_install_android_api_level_19.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0002_install_android_api_level_19.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li><p>Click <strong>Install packages...</strong> and wait for the install to complete.</p></li>
+</ol>
+
+<p><strong>Note:</strong> The android SDK install location will be referred to later using "<code>ANDROID_SDK</code>".
+By default it is included in the package with Eclipse:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0003_android_sdk_location.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0003_android_sdk_location.png" alt="" style="max-width:100%;"></a></p>
+
+<h3>
+<a id="user-content-task-2---set-up-your-eclipse-workspace" class="anchor" href="#task-2---set-up-your-eclipse-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 2 - Set up your Eclipse workspace</h3>
+
+<p>Follow these steps to get the source code ready to build on your machine.</p>
+
+<ol>
+<li>
+<p>Launch Eclipse and create a new workspace (if you have not already done so).
+Remember where you create your workspace as we will be working within it extensively.</p>
+
+<p>For the purposes of this this lab we will refer to the workspace path using "<code>C:\Android</code>".</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0004_eclipse_create_workspace_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0004_eclipse_create_workspace_dialog.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Start a git command prompt and navigate to your Eclipse workspace.</p>
+
+<pre><code>C:\&gt; cd Android
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_cd_android.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_cd_android.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Clone the <strong>Office 365 SDK for Android</strong> into your workspace from github, then checkout
+the revision we're targeting in this lab.</p>
+
+<pre><code>C:\Android&gt; git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
+C:\Android&gt; cd adal
+C:\Android\adal&gt; git checkout v1.0.1
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_clone_adal.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_clone_adal.png" alt="" style="max-width:100%;"></a></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_checkout_adal_v101.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_checkout_adal_v101.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Clone the <strong>Azure AD Authentication Library for Android</strong> into your workspace from github, then checkout
+the revision we're targeting in this lab.</p>
+
+<pre><code>C:\Android\adal&gt; cd ..
+C:\Android&gt; git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
+C:\Android&gt; cd o365-android-sdk
+C:\Android\o365-android-sdk&gt; git checkout v1.0
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0008_clone_o365_sdk.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0008_clone_o365_sdk.png" alt="" style="max-width:100%;"></a></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0009_checkout_o365_sdk_v1.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0009_checkout_o365_sdk_v1.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Copy the <code>o365-tasks</code> folder from <code>src</code> directory of this hands-on lab into your workspace. This
+contains the source code for the <strong>Tasks for SharePoint O365</strong> app.</p>
+
+<p><strong>Copy from hands-on lab:</strong></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_copy_o365_tasks.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_copy_o365_tasks.png" alt="" style="max-width:100%;"></a></p>
+
+<p><strong>Paste into workspace:</strong></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0011_paste_o365_tasks.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0011_paste_o365_tasks.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Next we will return to Eclipse to import the source code from your workspace.</p>
+
+<p>Select <strong>File &gt; Import</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_menu_import.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_menu_import.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Expand <strong>Android</strong> and select <strong>Existing Android Code Into Workspace</strong>.
+Finally, click <strong>Next</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0013_existing_workspace.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0013_existing_workspace.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li><p>For <strong>Root Directory</strong> enter the path to your workspace. Click <strong>Refresh</strong> to search for Android code within
+the workspace.</p></li>
+<li>
+<p>Click <strong>Deselect All</strong> to clear all selections, then select the following projects:</p>
+
+<ul>
+<li><code>adal\src</code></li>
+<li><code>o365-android-sdk\sdk\office-365-base-sdk</code></li>
+<li><code>o365-android-sdk\sdk\office-365-lists-sdk</code></li>
+<li><code>o365-tasks\src</code></li>
+</ul>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_eclipse_import_code_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_eclipse_import_code_dialog.png" alt="" style="max-width:100%;"></a></p>
+
+<p>The rest of these projects are test and sample code and can be ignored.</p>
+</li>
+<li><p>Finally, click <strong>Finish</strong></p></li>
+<li>
+<p>We now need to fix some missing dependencies. 
+Execute the "<code>C:\Android\adal\src\libs\getLibs.ps1</code>" script to download Gson 2.2.2.</p>
+
+<pre><code>C:\Android&gt; powershell adal\src\libs\getLibs.ps1
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0015_download_gson.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0015_download_gson.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Copy <code>%ANDROID_SDK%\extras\android\support\v4\android-support-v4.jar</code> into <code>C:\Android\adal\src\libs</code>.</p>
+
+<p>(Where <strong><code>%ANDROID_SDK%</code></strong> refers to the location of the Android SDK on your machine)</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0016_copy_v4_support_lib.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0016_copy_v4_support_lib.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Execute the "<code>C:\Android\o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1</code>" script to download Guava 16.0.1.</p>
+
+<pre><code>C:\Android&gt; powershell o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0017_download_guava.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0017_download_guava.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Return to Eclipse and press <strong>F5</strong> to refresh. Wait a moment as Eclipse re-compiles the code. If everything
+has been done correctly, then there should be no more red entries in the <strong>Problems</strong> window.</p>
+
+<p>If there are any remaining error messages in the <strong>Problems</strong> window, please troubleshoot them before continuing.</p>
+</li>
+</ol>
+
+<p>In this task we created an Eclipse workspace, copied our code into it and got it into a working state.</p>
+
+<h3>
+<a id="user-content-task-3---create-and-launch-the-emulator" class="anchor" href="#task-3---create-and-launch-the-emulator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 3 - Create and launch the emulator</h3>
+
+<p>In this task we will configure and launch the Android emulator, and deploy the app.</p>
+
+<ol>
+<li>
+<p>Launch the Android Device Manager from <strong>Window &gt; Android Virtual Device Manager</strong>.</p>
+
+<p>Click <strong>Create</strong> to create a new virtual device.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0019_avd_manager.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0019_avd_manager.png" alt="" style="max-width:100%;"></a></p>
+
+<p><strong>Note</strong> please be patient - launching the emulator will take some time.</p>
+</li>
+<li>
+<p>Fill out the dialog.</p>
+
+<ul>
+<li>For <strong>Device</strong> select "Nexus 4"</li>
+<li>For <strong>Target</strong> select "API Level 19"</li>
+<li>For <strong>CPU/ABI</strong> select "Intel Atom (x86)" if available, otherwise "ARM"</li>
+<li>For <strong>Skin</strong> select "Skin with dynamic hardware controls"</li>
+</ul>
+
+<p>Internal storage should be at least 200mb, and no SD card is required.</p>
+
+<p><strong>Note:</strong> if you select the x86 image, and have the <a href="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager">Intel HAXM driver</a> installed then the Android emulator will be
+emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0020_create_new_avd.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0020_create_new_avd.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li><p>Click <strong>OK</strong> to create the device.</p></li>
+<li>
+<p>Dismiss the AVD manager. In the Package Explorer, right-click on <strong>o365-tasks</strong> and select <strong>Debug as &gt; Android Application</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0025_start_as_android_app.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0025_start_as_android_app.png" alt="" style="max-width:100%;"></a></p>
+
+<p>This will launch the Android Device Chooser.</p>
+</li>
+<li>
+<p>Select <strong>Launch a new Android Virtual Device</strong>. 
+Select the AVD you created in the previous steps.
+Finally, select <strong>OK</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0030_android_device_chooser.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0030_android_device_chooser.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>The android emulator will launch and Android will boot (this may take some time).</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0035_emulator_launching.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0035_emulator_launching.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>When the android emulator has started the Tasks app should be automatically deployed and launched. If it
+is not, try executing <strong>Debug as &gt; Android Application</strong> again. This time, select the already-running emulator.
+There is no need to restart the emulator.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0035_emulator_running.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0035_emulator_running.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<p>Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
+the app to work against your own O365 tenant.</p>
+
+<h3>
+<a id="user-content-task-4---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-4---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 4 - Configure the code for your own O365 tenant</h3>
+
+<p>In this task we will create an Application in Azure AD to represent our android app.</p>
+
+<ol>
+<li><p>Navigate your web browser to the <a href="http://manage.windowsazure.com">Azure portal</a>.</p></li>
+<li>
+<p>Navigate to the <strong>Active Directory</strong> extension.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0045_active_directory_extension.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0045_active_directory_extension.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Navigate to the AD instance for your O365 tenant.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0050_navigate_to_ad_instance.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0050_navigate_to_ad_instance.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Navigate to the <strong>Applications</strong> screen.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0055_navigate_to_applications.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0055_navigate_to_applications.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>From the action bar at the bottom of the page, click <strong>Add</strong>. Then click <strong>Add an application my organization is developing</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0056_add_new_application.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0056_add_new_application.png" alt="" style="max-width:100%;"></a></p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0057_create_native_application.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0057_create_native_application.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>For the name field enter "Tasks for O365 SharePoint". For type select "Native client application", then click <strong>Next</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0060_create_application_1.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0060_create_application_1.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>For the Redirect Uri field enter "<code>http://android/complete</code>", then click <strong>Done</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0060_create_application_2.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0060_create_application_2.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>When the app has been created, navigate to the screen for that app. <strong>Note:</strong> this may happen automatically.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0065_navigate_to_app_page.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0065_navigate_to_app_page.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Switch to the <strong>Configure</strong> tab</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0070_navigate_to_app_settings.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0070_navigate_to_app_settings.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Scroll down to the <em>Properties</em> section and copy the <strong>Client Id</strong>. Remember this value for later, as we will use it
+when we are configuring the app in the next step.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0075_copy_client_id.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0075_copy_client_id.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Scroll down to the to the <em>Permissions to other applications</em> section and click <strong>Add application</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0076_add_application.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0076_add_application.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>From the <strong>Show</strong> drop down, select "Microsoft Apps". From the list below click <strong>Add</strong> on "Office 365 SharePoint Online".
+The application appears in the <em>Selected</em> list on the right-hand side. Click <strong>Done</strong> to continue.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0077_add_o365_sharepoint.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0077_add_o365_sharepoint.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Add the following Delegated Permissions for "Office 365 SharePoint Online".</p>
+
+<ul>
+<li><em>Create or delete items and lists in all site collections</em></li>
+</ul>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0080_set_application_permissions.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0080_set_application_permissions.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Click <strong>Save</strong> to apply the changes.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0085_save_button.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0085_save_button.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<p>Done! The <strong>Client Id</strong> we created above will be used to configure the Android app in the next task.</p>
+
+<h3>
+<a id="user-content-task-5---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-5---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 5 - Configure the code for your own O365 tenant</h3>
+
+<p>In this task we will configure the app to work agains your own O365 tenant.</p>
+
+<ol>
+<li>
+<p>Return to Eclipse. Locate the Java class <code>com.microsoft.o365_tasks.Constants</code>. This can be found by expanding 
+the nodes <strong>o365-tasks</strong>, <strong>src</strong> and <strong>com.microsoft.o365_tasks</strong> in the Package Explorer.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0040_open_constants.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0040_open_constants.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Change the constants in this class to suit your own tenancy.</p>
+
+<ul>
+<li>Set <strong><code>AAD_DOMAIN</code></strong> to your O365 tenant domain. E.g. "mycompany.onmicrosoft.com"</li>
+<li>Set <strong><code>AAD_CLIENT_ID</code></strong> to the Client Id obtained during Task 4</li>
+<li>Set <strong><code>SHAREPOINT_URL</code></strong> to the root url for your O365 SharePoint instance.</li>
+</ul>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0090_set_java_constants.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0090_set_java_constants.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<h3>
+<a id="user-content-task-6---launch-the-application" class="anchor" href="#task-6---launch-the-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 6 - Launch the application</h3>
+
+<p>We're ready to launch the app now.</p>
+
+<ol>
+<li><p>Once again, right-click on <strong>o365-tasks</strong> and use <strong>Debug as &gt; Android Application</strong> to launch the application.
+If the emulator is already running there is no need to restart it.</p></li>
+<li>
+<p>When the application launches, click <strong>Sign in</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0095_sign_in_1.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0095_sign_in_1.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>You will be prompted to enter your sign-in credentials. Enter them and click <strong>Sign in</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0100_sign_in_2.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0100_sign_in_2.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>If you authenticate successfully the app will automatically create a new Tasks list in SharePoint, and
+populate it with some example data.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0105_list_tasks_activity.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0105_list_tasks_activity.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<p>That's it! You've successfully configured and deployed the "Tasks for O365 SharePoint" app. Try creating and updating
+some of the tasks in this list.</p>
+
+<p>Using the <strong>Clear auth token</strong> function from the menu on this screen will clear your current Access Token. Your next request
+to the server (e.g. when you refresh the list or create a new task) will trigger a dialog asking you to re-authenticate.</p>
+
+<p><a name="user-content-exercise2"></a></p>
+
+<h2>
+<a id="user-content-exercise-2-add-a-delete-shortcup-feature-to-the-app" class="anchor" href="#exercise-2-add-a-delete-shortcup-feature-to-the-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise 2: Add a "delete" shortcup feature to the app</h2>
+
+<p>In this exercise we will add a "Delete" context action to the List Tasks activity.</p>
+
+<h3>
+<a id="user-content-task-1---write-the-new-delete-feature" class="anchor" href="#task-1---write-the-new-delete-feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 1 - Write the new Delete feature</h3>
+
+<ol>
+<li><p>Return to Eclipse.</p></li>
+<li><p>First we will create a "menu template" which defines the items in our new context menu.
+In the Package Explorer, expand the <code>res/menu</code> folders.</p></li>
+<li>
+<p>Right-click <code>menu</code> and select <strong>New &gt; Android XML file</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0110_new_android_xml_file.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0110_new_android_xml_file.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Name the file <code>list_tasks_context</code>. The root element type should be <code>menu</code>. Click <strong>Finish</strong> to continue.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0115_new_android_xml_file_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0115_new_android_xml_file_dialog.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Click the <code>list_tasks_context.xml</code> tab to switch to XML mode, and paste in the following XML:</p>
+
+<pre><code>&lt;item
+    android:id="@+id/action_delete"
+    android:orderInCategory="200"
+    android:showAsAction="ifRoom"
+    android:icon="@drawable/ic_action_discard"
+    android:title="@string/action_delete" /&gt;
+</code></pre>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0120_edit_list_tasks_context_xml.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0120_edit_list_tasks_context_xml.png" alt="" style="max-width:100%;"></a></p>
+
+<p>Save the file. This xml defines a button with the label "Delete" (defined in <code>res/values/strings.xml</code>) and the 
+id <code>action_delete</code>.</p>
+</li>
+<li>
+<p>Navigate to the java class <code>com.microsoft.o365_tasks.ListTasksActivity</code> (this is located in the <code>src</code> folder).</p>
+
+<p>In this class we need to add a number of callbacks to inflate the context menu and hook up handler functions for
+the buttons defined in this menu.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0125_open_ListTasksActivity.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0125_open_ListTasksActivity.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>At the top of the file, add the following imports:</p>
+
+<pre><code>import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0128_add_missing_imports.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0128_add_missing_imports.png" alt="0128_add_missing_imports.png" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>In the <code>onCreate</code> function, just before the call to <code>optionsActionRefresh</code>, paste the following:</p>
+
+<pre><code>registerForContextMenu(mListView);
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0130_update_onCreate.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0130_update_onCreate.png" alt="" style="max-width:100%;"></a></p>
+
+<p>This function registers the <code>mListView</code> view for a context menu.</p>
+</li>
+<li>
+<p>Under the comment "<code>//#### Context menu ####</code>" paste the following:</p>
+
+<pre><code>@Override
+public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    getMenuInflater().inflate(R.menu.list_tasks_context, menu);
+}
+</code></pre>
+
+<p>This function is invoked by Android to <em>inflate</em> a menu for the given view element <code>v</code>, when v has been registered
+for a context menu.</p>
+</li>
+<li>
+<p>Next, add this block:</p>
+
+<pre><code>public boolean onContextItemSelected(MenuItem item) {
+    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    switch (item.getItemId()) {
+    case R.id.action_delete:
+        contextActionDelete(info);
+        return true;
+    }
+    return super.onContextItemSelected(item);
+}
+</code></pre>
+
+<p>This function is invoked by android whenever a context menu item is long-pressed. We use it to link menu items up with
+behaviours. Here we are invoking <code>contextActionDelete</code> whenever the users taps the <code>action_delete</code> menu item.</p>
+
+<p>The <code>getItemId()</code> call returns the tools-generated integer id of the menu item. We compare this to the tools-generated
+static class field <code>R.id.action_delete</code> which was auto-generated based on the XML we added to <code>list_tasks_context.xml</code>.</p>
+</li>
+<li>
+<p>Next, add this block:</p>
+
+<pre><code>private void contextActionDelete(AdapterContextMenuInfo info) {
+    final TaskModel task = (TaskModel) mListView.getItemAtPosition(info.position);
+    //Launch confirmation dialog
+    new AlertDialog.Builder(this)
+        .setTitle(R.string.dialog_confirm_title)
+        .setMessage(R.string.dialog_delete_confirm_message)
+        .setNegativeButton(R.string.label_cancel, null)
+        .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialog, int which) {
+                //user has confirmed
+                ensureAuthenticated(new Runnable() {
+                    @Override public void run() {
+                        deleteTask(task);
+                    }
+                });
+            }
+        })
+        .create()
+        .show();
+}
+</code></pre>
+
+<p>This function handles launching a confirmation dialog for the user. If the user selects the "Delete" button, then
+we ensure that the user is still authenticated and invoke <code>deleteTask</code>.</p>
+</li>
+<li>
+<p>Finally, add this block:</p>
+
+<pre><code>protected void deleteTask(final TaskModel model) {
+   //Launch a background task to delete the current task
+   final String message = getString(R.string.edit_task_working);
+   new ProgressDialogAsyncTask&lt;Void&gt;(this, message) {
+        // Executes on a background thread. We can safely block here.
+        @Override protected Void doInBackground(Void... params) {
+            try {
+                new TaskListItemDataSource(mApplication).deleteTask(model);
+            }
+            catch (Exception ex) {
+                Log.e(TAG, "Error deleting task", ex);
+            }
+            return null;
+        }
+        // Executes on the UI thread after the background thread completes.
+        @Override protected void onResult(Void result) {
+            //all done - refresh the list
+            refresh();
+        }
+   }
+   .execute();
+}
+</code></pre>
+
+<p>This function launches an "in progress" dialog and deletes the given task via the API. When finished it starts
+a refresh.</p>
+</li>
+<li>
+<p><strong>Note:</strong> before continuing make sure that there are not errors in the file.
+Errors will be marked with a red squiggle automatically:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0135_eclipse_java_error.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0135_eclipse_java_error.png" alt="" style="max-width:100%;"></a></p>
+
+<p>If you find any errors, hover the mouse over them to see if Eclipse can provide a quick fix:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0140_eclipse_java_error_fix.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0140_eclipse_java_error_fix.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<p>Done! We've just added the ability for the user to delete a task item directly from the List Tasks activity.</p>
+
+<h3>
+<a id="user-content-task-2---test-the-new-delete-feature" class="anchor" href="#task-2---test-the-new-delete-feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 2 - Test the new Delete feature</h3>
+
+<p>In this task we will test the "Delete" feature we just added.</p>
+
+<ol>
+<li><p>Start debugging the <strong>o365-tasks</strong> app with <strong>Debug as &gt; Android Application</strong>. When the app launches, sign in.</p></li>
+<li>
+<p>Long-press on any task in the list - a context menu will appear. Select <strong>Delete</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0145_delete_context_menu.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0145_delete_context_menu.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Tap <strong>Delete</strong> to confirm.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0150_delete_confirm_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0150_delete_confirm_dialog.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li><p>The item will be deleted and the view will refresh.</p></li>
+</ol>
+
+<p>Done! You've successfully added a feature to this app.</p>
+
+<p><a name="user-content-exercise3"></a></p>
+
+<h2>
+<a id="user-content-exercise-3-add-a-filter-feature-to-the-app" class="anchor" href="#exercise-3-add-a-filter-feature-to-the-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise 3: Add a "filter" feature to the app</h2>
+
+<p>In this exercise we will add a "Filter" option to the List Tasks activity.</p>
+
+<h3>
+<a id="user-content-task-1---write-the-new-filter-feature" class="anchor" href="#task-1---write-the-new-filter-feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 1 - Write the new filter feature</h3>
+
+<ol>
+<li><p>Return to Eclipse.</p></li>
+<li>
+<p>First we will update the List Tasks activity options menu.
+Navigate to the "<code>list_tasks_options.xml</code>" menu template.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0155_open_list_tasks_options_xml.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0155_open_list_tasks_options_xml.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Switch to the XML view.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0160_switch_to_xml_view.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0160_switch_to_xml_view.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Add the following XML:</p>
+
+<pre><code>&lt;item
+    android:id="@+id/action_filter_completed"
+    android:orderInCategory="800"
+    android:showAsAction="never"
+    android:checkable="true"
+    android:title="@string/action_filter_completed" /&gt;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0165_add_menu_item_xml.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0165_add_menu_item_xml.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Navigate to the "<code>strings.xml</code>" resouce file and switch to the XML view.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0170_open_strings_xml.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0170_open_strings_xml.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Add the following XML:</p>
+
+<pre><code>&lt;string name="action_filter_completed"&gt;Filter completed tasks&lt;/string&gt;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0175_add_new_string_resource.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0175_add_new_string_resource.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Navigate back to the java class <code>com.microsoft.o365_tasks.ListTasksActivity</code>. Add the following import
+statements to the top of the file:</p>
+
+<pre><code>import com.microsoft.office365.Query;
+import android.content.SharedPreferences;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0180_add_missing_imports.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0180_add_missing_imports.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>At the bottom of the <code>ListTasksActivity</code> class add the following block:</p>
+
+<pre><code>private static class PreferencesWrapper {
+    private static final String PREFS_FILTER_COMPLETED = "filter_completed";
+    private SharedPreferences mPreferences;
+    public PreferencesWrapper(SharedPreferences preferences) {
+        mPreferences = preferences;
+    }
+    public boolean getFilterCompleted() {
+        return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
+    }
+    public void setFilterCompleted(boolean completed) {
+        mPreferences.edit()
+                    .putBoolean(PREFS_FILTER_COMPLETED, completed)
+                    .apply();
+    }
+}
+</code></pre>
+
+<p>This internal static class wraps the android <code>SharedPreferences</code> utility to give us a nice strongly-typed
+interface.</p>
+
+<p><strong>Note:</strong> this block must be pasted <strong>inside</strong> the final brace in the file - Java does not support multiple
+seperate class definitions per file.</p>
+</li>
+<li>
+<p>At the top of the class add the following member variable:</p>
+
+<pre><code>private PreferencesWrapper mPreferences;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0185_add_preferences_member_variable.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0185_add_preferences_member_variable.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Next, initialize the variable in the "<code>onCreate</code>" function:</p>
+
+<pre><code>mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0190_initialize_preferences.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0190_initialize_preferences.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>In the "<code>onCreateOptionsMenu</code>" function we must retrieve and initialize the <code>action_filter_completed</code> checkbox we
+defined earlier. Add the following line before the final <code>return</code>.</p>
+
+<pre><code>menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0195_initialize_action_filter_completed.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0195_initialize_action_filter_completed.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>In the "<code>onOptionsItemSelected</code>" function we must add code to handle taps on the new menu option. Add the following
+switch case:</p>
+
+<pre><code>case R.id.action_filter_completed:
+    optionsActionFilterCompleted(item);
+    return true;
+</code></pre>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0200_handle_action_filter_completed.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0200_handle_action_filter_completed.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li>
+<p>Next add the "<code>optionsActionFilterCompleted</code>" function which will handle updating the <code>action_filter_completed</code> menu
+item and refreshing the screen.</p>
+
+<pre><code>private void optionsActionFilterCompleted(MenuItem item) {   
+    boolean flag = !item.isChecked();
+    item.setChecked(flag);
+    mPreferences.setFilterCompleted(flag);
+    //refresh
+    optionsActionRefresh();
+}
+</code></pre>
+</li>
+<li>
+<p>Finally, navigate to the "<code>refresh</code><code>" function and add the following code to the "</code>doInBackground`" inner function:</p>
+
+<pre><code>Query query = new Query();
+if (mPreferences.getFilterCompleted()) {
+    query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
+}
+</code></pre>
+
+<p>Change the <code>getTasksByQuery</code> function call to pass the new <code>query</code> variable in argument.</p>
+
+<p>The result should look like this:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0205_update_refresh_function.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0205_update_refresh_function.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
+
+<p>Done! These changes add a filter on the <code>PercentComplete</code> field to the OData query sent to SharePoint when the
+"Filter completed tasks" option is checked. This filters out any tasks which have been marked as 100% complete.</p>
+
+<p>Note that this setting is automatically persisted thanks to our use of the Android <code>SharedPreferences</code> class.</p>
+
+<h3>
+<a id="user-content-task-2---test-the-new-filter-function" class="anchor" href="#task-2---test-the-new-filter-function" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 2 - Test the new Filter function</h3>
+
+<p>In this task we will test the "Filter" function we just implemented.</p>
+
+<ol>
+<li><p>Start debugging the <strong>o365-tasks</strong> app with <strong>Debug as &gt; Android Application</strong>. When the app launches, sign in.</p></li>
+<li>
+<p>When the List Tasks activity has loaded, tap the <strong>Options menu</strong> button in the top-right.
+Next, tap <strong>Filter completed tasks</strong> to confirm.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0210_invoke_filter_completed_tasks.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0210_invoke_filter_completed_tasks.png" alt="" style="max-width:100%;"></a></p>
+</li>
+<li><p>The view will refresh, and all "completed" tasks will be filtered out. Repeating the operation will disable
+the filtering.</p></li>
+</ol>
+
+<h2>
+<a id="user-content-summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
+
+<p>By completing this hands-on lab you have learnt:</p>
+
+<ol>
+<li><p>Some of the basics of Android development.</p></li>
+<li><p>How to use the 0365 SharePoint Lists API for Android </p></li>
+<li><p>How to filter queries with the 0365 SharePoint Lists API for Android </p></li>
+</ol>
+</article></body></html>

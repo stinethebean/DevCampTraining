@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.example.o365_tasks"
+        minSdkVersion 18
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile 'com.android.support:appcompat-v7:21.0.3'
+
+    // base OData stuff:
+    compile group: 'com.microsoft.services', name: 'odata-engine-core', version: '0.12.0'
+    compile group: 'com.microsoft.services', name: 'odata-engine-android-impl', version: '0.12.0', ext:'aar'
+
+    // choose the services/SDKs you need:
+    compile group: 'com.microsoft.services', name: 'sharepoint-services', version: '0.12.0', ext:'aar'
+
+    // ADAL
+    compile (group: 'com.microsoft.aad', name: 'adal', version: '1.0.5') {
+        //exclude group: 'com.android.support'   // this may not be necessary
+    }
+}
