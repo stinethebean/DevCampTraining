@@ -21,15 +21,4 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    //Active Directory Authentication Library - used to authenticate with SharePoint via Azure AD
-    compile group: 'com.microsoft.aad', name: 'adal', version: '1.0.5'
-
-    //Sharepoint Services - client classes for consuming Sharepoint's API
-    compile group: 'com.microsoft.services', name: 'sharepoint-services', version: '0.12.0', ext:'aar'
-
-    //Dependencies required by sharepoint-services
-    //TODO: This dependency should be automatically included by Gradle,
-    //TODO: but using the 'aar' version of sharepoint-services seems to interfere with this
-    compile group: 'com.google.guava', name: 'guava', version: '18.0'
 }
