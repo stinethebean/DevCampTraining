@@ -155,54 +155,64 @@ In this task we will add the missing dependencies to the app.
 
 In this task we will configure and launch the Android emulator, and deploy the app.
 
-02. Launch the Android Device Manager from **Window > Android Virtual Device Manager**.
+01. Launch the Android Device Manager from **Tools > Android > AVD Manager**.
+
+    ![](img/0015_launch_avd_manager.png)
+
+02. Select **Create a virtual device**
     
-    Click **Create** to create a new virtual device.
+    ![](img/0016_create_new_avd.png)
 
-    ![](img/0019_avd_manager.png)
-
-    **Note** please be patient - launching the emulator will take some time.
-
-03. Fill out the dialog.
-
-    - For **Device** select "Nexus 4"
-    - For **Target** select "API Level 19"
-    - For **CPU/ABI** select "Intel Atom (x86)" if available, otherwise "ARM"
-    - For **Skin** select "Skin with dynamic hardware controls"
+03. Select the **Nexus 5** hardware profile, in the **Phone Category**. Click **Next**.
     
-    Internal storage should be at least 200mb, and no SD card is required.
+    ![](img/0017_select_nexus_5.png)
 
-    **Note:** if you select the x86 image, and have the [Intel HAXM driver][haxm-driver] installed then the Android emulator will be
-    emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.
+04. Select an "Api Level 21" image, e.g. **Lollipop (API Level 21) x86**. Click **Next**.
+    
+    ![](img/0018_select_api_21_x86_image.png)
 
-    ![](img/0020_create_new_avd.png)
+05. Because the Nexus 5 hardware profile is very high resolution (1080x1920), the emulated
+    device may not fit on your monitor. 
 
-[haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
+    We can scale it down though:
 
-04. Click **OK** to create the device.
+    a)  Set "Scale" to **2db on device = 1px on screen**.
 
-05. Dismiss the AVD manager. In the Package Explorer, right-click on **o365-tasks** and select **Debug as > Android Application**.
+    b)  Click **Show Advanced Settings**.
 
-    ![](img/0025_start_as_android_app.png)
+    c)  Scroll down and set "Custom skin definition" to **No Skin**.
+    
+    This should fit the emulator comfortably on a 1920x1080 monitor. Finally, 
+    click **Finish** to create the device.
 
-    This will launch the Android Device Chooser.
+    ![](img/0019_complete_create_avd_form.png)
 
-06. Select **Launch a new Android Virtual Device**. 
-    Select the AVD you created in the previous steps.
-    Finally, select **OK**.
+06. When the virtual device has been created, click the **Start** button to start it.
 
-    ![](img/0030_android_device_chooser.png)
+    ![](img/0020_start_emulator.png)
 
-07. The android emulator will launch and Android will boot (this may take some time).
+    **Note** please be patient - starting the emulator will take some time.
 
     ![](img/0035_emulator_launching.png)
 
-08. When the android emulator has started the Tasks app should be automatically deployed and launched. If it
-    is not, try executing **Debug as > Android Application** again. This time, select the already-running emulator.
-    There is no need to restart the emulator.
+07. Dismiss the AVD manager. From the menu, select **Run > Debug 'app'**.
+
+    ![](img/0021_start_debugging.png)
+
+    This will launch the Android Device Chooser.
+
+06. From the device list select the emulator we just started.
+
+    Check the **Use the same device for future launches**. Finally, select **OK**.
+
+    ![](img/0030_choose_device.png)
+
+    **Note:** you can leave the emulator running in the background - now whenever you
+    **Run** or **Debug** your app it will automatically deploy your code to this emulator.
+
+08. When the android emulator has started the Tasks app should be automatically deployed and launched.
 
     ![](img/0035_emulator_running.png)
-
 
 Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
 the app to work against your own O365 tenant.
