@@ -867,8 +867,9 @@ body .markdown-body
 <h2>
 <a id="user-content-overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>The lab lets students configure and run an Android App which allows the user to edit items in a
-SharePoint Task list. The lab also has instructions for adding a new feature to the App.</p>
+<p>The lab instructs students in configuring and running an Android app which allows 
+the user to edit items in a SharePoint Task list. The lab also has instructions
+for adding a new feature to the app.</p>
 
 <h2>
 <a id="user-content-objectives" class="anchor" href="#objectives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objectives</h2>
@@ -878,7 +879,7 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 </li>
 <li>Learn how to consume SharePoint APIs from Android using the <strong>Office 365 SDK for Android</strong>
 </li>
-<li>Implement a new feature in the Android App</li>
+<li>Implement a new feature in the Android app</li>
 </ul>
 
 <h2>
@@ -886,11 +887,9 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 
 <ul>
 <li><a href="http://git-scm.com">Git version control tool</a></li>
-<li><a href="http://developer.android.com/sdk/index.html">Eclipse with the Android Developer Tools</a></li>
-<li>Android API Level 19 installed <a href="http://developer.android.com/tools/help/sdk-manager.html">using the Android SDK Manager</a>
-</li>
+<li><a href="http://developer.android.com/sdk/index.html">Android Studio</a></li>
 <li>You must have an Office 365 tenant and Windows Azure subscription to complete this lab.</li>
-<li>You must have completed Module 04 and linked your Azure subscription with your O365 tenant.</li>
+<li>You must have completed <a href="///D://Dev/DevCampTraining/04.Hook%20into%20Office%20365%20APIs/hands-on-lab.md">Module 04</a> and linked your Azure subscription with your O365 tenant.</li>
 </ul>
 
 <h2>
@@ -907,28 +906,27 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 <p><a name="user-content-exercise1"></a></p>
 
 <h2>
-<a id="user-content-exercise-1-set-up-your-workspace-and-configure-and-run-the-android-app" class="anchor" href="#exercise-1-set-up-your-workspace-and-configure-and-run-the-android-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise 1: Set up your workspace and configure and run the Android app</h2>
+<a id="user-content-exercise-1-import-and-configure-the-base-o365-tasks" class="anchor" href="#exercise-1-import-and-configure-the-base-o365-tasks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise 1: Import and configure the base O365-Tasks</h2>
 
-<p>In this exercise you will set up your Eclipse workspace and then configure and run the
-<strong>Tasks for SharePoint O365</strong> Android app.</p>
+<p>In this exercise you will import the <strong>Tasks for SharePoint O365</strong> Android app into
+Android Studio, and configure it for your SharePoint instance.</p>
 
 <h3>
 <a id="user-content-task-1---preparation" class="anchor" href="#task-1---preparation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 1 - Preparation</h3>
 
-<p>Prepare the Android SDK by downloading Android API Level 19.</p>
+<p>Prepare the Android SDK by downloading Android API Level 21.</p>
 
 <ol>
 <li>
-<p>Launch Eclipse. Launch the Android SDK Manager via <strong>Window &gt; Android SDK Manager</strong></p>
+<p>Launch Android Studio. From the launch menu, select <strong>Configure &gt; SDK Manager</strong></p>
 
 <p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0001_launch_sdk_manager.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0001_launch_sdk_manager.png" alt="" style="max-width:100%;"></a></p>
 </li>
 <li>
-<p>Install the following components from <strong>Android 4.4.2 (API 19)</strong></p>
+<p>Install the following components from <strong>Android 5.0.1 (API 21)</strong></p>
 
 <ul>
 <li>SDK Platform</li>
-<li>ARM EABI v7a System Image</li>
 <li>Intel x86 Atom System Image</li>
 <li>Sources for Android SDK</li>
 </ul>
@@ -939,137 +937,113 @@ SharePoint Task list. The lab also has instructions for adding a new feature to 
 </ol>
 
 <p><strong>Note:</strong> The android SDK install location will be referred to later using "<code>ANDROID_SDK</code>".
-By default it is included in the package with Eclipse:</p>
+By default it is installed in your local appdata folder, e.g.:</p>
 
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0003_android_sdk_location.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0003_android_sdk_location.png" alt="" style="max-width:100%;"></a></p>
+<pre><code>C:\Users\&lt;user&gt;\AppData\Local\Android\sdk
+</code></pre>
 
 <h3>
-<a id="user-content-task-2---set-up-your-eclipse-workspace" class="anchor" href="#task-2---set-up-your-eclipse-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 2 - Set up your Eclipse workspace</h3>
+<a id="user-content-task-2---import-the-code-into-android-studio" class="anchor" href="#task-2---import-the-code-into-android-studio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 2 - Import the code into Android Studio</h3>
 
-<p>Follow these steps to get the source code ready to build on your machine.</p>
+<p>Follow these steps to get the source code ready to build on your machine and 
+learn the layout of the code within the Android Studio IDE.</p>
 
 <ol>
 <li>
-<p>Launch Eclipse and create a new workspace (if you have not already done so).
-Remember where you create your workspace as we will be working within it extensively.</p>
+<p>From the Launch menu, select <strong>Open an existing Android Studio project</strong></p>
 
-<p>For the purposes of this this lab we will refer to the workspace path using "<code>C:\Android</code>".</p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0004_eclipse_create_workspace_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0004_eclipse_create_workspace_dialog.png" alt="" style="max-width:100%;"></a></p>
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_import_existing_android_project.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_import_existing_android_project.png" alt="" style="max-width:100%;"></a></p>
 </li>
 <li>
-<p>Start a git command prompt and navigate to your Eclipse workspace.</p>
+<p>Navigate to the <code>/src</code> directory and select <code>o365-tasks</code>. Click <strong>OK</strong>.</p>
 
-<pre><code>C:\&gt; cd Android
-</code></pre>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_cd_android.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0005_cd_android.png" alt="" style="max-width:100%;"></a></p>
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_find_o365_tasks_project_folder.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_find_o365_tasks_project_folder.png" alt="" style="max-width:100%;"></a></p>
 </li>
 <li>
-<p>Clone the <strong>Office 365 SDK for Android</strong> into your workspace from github, then checkout
-the revision we're targeting in this lab.</p>
+<p>Wait for the project to load. You may be prompted with an error message like
+the following:</p>
 
-<pre><code>C:\Android&gt; git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
-C:\Android&gt; cd adal
-C:\Android\adal&gt; git checkout v1.0.1
-</code></pre>
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_install_missing_dependencies.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_install_missing_dependencies.png" alt="" style="max-width:100%;"></a></p>
 
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_clone_adal.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0006_clone_adal.png" alt="" style="max-width:100%;"></a></p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_checkout_adal_v101.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0007_checkout_adal_v101.png" alt="" style="max-width:100%;"></a></p>
+<p>If so, follow the suggested action by clicking on (e.g.) <strong>Install missing platform(s) and sync content</strong>,
+and wait for the install to finish.</p>
 </li>
+<li><p>The application won't compile yet - it relies on some libraries which have
+not yet been added as dependencies. We'll cover that in the next task.</p></li>
 <li>
-<p>Clone the <strong>Azure AD Authentication Library for Android</strong> into your workspace from github, then checkout
-the revision we're targeting in this lab.</p>
-
-<pre><code>C:\Android\adal&gt; cd ..
-C:\Android&gt; git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
-C:\Android&gt; cd o365-android-sdk
-C:\Android\o365-android-sdk&gt; git checkout v1.0
-</code></pre>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0008_clone_o365_sdk.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0008_clone_o365_sdk.png" alt="" style="max-width:100%;"></a></p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0009_checkout_o365_sdk_v1.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0009_checkout_o365_sdk_v1.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Copy the <code>o365-tasks</code> folder from <code>src</code> directory of this hands-on lab into your workspace. This
-contains the source code for the <strong>Tasks for SharePoint O365</strong> app.</p>
-
-<p><strong>Copy from hands-on lab:</strong></p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_copy_o365_tasks.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_copy_o365_tasks.png" alt="" style="max-width:100%;"></a></p>
-
-<p><strong>Paste into workspace:</strong></p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0011_paste_o365_tasks.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0011_paste_o365_tasks.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Next we will return to Eclipse to import the source code from your workspace.</p>
-
-<p>Select <strong>File &gt; Import</strong>.</p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_menu_import.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_menu_import.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Expand <strong>Android</strong> and select <strong>Existing Android Code Into Workspace</strong>.
-Finally, click <strong>Next</strong>.</p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0013_existing_workspace.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0013_existing_workspace.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li><p>For <strong>Root Directory</strong> enter the path to your workspace. Click <strong>Refresh</strong> to search for Android code within
-the workspace.</p></li>
-<li>
-<p>Click <strong>Deselect All</strong> to clear all selections, then select the following projects:</p>
+<p>Before continuing, take a moment to expand the <strong>app</strong> node in the
+Project window. Application code is organized under this node.</p>
 
 <ul>
-<li><code>adal\src</code></li>
-<li><code>o365-android-sdk\sdk\office-365-base-sdk</code></li>
-<li><code>o365-android-sdk\sdk\office-365-lists-sdk</code></li>
-<li><code>o365-tasks\src</code></li>
+<li><p>The <strong>manifests</strong> folder contains your Android manifest: <code>AndroidManifest.xml</code></p></li>
+<li><p>The <strong>java</strong> folder contains application code.</p></li>
+<li><p>The <strong>res</strong> folder contains resources like layouts, images and strings.</p></li>
 </ul>
 
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_eclipse_import_code_dialog.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_eclipse_import_code_dialog.png" alt="" style="max-width:100%;"></a></p>
+<p>Note that the nodes in this folder are virtualized - they do not map
+directly to files and folders on disk. Keep this in mind if you are navigating
+the source tree outside Android Studio!</p>
 
-<p>The rest of these projects are test and sample code and can be ignored.</p>
-</li>
-<li><p>Finally, click <strong>Finish</strong></p></li>
-<li>
-<p>We now need to fix some missing dependencies. 
-Execute the "<code>C:\Android\adal\src\libs\getLibs.ps1</code>" script to download Gson 2.2.2.</p>
-
-<pre><code>C:\Android&gt; powershell adal\src\libs\getLibs.ps1
-</code></pre>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0015_download_gson.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0015_download_gson.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Copy <code>%ANDROID_SDK%\extras\android\support\v4\android-support-v4.jar</code> into <code>C:\Android\adal\src\libs</code>.</p>
-
-<p>(Where <strong><code>%ANDROID_SDK%</code></strong> refers to the location of the Android SDK on your machine)</p>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0016_copy_v4_support_lib.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0016_copy_v4_support_lib.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Execute the "<code>C:\Android\o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1</code>" script to download Guava 16.0.1.</p>
-
-<pre><code>C:\Android&gt; powershell o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1
-</code></pre>
-
-<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0017_download_guava.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0017_download_guava.png" alt="" style="max-width:100%;"></a></p>
-</li>
-<li>
-<p>Return to Eclipse and press <strong>F5</strong> to refresh. Wait a moment as Eclipse re-compiles the code. If everything
-has been done correctly, then there should be no more red entries in the <strong>Problems</strong> window.</p>
-
-<p>If there are any remaining error messages in the <strong>Problems</strong> window, please troubleshoot them before continuing.</p>
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_res_folder_note.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0010_res_folder_note.png" alt="" style="max-width:100%;"></a></p>
 </li>
 </ol>
 
-<p>In this task we created an Eclipse workspace, copied our code into it and got it into a working state.</p>
+<h3>
+<a id="user-content-task-3---add-missing-dependencies" class="anchor" href="#task-3---add-missing-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 3 - Add missing dependencies</h3>
+
+<p>In this task we will add the missing dependencies to the app.</p>
+
+<ol>
+<li><p>Expand the <strong>Gradle scripts</strong> node. All gradle scripts in the project are
+organized under this node.</p></li>
+<li><p>Open the file <strong>build.gradle (Module: app)</strong>. This file describes all the
+dependencies the project has, and also defines things such as the app ID, app
+version number, min and max SDK versions, build tools version, etc.</p></li>
+<li>
+<p>Add the following code to the <code>dependencies</code> section:</p>
+
+<div class="highlight highlight-groovy"><pre><span class="pl-c">//Active Directory Authentication Library - used to authenticate with SharePoint via Azure AD</span>
+compile <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.microsoft.aad<span class="pl-pds">'</span></span>, <span class="pl-c1">name</span>: <span class="pl-s1"><span class="pl-pds">'</span>adal<span class="pl-pds">'</span></span>, <span class="pl-c1">version</span>: <span class="pl-s1"><span class="pl-pds">'</span>1.0.5<span class="pl-pds">'</span></span>
+
+<span class="pl-c">//Sharepoint Services - client classes for consuming Sharepoint's API</span>
+compile <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.microsoft.services<span class="pl-pds">'</span></span>, <span class="pl-c1">name</span>: <span class="pl-s1"><span class="pl-pds">'</span>sharepoint-services<span class="pl-pds">'</span></span>, <span class="pl-c1">version</span>: <span class="pl-s1"><span class="pl-pds">'</span>0.12.0<span class="pl-pds">'</span></span>, <span class="pl-c1">ext</span>:<span class="pl-s1"><span class="pl-pds">'</span>aar<span class="pl-pds">'</span></span>
+
+<span class="pl-c">//Dependencies required by sharepoint-services</span>
+<span class="pl-c">//TODO: This dependency should be automatically included by Gradle,</span>
+<span class="pl-c">//TODO: but using the 'aar' version of sharepoint-services seems to interfere with this</span>
+compile <span class="pl-c1">group</span>: <span class="pl-s1"><span class="pl-pds">'</span>com.google.guava<span class="pl-pds">'</span></span>, <span class="pl-c1">name</span>: <span class="pl-s1"><span class="pl-pds">'</span>guava<span class="pl-pds">'</span></span>, <span class="pl-c1">version</span>: <span class="pl-s1"><span class="pl-pds">'</span>18.0<span class="pl-pds">'</span></span></pre></div>
+
+<p>This code describes the app dependencies:</p>
+
+<ul>
+<li> <code>com.microsoft.aad:adal</code> - The Active Directory Authentication Library for Android</li>
+<li> <code>com.microsoft.services:sharepoint-services</code> - The O365 SharePoint SDK for Android</li>
+<li> <code>com.google.guava</code> - A utility library by Google which is required by the O365 SharePoint SDK</li>
+</ul>
+
+<p>You can find more information about the O365 SharePoint SDK on the project's <a href="https://github.com/OfficeDev/Office-365-SDK-for-Android">Github page</a>.</p>
+</li>
+<li>
+<p>Android Studio needs to keep it's own project files in sync with our <code>build.gradle</code> file. It lets us know
+by showing the following warning message:</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_android_studio_sync_warning.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0012_android_studio_sync_warning.png" alt="" style="max-width:100%;"></a></p>
+
+<p>Click <strong>Sync now</strong> to fix the problem.</p>
+
+<p><strong>Note:</strong> You can also force Android Studio to sync with your Gradle files 
+using the command <strong>Tools &gt; Android &gt; Sync project with Gradle files</strong>.</p>
+</li>
+<li>
+<p>You should now be able to successfully build the project.
+To do so, select <strong>Build &gt; Make Module 'app'</strong>.</p>
+
+<p><a href="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_build_module_app.png" target="_blank"><img src="///D://Dev/DevCampTraining/06.Hook%20into%20SharePoint%20APIs%20with%20Android/img/0014_build_module_app.png" alt="" style="max-width:100%;"></a></p>
+</li>
+</ol>
 
 <h3>
-<a id="user-content-task-3---create-and-launch-the-emulator" class="anchor" href="#task-3---create-and-launch-the-emulator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 3 - Create and launch the emulator</h3>
+<a id="user-content-task-4---create-and-launch-the-emulator" class="anchor" href="#task-4---create-and-launch-the-emulator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 4 - Create and launch the emulator</h3>
 
 <p>In this task we will configure and launch the Android emulator, and deploy the app.</p>
 
@@ -1133,7 +1107,7 @@ There is no need to restart the emulator.</p>
 the app to work against your own O365 tenant.</p>
 
 <h3>
-<a id="user-content-task-4---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-4---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 4 - Configure the code for your own O365 tenant</h3>
+<a id="user-content-task-5---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-5---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 5 - Configure the code for your own O365 tenant</h3>
 
 <p>In this task we will create an Application in Azure AD to represent our android app.</p>
 
@@ -1217,7 +1191,7 @@ The application appears in the <em>Selected</em> list on the right-hand side. Cl
 <p>Done! The <strong>Client Id</strong> we created above will be used to configure the Android app in the next task.</p>
 
 <h3>
-<a id="user-content-task-5---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-5---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 5 - Configure the code for your own O365 tenant</h3>
+<a id="user-content-task-6---configure-the-code-for-your-own-o365-tenant" class="anchor" href="#task-6---configure-the-code-for-your-own-o365-tenant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 6 - Configure the code for your own O365 tenant</h3>
 
 <p>In this task we will configure the app to work agains your own O365 tenant.</p>
 
@@ -1242,7 +1216,7 @@ the nodes <strong>o365-tasks</strong>, <strong>src</strong> and <strong>com.micr
 </ol>
 
 <h3>
-<a id="user-content-task-6---launch-the-application" class="anchor" href="#task-6---launch-the-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 6 - Launch the application</h3>
+<a id="user-content-task-7---launch-the-application" class="anchor" href="#task-7---launch-the-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Task 7 - Launch the application</h3>
 
 <p>We're ready to launch the app now.</p>
 

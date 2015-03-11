@@ -3,22 +3,26 @@
 
 ##Overview
 
-The lab lets students configure and run an Android App which allows the user to edit items in a
-SharePoint Task list. The lab also has instructions for adding a new feature to the App.
+The lab instructs students in configuring and running an Android app which allows 
+the user to edit items in a SharePoint Task list. The lab also has instructions
+for adding a new feature to the app.
 
 ##Objectives
 
 - Learn how to authenticate with Azure AD from Android using the **Azure Active Directory AuthenticationLibrary (ADAL) for Android**
 - Learn how to consume SharePoint APIs from Android using the **Office 365 SDK for Android**
-- Implement a new feature in the Android App
+- Implement a new feature in the Android app
 
 ##Prerequisites
 
-- [Git version control tool](http://git-scm.com)
-- [Eclipse with the Android Developer Tools](http://developer.android.com/sdk/index.html)
-- Android API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
+- [Git version control tool][git-scm]
+- [Android Studio][android-studio]
 - You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
-- You must have completed Module 04 and linked your Azure subscription with your O365 tenant.
+- You must have completed [Module 04][module-four] and linked your Azure subscription with your O365 tenant.
+
+[git-scm]: http://git-scm.com
+[android-studio]: http://developer.android.com/sdk/index.html
+[module-four]: ../04.Hook%20into%20Office%20365%20APIs/hands-on-lab.md
 
 ##Exercises
 
@@ -29,21 +33,20 @@ The hands-on lab includes the following exercises:
 - [Add a "filter" feature to the app](#exercise3)
 
 <a name="exercise1"></a>
-##Exercise 1: Set up your workspace and configure and run the Android app
-In this exercise you will set up your Eclipse workspace and then configure and run the
-**Tasks for SharePoint O365** Android app.
+##Exercise 1: Import and configure the base O365-Tasks
+In this exercise you will import the **Tasks for SharePoint O365** Android app into
+Android Studio, and configure it for your SharePoint instance.
 
 ###Task 1 - Preparation
-Prepare the Android SDK by downloading Android API Level 19.
+Prepare the Android SDK by downloading Android API Level 21.
 
-01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
+01. Launch Android Studio. From the launch menu, select **Configure > SDK Manager**
 
     ![](img/0001_launch_sdk_manager.png)
 
-02. Install the following components from **Android 4.4.2 (API 19)**
+02. Install the following components from **Android 5.0.1 (API 21)**
 
     - SDK Platform
-    - ARM EABI v7a System Image
     - Intel x86 Atom System Image
     - Sources for Android SDK
 
@@ -52,118 +55,103 @@ Prepare the Android SDK by downloading Android API Level 19.
 03. Click **Install packages...** and wait for the install to complete.
 
 **Note:** The android SDK install location will be referred to later using "`ANDROID_SDK`".
-By default it is included in the package with Eclipse:
+By default it is installed in your local appdata folder, e.g.:
 
-![](img/0003_android_sdk_location.png)
-
-
-###Task 2 - Set up your Eclipse workspace
-Follow these steps to get the source code ready to build on your machine.
+    C:\Users\<user>\AppData\Local\Android\sdk
 
 
-01. Launch Eclipse and create a new workspace (if you have not already done so).
-    Remember where you create your workspace as we will be working within it extensively.
+###Task 2 - Import the code into Android Studio
 
-    For the purposes of this this lab we will refer to the workspace path using "`C:\Android`".
+Follow these steps to get the source code ready to build on your machine and 
+learn the layout of the code within the Android Studio IDE.
 
-    ![](img/0004_eclipse_create_workspace_dialog.png)
+01. From the Launch menu, select **Open an existing Android Studio project**
 
-02. Start a git command prompt and navigate to your Eclipse workspace.
+    ![](img/0005_import_existing_android_project.png)
 
-        C:\> cd Android
+02. Navigate to the `/src` directory and select `o365-tasks`. Click **OK**.
+    
+    ![](img/0006_find_o365_tasks_project_folder.png)
 
-    ![](img/0005_cd_android.png)
+03. Wait for the project to load. You may be prompted with an error message like
+    the following:
 
-03. Clone the **Office 365 SDK for Android** into your workspace from github, then checkout
-    the revision we're targeting in this lab.
-   
-        C:\Android> git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
-        C:\Android> cd adal
-        C:\Android\adal> git checkout v1.0.1
+    ![](img/0007_install_missing_dependencies.png)
 
-    ![](img/0006_clone_adal.png)
+    If so, follow the suggested action by clicking on (e.g.) **Install missing platform(s) and sync content**,
+    and wait for the install to finish.
 
-    ![](img/0007_checkout_adal_v101.png)
+04. The application won't compile yet - it relies on some libraries which have
+    not yet been added as dependencies. We'll cover that in the next task.
 
-04. Clone the **Azure AD Authentication Library for Android** into your workspace from github, then checkout
-    the revision we're targeting in this lab.
+05. Before continuing, take a moment to expand the **app** node in the
+    Project window. Application code is organized under this node.
+    
+    *  The **manifests** folder contains your Android manifest: `AndroidManifest.xml`
 
-        C:\Android\adal> cd ..
-        C:\Android> git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
-        C:\Android> cd o365-android-sdk
-        C:\Android\o365-android-sdk> git checkout v1.0
+    *  The **java** folder contains application code.
+    
+    *  The **res** folder contains resources like layouts, images and strings.
+       
+    Note that the nodes in this folder are virtualized - they do not map
+    directly to files and folders on disk. Keep this in mind if you are navigating
+    the source tree outside Android Studio!
 
-    ![](img/0008_clone_o365_sdk.png)
+    ![](img/0010_res_folder_note.png)
 
-    ![](img/0009_checkout_o365_sdk_v1.png)
+###Task 3 - Add missing dependencies
 
-05. Copy the `o365-tasks` folder from `src` directory of this hands-on lab into your workspace. This
-    contains the source code for the **Tasks for SharePoint O365** app.
-
-    **Copy from hands-on lab:**
-
-    ![](img/0010_copy_o365_tasks.png)
-
-    **Paste into workspace:**
-
-    ![](img/0011_paste_o365_tasks.png)
-
-06. Next we will return to Eclipse to import the source code from your workspace.
-
-    Select **File > Import**.
-
-    ![](img/0012_menu_import.png)
-
-07. Expand **Android** and select **Existing Android Code Into Workspace**.
-    Finally, click **Next**.
-
-    ![](img/0013_existing_workspace.png)
-
-08. For **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
-    the workspace.
-
-08. Click **Deselect All** to clear all selections, then select the following projects:
-
-    - `adal\src`
-    - `o365-android-sdk\sdk\office-365-base-sdk`
-    - `o365-android-sdk\sdk\office-365-lists-sdk`
-    - `o365-tasks\src`
-
-    ![](img/0014_eclipse_import_code_dialog.png)
-
-    The rest of these projects are test and sample code and can be ignored.
-
-09. Finally, click **Finish**
-
-10. We now need to fix some missing dependencies. 
-    Execute the "`C:\Android\adal\src\libs\getLibs.ps1`" script to download Gson 2.2.2.
-
-        C:\Android> powershell adal\src\libs\getLibs.ps1
-
-    ![](img/0015_download_gson.png)
-
-11. Copy `%ANDROID_SDK%\extras\android\support\v4\android-support-v4.jar` into `C:\Android\adal\src\libs`.
-
-    (Where **`%ANDROID_SDK%`** refers to the location of the Android SDK on your machine)
-
-    ![](img/0016_copy_v4_support_lib.png)
-
-13. Execute the "`C:\Android\o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1`" script to download Guava 16.0.1.
-
-        C:\Android> powershell o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1
-
-    ![](img/0017_download_guava.png)
-
-14. Return to Eclipse and press **F5** to refresh. Wait a moment as Eclipse re-compiles the code. If everything
-    has been done correctly, then there should be no more red entries in the **Problems** window.
-
-    If there are any remaining error messages in the **Problems** window, please troubleshoot them before continuing.
+In this task we will add the missing dependencies to the app.
 
 
-In this task we created an Eclipse workspace, copied our code into it and got it into a working state.
+01. Expand the **Gradle scripts** node. All gradle scripts in the project are
+    organized under this node.
 
+02. Open the file **build.gradle (Module: app)**. This file describes all the
+    dependencies the project has, and also defines things such as the app ID, app
+    version number, min and max SDK versions, build tools version, etc.
 
-###Task 3 - Create and launch the emulator
+03. Add the following code to the `dependencies` section:
+
+    ```groovy
+    //Active Directory Authentication Library - used to authenticate with SharePoint via Azure AD
+    compile group: 'com.microsoft.aad', name: 'adal', version: '1.0.5'
+
+    //Sharepoint Services - client classes for consuming Sharepoint's API
+    compile group: 'com.microsoft.services', name: 'sharepoint-services', version: '0.12.0', ext:'aar'
+
+    //Dependencies required by sharepoint-services
+    //TODO: This dependency should be automatically included by Gradle,
+    //TODO: but using the 'aar' version of sharepoint-services seems to interfere with this
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    ```
+
+    This code describes the app dependencies:
+
+    *  `com.microsoft.aad:adal` - The Active Directory Authentication Library for Android
+    *  `com.microsoft.services:sharepoint-services` - The O365 SharePoint SDK for Android
+    *  `com.google.guava` - A utility library by Google which is required by the O365 SharePoint SDK
+
+    You can find more information about the O365 SharePoint SDK on the project's [Github page][o365-sdk-android].
+
+04. Android Studio needs to keep it's own project files in sync with our `build.gradle` file. It lets us know
+    by showing the following warning message:
+
+    ![](img/0012_android_studio_sync_warning.png)
+
+    Click **Sync now** to fix the problem.
+
+    **Note:** You can also force Android Studio to sync with your Gradle files 
+    using the command **Tools > Android > Sync project with Gradle files**.
+
+05. You should now be able to successfully build the project.
+    To do so, select **Build > Make Module 'app'**.
+
+    ![](img/0014_build_module_app.png)
+
+[o365-sdk-android]: https://github.com/OfficeDev/Office-365-SDK-for-Android
+
+###Task 4 - Create and launch the emulator
 
 In this task we will configure and launch the Android emulator, and deploy the app.
 
@@ -187,9 +175,9 @@ In this task we will configure and launch the Android emulator, and deploy the a
     **Note:** if you select the x86 image, and have the [Intel HAXM driver][haxm-driver] installed then the Android emulator will be
     emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.
 
-[haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
-
     ![](img/0020_create_new_avd.png)
+
+[haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
 
 04. Click **OK** to create the device.
 
@@ -219,7 +207,7 @@ In this task we will configure and launch the Android emulator, and deploy the a
 Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
 the app to work against your own O365 tenant.
 
-###Task 4 - Configure the code for your own O365 tenant
+###Task 5 - Configure the code for your own O365 tenant
 
 In this task we will create an Application in Azure AD to represent our android app.
 
@@ -287,7 +275,7 @@ In this task we will create an Application in Azure AD to represent our android 
 Done! The **Client Id** we created above will be used to configure the Android app in the next task.
 
 
-###Task 5 - Configure the code for your own O365 tenant
+###Task 6 - Configure the code for your own O365 tenant
 
 In this task we will configure the app to work agains your own O365 tenant.
 
@@ -305,7 +293,7 @@ In this task we will configure the app to work agains your own O365 tenant.
     ![](img/0090_set_java_constants.png)
 
 
-###Task 6 - Launch the application
+###Task 7 - Launch the application
 
 We're ready to launch the app now.
 
