@@ -111,6 +111,8 @@ In this task we will add the missing dependencies to the app.
     dependencies the project has, and also defines things such as the app ID, app
     version number, min and max SDK versions, build tools version, etc.
 
+    ![](img/0011_open_build_gradle.png)
+
 03. Add the following code to the `dependencies` section:
 
     ```groovy
