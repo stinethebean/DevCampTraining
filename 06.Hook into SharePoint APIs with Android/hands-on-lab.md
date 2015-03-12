@@ -28,11 +28,10 @@ for adding a new feature to the app.
 
 The hands-on lab includes the following exercises:
 
-- [Set up your workspace and configure and run the Android app](#exercise1)
-- [Add a "delete" shortcup feature to the app](#exercise2)
-- [Add a "filter" feature to the app](#exercise3)
+- Set up your workspace and configure and run the Android app
+- Implement the missing "delete" feature
+- Add a "filter" feature
 
-<a name="exercise1"></a>
 ##Exercise 1: Import and configure the base O365-Tasks
 In this exercise you will import the **Tasks for SharePoint O365** Android app into
 Android Studio, and configure it for your SharePoint instance.
@@ -306,8 +305,6 @@ In this task we will configure the app to work agains your own O365 tenant.
 In this task you provided the configuration values required to authenticate with O365 SharePoint via
 Azure Active directory.
 
-<a name="adal_explanation"></a>
-
 The library we are using to authenticate with AD is called the Active Directory Authentication Library (ADAL).
 Our code which calls into this library can be found in the `AuthManager` class, and looks something like this:
 
@@ -368,7 +365,6 @@ Using the **Clear auth token** function from the menu on this screen will clear 
 to the server (e.g. when you refresh the list or create a new task) will trigger a dialog asking you to re-authenticate.
 
 
-<a name="exercise2"></a>
 ##Exercise 2: Implement the "delete" feature for the app
 
 In this exercise we will implement the "Delete" action for this activity.
@@ -449,7 +445,6 @@ In this exercise we will implement the "Delete" action for this activity.
     Here I've used the **Import class** function to add the missing `import` statement to
     the top of the file.
 
-
 ###Task 2 - Test the new Delete feature
 
 In this task we will test the "Delete" feature we just added. The `deleteTask` function is currently
@@ -473,141 +468,150 @@ In review, you've learnt how to:
 
 *  Construct
 
-<a name="exercise3"></a>
 ##Exercise 3: Add a "filter" feature to the app
 In this exercise we will add a "Filter" option to the List Tasks activity.
 
 ###Task 1 - Write the new filter feature
 
-01. Return to Eclipse.
+01. Return to Android Studio.
 
 02. First we will update the List Tasks activity options menu.
     Navigate to the "`list_tasks_options.xml`" menu template.
 
     ![](img/0155_open_list_tasks_options_xml.png)
 
-03. Switch to the XML view.
-
-    ![](img/0160_switch_to_xml_view.png)
 
 04. Add the following XML:
 
-        <item
-            android:id="@+id/action_filter_completed"
-            android:orderInCategory="800"
-            android:showAsAction="never"
-            android:checkable="true"
-            android:title="@string/action_filter_completed" />
+    ```xml
+    <item
+        android:id="@+id/action_filter_completed"
+        android:orderInCategory="800"
+        android:showAsAction="never"
+        android:checkable="true"
+        android:title="@string/action_filter_completed" />
+    ```
 
-    The result should look like this:
-
-    ![](img/0165_add_menu_item_xml.png)
-
-05. Navigate to the "`strings.xml`" resouce file and switch to the XML view.
-
-    ![](img/0170_open_strings_xml.png)
-
-06. Add the following XML:
-
-        <string name="action_filter_completed">Filter completed tasks</string>
-
-    The result should look like this:
-
-    ![](img/0175_add_new_string_resource.png)
-
-07. Navigate back to the java class `com.microsoft.o365_tasks.ListTasksActivity`. Add the following import
-    statements to the top of the file:
+07. Navigate back to the java class `com.microsoft.o365_tasks.ListTasksActivity`. 
+    Add the following import statements to the top of the file:
         
-        import com.microsoft.office365.Query;
-        import android.content.SharedPreferences;
-
-    The result should look like this:
-
-    ![](img/0180_add_missing_imports.png)
+    ```java
+    import com.microsoft.sharepointservices.Query;
+    import android.content.SharedPreferences;
+    ```
 
 09. At the bottom of the `ListTasksActivity` class add the following block:
     
-        private static class PreferencesWrapper {
-            private static final String PREFS_FILTER_COMPLETED = "filter_completed";
-            private SharedPreferences mPreferences;
-            public PreferencesWrapper(SharedPreferences preferences) {
-                mPreferences = preferences;
-            }
-            public boolean getFilterCompleted() {
-                return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
-            }
-            public void setFilterCompleted(boolean completed) {
-                mPreferences.edit()
-                            .putBoolean(PREFS_FILTER_COMPLETED, completed)
-                            .apply();
-            }
+    ```java
+    private static class PreferencesWrapper {
+        private static final String PREFS_FILTER_COMPLETED = "filter_completed";
+        private SharedPreferences mPreferences;
+        public PreferencesWrapper(SharedPreferences preferences) {
+            mPreferences = preferences;
         }
+        public boolean getFilterCompleted() {
+            return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
+        }
+        public void setFilterCompleted(boolean completed) {
+            mPreferences.edit()
+                        .putBoolean(PREFS_FILTER_COMPLETED, completed)
+                        .apply();
+        }
+    }
+    ```
 
-    This internal static class wraps the android `SharedPreferences` utility to give us a nice strongly-typed
-    interface.
+    This internal static class wraps the android `SharedPreferences` utility to give us 
+    a nice strongly-typed interface to it.
 
     **Note:** this block must be pasted **inside** the final brace in the file - Java does not support multiple
     seperate class definitions per file.
 
 10. At the top of the class add the following member variable:
 
-        private PreferencesWrapper mPreferences;
-
-    The result should look like this:
-
-    ![](img/0185_add_preferences_member_variable.png)
+    ```java
+    private PreferencesWrapper mPreferences;
+    ```
 
 12. Next, initialize the variable in the "`onCreate`" function:
 
-        mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
-
-    The result should look like this:
-
-    ![](img/0190_initialize_preferences.png)
+    ```java
+    mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
+    ```
 
 13. In the "`onCreateOptionsMenu`" function we must retrieve and initialize the `action_filter_completed` checkbox we
-    defined earlier. Add the following line before the final `return`.
+    defined earlier. Add the following line before the final return statement.
 
-        menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
-
-    The result should look like this:
-
-    ![](img/0195_initialize_action_filter_completed.png)
+    ```java
+    menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
+    ```
 
 14. In the "`onOptionsItemSelected`" function we must add code to handle taps on the new menu option. Add the following
     switch case:
 
-        case R.id.action_filter_completed:
-            optionsActionFilterCompleted(item);
-            return true;
-
-    The result should look like this:
-
-    ![](img/0200_handle_action_filter_completed.png)
+    ```java
+    case R.id.action_filter_completed:
+        optionsActionFilterCompleted(item);
+        return true;
+    ```
 
 15. Next add the "`optionsActionFilterCompleted`" function which will handle updating the `action_filter_completed` menu
     item and refreshing the screen.
 
-        private void optionsActionFilterCompleted(MenuItem item) {   
-            boolean flag = !item.isChecked();
-            item.setChecked(flag);
-            mPreferences.setFilterCompleted(flag);
-            //refresh
-            optionsActionRefresh();
-        }
+    ```java
+    private void optionsActionFilterCompleted(MenuItem item) {   
+        boolean flag = !item.isChecked();
+        item.setChecked(flag);
+        mPreferences.setFilterCompleted(flag);
+        //refresh
+        optionsActionRefresh();
+    }
+    ```
 
-16. Finally, navigate to the "`refresh``" function and add the following code to the "`doInBackground`" inner function:
+16. Finally, navigate to the "`refresh`" function and add the following code to the "`doInBackground`" inner function:
 
-        Query query = new Query();
-        if (mPreferences.getFilterCompleted()) {
-            query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
-        }
-        
-    Change the `getTasksByQuery` function call to pass the new `query` variable in argument.
+    ```java
+    Query query = new Query();
+    if (mPreferences.getFilterCompleted()) {
+        query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
+    }
+    ```
+       
+    This creates and configures new `Query` object. The Query class is used to programatically
+    build OData query strings. It can be used to create fairly complicated queries!
 
-    The result should look like this:
+    This query is simple: Filter to items where the "PercentComplete" field is less than `COMPLETED_MAX` - 
+    i.e. return only tasks which are less than 100% complete.
 
-    ![](img/0205_update_refresh_function.png)
+    The resulting query string would be something like: `$filter=PercentComplete lt 100`.
+
+    Try exploring the Query class to see what other operations you can perform.
+
+17. Finally, change the `getTasksByQuery` function call to pass the new `query` variable in argument.
+
+    ```java
+    return new TaskListItemDataSource(mApplication).getTasksByQuery(query);
+    ```
+
+    Android Studio should report an error - `getTasksByQuery` does not accept any arguments!
+    We're going to change that next.
+
+18. Return to the `com.microsoft.o365_tasks.data.TaskListItemDataSource` class and locate the 
+    `getTasksByQuery` function.
+
+
+19. Change the function signature to add the `Query` argument:
+
+    ```java
+    public List<TaskModel> getTasksByQuery(Query query) throws Exception
+    ```
+
+20. Delete the statement `Query query = new Query();` and replace it with this:
+
+    ```java
+    if (query == null) {
+        query = new Query();
+    }
+    ```
 
 
 Done! These changes add a filter on the `PercentComplete` field to the OData query sent to SharePoint when the
@@ -620,7 +624,7 @@ Note that this setting is automatically persisted thanks to our use of the Andro
 
 In this task we will test the "Filter" function we just implemented.
 
-01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
+01. Start debugging the **o365-tasks** app with **Run > Debug 'app'**. When the app launches, sign in.
 
 02. When the List Tasks activity has loaded, tap the **Options menu** button in the top-right.
     Next, tap **Filter completed tasks** to confirm.
