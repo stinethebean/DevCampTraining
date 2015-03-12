@@ -291,10 +291,9 @@ Done! The **Client Id** we created above will be used to configure the Android a
 
 In this task we will configure the app to work agains your own O365 tenant.
 
-01. Return to Eclipse. Locate the Java class `com.microsoft.o365_tasks.Constants`. This can be found by expanding 
-    the nodes **o365-tasks**, **src** and **com.microsoft.o365_tasks** in the Package Explorer.
+01. Return to Android Studio. Locate and open the Java class file `com.microsoft.o365_tasks.Constants`.
 
-    ![](img/0040_open_constants.png)
+    ![](img/0086_open_constants.png)
 
 02. Change the constants in this class to suit your own tenancy.
 
@@ -304,13 +303,49 @@ In this task we will configure the app to work agains your own O365 tenant.
 
     ![](img/0090_set_java_constants.png)
 
+In this task you provided the configuration values required to authenticate with O365 SharePoint via
+Azure Active directory.
+
+<a name="adal_explanation"></a>
+
+The library we are using to authenticate with AD is called the Active Directory Authentication Library (ADAL).
+Our code which calls into this library can be found in the `AuthManager` class, and looks something like this:
+
+```java
+mAuthContext = new AuthenticationContext(context, Constants.AAD_AUTHORITY, false);
+
+//Asks the user to authenticate directly only if the ADAL cannot locate a refresh token
+mAuthContext.acquireToken(currentActivity,
+    /* Resource         */ Constants.SHAREPOINT_URL,
+    /* Client Id        */ Constants.AAD_CLIENT_ID,
+    /* Redirect Uri     */ Constants.AAD_REDIRECT_URL,
+    /* Login Hint       */ Constants.AAD_LOGIN_HINT,
+    /* Prompt Behaviour */ PromptBehavior.Always,
+    /* Extra            */ null,
+    new AuthenticationCallback<AuthenticationResult>() {
+        public void onSuccess(AuthenticationResult authResult) {
+            
+            String accessToken = authResult.getAccessToken();
+
+            //continue with application code...
+        }
+
+        public void onError(Exception ex) {
+             
+             //report error to the user...
+        }
+    }
+);
+```
+
+The "access token" can now be used when communicating with O365 SharePoint.
+
 
 ###Task 7 - Launch the application
 
 We're ready to launch the app now.
 
-01. Once again, right-click on **o365-tasks** and use **Debug as > Android Application** to launch the application.
-    If the emulator is already running there is no need to restart it.
+01. Once again, use **Run > Debug 'app'** to deploy the app to the emulator.
 
 02. When the application launches, click **Sign in**.
 
@@ -334,168 +369,93 @@ to the server (e.g. when you refresh the list or create a new task) will trigger
 
 
 <a name="exercise2"></a>
-##Exercise 2: Add a "delete" shortcup feature to the app
+##Exercise 2: Implement the "delete" feature for the app
 
-In this exercise we will add a "Delete" context action to the List Tasks activity.
+In this exercise we will implement the "Delete" action for this activity.
 
-###Task 1 - Write the new Delete feature
+###Task 1 - Implement the unimplemented data method
 
-01. Return to Eclipse.
+01. Return to Android Studio.
 
-02. First we will create a "menu template" which defines the items in our new context menu.
-    In the Package Explorer, expand the `res/menu` folders.
+02. Navigate to the `com.microsoft.o365_tasks.data.TaskListItemDataSource` class. This class contains
+    all the code in the project which communicates with the SharePoint API.
 
-03. Right-click `menu` and select **New > Android XML file**.
+    ![](img/0110_open_TaskListItemDataSource.png)
 
-    ![](img/0110_new_android_xml_file.png)
+03. Scroll down to the `deleteTask(TaskModel model)` method, at the bottom of the file.
+    It is currently unimplemented.
 
-04. Name the file `list_tasks_context`. The root element type should be `menu`. Click **Finish** to continue.
+04. Delete the `throw` statement and insert the following code:
 
-    ![](img/0115_new_android_xml_file_dialog.png)
+    ```java
+    AuthManager authManager = mApplication.getAuthManager();
 
-05. Click the `list_tasks_context.xml` tab to switch to XML mode, and paste in the following XML:
+    String accessToken = authManager.getAccessToken();
 
-        <item
-            android:id="@+id/action_delete"
-            android:orderInCategory="200"
-            android:showAsAction="ifRoom"
-            android:icon="@drawable/ic_action_discard"
-            android:title="@string/action_delete" />
+    OAuthCredentials credentials = new OAuthCredentials(accessToken);
 
-    ![](img/0120_edit_list_tasks_context_xml.png)
+    ListClient client = new ListClient(Constants.SHAREPOINT_URL, Constants.SHAREPOINT_SITE_PATH, credentials);
+    ```
 
-    Save the file. This xml defines a button with the label "Delete" (defined in `res/values/strings.xml`) and the 
-    id `action_delete`.
+    These instructions, in order:
 
-06. Navigate to the java class `com.microsoft.o365_tasks.ListTasksActivity` (this is located in the `src` folder).
+    1.  Get the current Access Token, previously acquired using the ADAL (covered [earlier](#adal_explanation)).
+    2.  Create an `OAuthCredentials` instance.
+    3.  Construct a new `ListClient`, passing in the configuration variables you set earlier.
 
-    In this class we need to add a number of callbacks to inflate the context menu and hook up handler functions for
-    the buttons defined in this menu.
+05. Next, add the following code:
 
-    ![](img/0125_open_ListTasksActivity.png)
+    ```java
+    SPListItem listItem = model.getListItem();
 
-07. At the top of the file, add the following imports:
-        
-        import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.view.ContextMenu;
-        import android.view.ContextMenu.ContextMenuInfo;
-        import android.widget.AdapterView.AdapterContextMenuInfo;
+    ListenableFuture<Void> result = client.deleteListItem(listItem, Constants.SHAREPOINT_LIST_NAME);
 
-    The result should look like this:
+    result.get();
+    ```
 
-    ![0128_add_missing_imports.png](img/0128_add_missing_imports.png)
+    These instructions, in order:
 
+    1.  Get an instance of `SPListItem` to delete. In this case, the `TaskModel` class contains the object
+        we need. Alternatively, we could query SharePoint for a list item using the `ListClient`.
+    2.  Make a call to SharePoint using the `deleteListItem` function. This returns a "future", which represents
+        the eventual completion of the operation.
+    3.  Wait for the result synchronously by calling `result.get()`.
 
-07. In the `onCreate` function, just before the call to `optionsActionRefresh`, paste the following:
+    **Note** the `get()` call blocks the thread! You can also wait on this result asynchronously using
+    the `Futures.addCallback` function, e.g.
 
-        registerForContextMenu(mListView);
-
-    The result should look like this:
-
-    ![](img/0130_update_onCreate.png)
-
-    This function registers the `mListView` view for a context menu.
-
-08. Under the comment "`//#### Context menu ####`" paste the following:
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-            getMenuInflater().inflate(R.menu.list_tasks_context, menu);
+    ```java
+    Futures.addCallback(result, new FutureCallback<Void>() {
+        public void onSuccess(Void result) {
+            //Handle success
         }
 
-    This function is invoked by Android to _inflate_ a menu for the given view element `v`, when v has been registered
-    for a context menu.
-   
-09. Next, add this block:
-    
-        public boolean onContextItemSelected(MenuItem item) {
-            AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-            switch (item.getItemId()) {
-            case R.id.action_delete:
-                contextActionDelete(info);
-                return true;
-            }
-            return super.onContextItemSelected(item);
+        public void onFailure(Throwable t) {
+            //Handle failure
         }
+    });
+    ```
 
-    This function is invoked by android whenever a context menu item is long-pressed. We use it to link menu items up with
-    behaviours. Here we are invoking `contextActionDelete` whenever the users taps the `action_delete` menu item.
-
-    The `getItemId()` call returns the tools-generated integer id of the menu item. We compare this to the tools-generated
-    static class field `R.id.action_delete` which was auto-generated based on the XML we added to `list_tasks_context.xml`.
-
-10. Next, add this block:
-
-        private void contextActionDelete(AdapterContextMenuInfo info) {
-            final TaskModel task = (TaskModel) mListView.getItemAtPosition(info.position);
-            //Launch confirmation dialog
-            new AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_confirm_title)
-                .setMessage(R.string.dialog_delete_confirm_message)
-                .setNegativeButton(R.string.label_cancel, null)
-                .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
-                        //user has confirmed
-                        ensureAuthenticated(new Runnable() {
-                            @Override public void run() {
-                                deleteTask(task);
-                            }
-                        });
-                    }
-                })
-                .create()
-                .show();
-        }
-    
-    This function handles launching a confirmation dialog for the user. If the user selects the "Delete" button, then
-    we ensure that the user is still authenticated and invoke `deleteTask`.
-
-11. Finally, add this block:
-    
-        protected void deleteTask(final TaskModel model) {
-           //Launch a background task to delete the current task
-           final String message = getString(R.string.edit_task_working);
-           new ProgressDialogAsyncTask<Void>(this, message) {
-                // Executes on a background thread. We can safely block here.
-                @Override protected Void doInBackground(Void... params) {
-                    try {
-                        new TaskListItemDataSource(mApplication).deleteTask(model);
-                    }
-                    catch (Exception ex) {
-                        Log.e(TAG, "Error deleting task", ex);
-                    }
-                    return null;
-                }
-                // Executes on the UI thread after the background thread completes.
-                @Override protected void onResult(Void result) {
-                    //all done - refresh the list
-                    refresh();
-                }
-           }
-           .execute();
-        }
-
-    This function launches an "in progress" dialog and deletes the given task via the API. When finished it starts
-    a refresh.
-
-12. **Note:** before continuing make sure that there are not errors in the file.
+06. **Note:** before continuing make sure that there are not errors in the file.
     Errors will be marked with a red squiggle automatically:
 
-    ![](img/0135_eclipse_java_error.png)
+    ![](img/0135_android_studio_java_error.png)
 
-    If you find any errors, hover the mouse over them to see if Eclipse can provide a quick fix:
+    If you find any errors place the caret on them and press **Alt + Enter** to see if 
+    Android Studio offers to fix them automatically.
 
-    ![](img/0140_eclipse_java_error_fix.png)
+    ![](img/0140_android_studio_java_error_fix.png)
 
+    Here I've used the **Import class** function to add the missing `import` statement to
+    the top of the file.
 
-Done! We've just added the ability for the user to delete a task item directly from the List Tasks activity.
 
 ###Task 2 - Test the new Delete feature
 
-In this task we will test the "Delete" feature we just added.
+In this task we will test the "Delete" feature we just added. The `deleteTask` function is currently
+called from one place - the "Delete" context menu item in the List Tasks activity.
 
-01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
+01. Start debugging the **o365-tasks** app with **Run > Debug 'app'**. When the app launches, sign in.
 
 02. Long-press on any task in the list - a context menu will appear. Select **Delete**.
 
@@ -507,8 +467,11 @@ In this task we will test the "Delete" feature we just added.
 
 04. The item will be deleted and the view will refresh.
 
-Done! You've successfully added a feature to this app.
+Done! You've successfully implemented the missing Delete feature.
 
+In review, you've learnt how to:
+
+*  Construct
 
 <a name="exercise3"></a>
 ##Exercise 3: Add a "filter" feature to the app

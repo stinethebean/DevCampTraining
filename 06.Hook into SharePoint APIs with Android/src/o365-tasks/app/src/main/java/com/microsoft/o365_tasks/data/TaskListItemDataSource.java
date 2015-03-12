@@ -31,21 +31,16 @@ public class TaskListItemDataSource {
     /**
      * Makes a blocking call to the Sharepoint API to execute the given query against the
      * configured Tasks list.
-     * 
-     * @param query The query to execute. Can be null.
+     *
      * @return The resolved list of TaskListItemModels
      * @throws Exception
      */
-    public List<TaskModel> getTasksByQuery(Query query) throws Exception {
+    public List<TaskModel> getTasksByQuery() throws Exception {
         
         final ArrayList<TaskModel> items = new ArrayList<TaskModel>();
 
-        if (query == null) {
-            query = new Query();
-        }
-        
         //Limit the query to just the fields we are interested in
-        query.select(TaskModel.SELECT_FIELDS);
+        Query query = new Query().select(TaskModel.SELECT_FIELDS);
         
         List<SPListItem> listItems = getListsClient().getListItems(Constants.SHAREPOINT_LIST_NAME, query).get();
         
@@ -135,15 +130,13 @@ public class TaskListItemDataSource {
     }
 
     /**
-     * Makes a blocking call to the Sharepoint API to delete the Task with the given Id.
+     * Makes a blocking call to the Sharepoint API to delete the give Task.
      * 
      * @param model
      * @throws Exception
      */
     public void deleteTask(TaskModel model) throws Exception {
-        
-        assert model != null;
 
-        getListsClient().deleteListItem(model.getListItem(), Constants.SHAREPOINT_LIST_NAME).get();
+        throw new Exception("Not implemented");
     }
 }

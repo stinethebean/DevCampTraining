@@ -1,11 +1,29 @@
 package com.microsoft.o365_tasks;
 
-import java.text.DateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.microsoft.o365_tasks.R;
 import com.microsoft.o365_tasks.data.TaskListItemDataSource;
 import com.microsoft.o365_tasks.data.TaskModel;
 import com.microsoft.o365_tasks.tasks.ProgressDialogAsyncTask;
@@ -13,32 +31,10 @@ import com.microsoft.o365_tasks.utils.AuthUtil;
 import com.microsoft.o365_tasks.utils.ViewUtil;
 import com.microsoft.o365_tasks.utils.auth.DefaultAuthHandler;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-
-import com.microsoft.sharepointservices.Query;
-import android.content.SharedPreferences;
+import java.text.DateFormat;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class ListTasksActivity extends Activity {
     
@@ -214,13 +210,7 @@ public class ListTasksActivity extends Activity {
             protected List<TaskModel> doInBackground(Void... params) {
                 try {
                     
-                    Query query = new Query();
-                    
-                    if (mPreferences.getFilterCompleted()) {
-                        query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
-                    }
-                    
-                    return new TaskListItemDataSource(mApplication).getTasksByQuery(query);
+                    return new TaskListItemDataSource(mApplication).getTasksByQuery();
                 }
                 catch (Exception ex) {
                     Log.e(TAG, "Error retrieving task list", ex);
