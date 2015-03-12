@@ -110,7 +110,7 @@ public class TaskListItemDataSource {
         
         SPList list = client.getList(Constants.SHAREPOINT_LIST_NAME).get();
         
-        client.insertListItem(model.getListItem(), list);
+        client.insertListItem(model.getListItem(), list).get();
     }
 
     /**
