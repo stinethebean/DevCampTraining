@@ -15,13 +15,6 @@
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_refresh"
         android:title="@string/action_refresh" />
-    
-    <item
-        android:id="@+id/action_filter_completed"
-        android:orderInCategory="800"
-        android:showAsAction="never"
-        android:checkable="true"
-        android:title="@string/action_filter_completed" />
 
     <item
         android:id="@+id/action_clear_token"

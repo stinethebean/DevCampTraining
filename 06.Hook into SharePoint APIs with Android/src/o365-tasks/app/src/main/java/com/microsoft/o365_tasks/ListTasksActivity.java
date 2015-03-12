@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -43,7 +42,6 @@ public class ListTasksActivity extends Activity {
     private static final int REQUEST_EDIT_TASK = 1;
 
     private TasksApplication mApplication;
-    private PreferencesWrapper mPreferences;
     
     private ListView mListView;
     
@@ -53,7 +51,6 @@ public class ListTasksActivity extends Activity {
         setContentView(R.layout.activity_list_tasks);
         
         mApplication = (TasksApplication) getApplication();
-        mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
 
         mListView = (ListView) findViewById(R.id.list);
         mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -137,8 +134,6 @@ public class ListTasksActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.list_tasks_options, menu);
         
-        menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
-        
         return true;
     }
 
@@ -160,10 +155,6 @@ public class ListTasksActivity extends Activity {
         case R.id.action_refresh:
             optionsActionRefresh();
             return true;
-            
-        case R.id.action_filter_completed:
-            optionsActionFilterCompleted(item);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -183,16 +174,6 @@ public class ListTasksActivity extends Activity {
                 refresh();
             }
         });
-    }
-
-    private void optionsActionFilterCompleted(MenuItem item) {
-        
-        boolean flag = !item.isChecked();
-        item.setChecked(flag);
-        mPreferences.setFilterCompleted(flag);
-        
-        //refresh
-        optionsActionRefresh();
     }
     
     //#### Sharepoint api calls ####
@@ -360,26 +341,5 @@ public class ListTasksActivity extends Activity {
             return position;
         }
         
-    }
-    
-    private static class PreferencesWrapper {
-        
-        private static final String PREFS_FILTER_COMPLETED = "filter_completed";
-        
-        private SharedPreferences mPreferences;
-                
-        public PreferencesWrapper(SharedPreferences preferences) {
-            mPreferences = preferences;
-        }
-
-        public boolean getFilterCompleted() {
-            return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
-        }
-        
-        public void setFilterCompleted(boolean completed) {
-            mPreferences.edit()
-                        .putBoolean(PREFS_FILTER_COMPLETED, completed)
-                        .apply();
-        }
     }
 }

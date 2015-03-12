@@ -39,8 +39,10 @@ public class TaskListItemDataSource {
         
         final ArrayList<TaskModel> items = new ArrayList<TaskModel>();
 
+        Query query = new Query();
+
         //Limit the query to just the fields we are interested in
-        Query query = new Query().select(TaskModel.SELECT_FIELDS);
+        query.select(TaskModel.SELECT_FIELDS);
         
         List<SPListItem> listItems = getListsClient().getListItems(Constants.SHAREPOINT_LIST_NAME, query).get();
         
