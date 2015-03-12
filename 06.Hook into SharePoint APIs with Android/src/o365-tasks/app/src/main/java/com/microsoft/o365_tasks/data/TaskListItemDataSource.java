@@ -1,29 +1,29 @@
 package com.microsoft.o365_tasks.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.microsoft.o365_tasks.Constants;
 import com.microsoft.o365_tasks.TasksApplication;
-import com.microsoft.o365_tasks.sharepoint.SharepointListsClient2;
+import com.microsoft.sharepointservices.ListClient;
 import com.microsoft.sharepointservices.Query;
 import com.microsoft.sharepointservices.QueryOperations;
 import com.microsoft.sharepointservices.SPList;
 import com.microsoft.sharepointservices.SPListItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskListItemDataSource {
 
     private TasksApplication mApplication;
     
-    private SharepointListsClient2 mClient;
+    private ListClient mClient;
 
     public TaskListItemDataSource(TasksApplication application) {
         mApplication = application;
     }
     
-    private SharepointListsClient2 getListsClient() {
+    private ListClient getListsClient() {
         if (mClient == null) {
-            mClient = mApplication.createListsClient();
+            mClient = mApplication.createListClient();
         }
         return mClient;
     }
@@ -93,7 +93,7 @@ public class TaskListItemDataSource {
         
         assert model != null;
         
-        SharepointListsClient2 client = getListsClient();
+        ListClient client = getListsClient();
         
         SPList list = client.getList(Constants.SHAREPOINT_LIST_NAME).get();
         
@@ -110,8 +110,8 @@ public class TaskListItemDataSource {
     public void createTask(TaskModel model) throws Exception {
         
         assert model != null;
-        
-        SharepointListsClient2 client = getListsClient();
+
+        ListClient client = getListsClient();
         
         SPList list = client.getList(Constants.SHAREPOINT_LIST_NAME).get();
         
@@ -121,7 +121,7 @@ public class TaskListItemDataSource {
     /**
      * Makes a blocking call to the Sharepoint API to delete the Task with the given Id.
      * 
-     * @param model
+     * @param id
      * @throws Exception
      */
     public void deleteTask(int id) throws Exception {

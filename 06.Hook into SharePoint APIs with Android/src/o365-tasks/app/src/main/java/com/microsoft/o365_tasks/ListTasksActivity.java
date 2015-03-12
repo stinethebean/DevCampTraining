@@ -173,7 +173,7 @@ public class ListTasksActivity extends Activity {
     }
 
     private void optionsActionClearToken() {
-        mApplication.getAuthManager().forceExpireToken();
+        mApplication.getAuthManager().clearAuthTokenAndCachedCredentials();
     }
 
     private void optionsActionAddNewTask() {

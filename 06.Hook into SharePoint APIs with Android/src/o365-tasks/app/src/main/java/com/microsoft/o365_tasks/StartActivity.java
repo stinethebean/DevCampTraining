@@ -2,11 +2,10 @@ package com.microsoft.o365_tasks;
 
 import java.util.List;
 
-import com.microsoft.o365_tasks.R;
 import com.microsoft.o365_tasks.auth.AuthCallback;
 import com.microsoft.o365_tasks.auth.AuthManager;
 import com.microsoft.o365_tasks.data.TaskModel;
-import com.microsoft.o365_tasks.sharepoint.SharepointListsClient2;
+import com.microsoft.o365_tasks.sharepoint.ExtendedListClient;
 import com.microsoft.sharepointservices.Query;
 import com.microsoft.sharepointservices.QueryOperations;
 import com.microsoft.sharepointservices.SPList;
@@ -141,7 +140,7 @@ public class StartActivity extends Activity {
             @Override
             protected Boolean doInBackground(Void... ignored) {
                 //Executed on background thread
-                SharepointListsClient2 listsClient = mApplication.createListsClient();
+                ExtendedListClient listsClient = mApplication.createExtendedListClient();
                 
                 try {
                     //Does the list already exist?
@@ -180,7 +179,7 @@ public class StartActivity extends Activity {
             protected void onPostExecute(Boolean success) {
 
                 //Executed on UI thread
-                if (!success.booleanValue()) {
+                if (!success) {
                     showToast(R.string.splash_initialization_error);
                     mStatusLabel.setText(R.string.splash_initialization_error);
                 }

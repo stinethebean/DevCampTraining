@@ -1,14 +1,5 @@
 package com.microsoft.o365_tasks.sharepoint;
 
-import java.io.StringWriter;
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.http.util.EncodingUtils;
-import org.json.JSONObject;
-import org.xmlpull.v1.XmlSerializer;
-
 import android.util.Log;
 import android.util.Xml;
 
@@ -18,14 +9,29 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.microsoft.sharepointservices.Credentials;
-import com.microsoft.sharepointservices.SPList;
 import com.microsoft.sharepointservices.ListClient;
+import com.microsoft.sharepointservices.SPList;
 
-public class SharepointListsClient2 extends ListClient {
+import org.apache.http.util.EncodingUtils;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlSerializer;
 
-    private static final String TAG = "SharepointListClient2";
+import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This class adds a simple "createList" function to the base ListClient class, which allows us
+ * to create a List on a SharePoint site based on a template.
+ *
+ * This class is only required for the purposes of this specific demo and is not part of the Office 365 SDK for Android
+ */
+public class ExtendedListClient extends ListClient {
+
+    private static final String TAG = "ExtendedListClient";
     
-    public SharepointListsClient2(String serverUrl, String siteRelativeUrl, Credentials credentials) {
+    public ExtendedListClient(String serverUrl, String siteRelativeUrl, Credentials credentials) {
         super(serverUrl, siteRelativeUrl, credentials);
     }
     
@@ -35,7 +41,17 @@ public class SharepointListsClient2 extends ListClient {
         final String createListUrl = getSiteUrl() + "_api/web/lists";
         final Charset charset = Charsets.UTF_8;
         
-        String xml = getCreateListXml(charset, listName, listTemplate);
+        String xml;
+        try {
+            xml = getCreateListXml(charset, listName, listTemplate);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error creating list XML", ex);
+            result.setException(ex);
+            return result;
+        }
+
         byte[] payload = EncodingUtils.getBytes(xml, charset.name());
         
         Map<String, String> headers = new HashMap<String, String>();
@@ -67,7 +83,7 @@ public class SharepointListsClient2 extends ListClient {
         public static final String DataServicesMetadata = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
     }
 
-    private String getCreateListXml(Charset charset, String listName, String listTemplate) {
+    private String getCreateListXml(Charset charset, String listName, String listTemplate) throws Exception {
 
         try {
             XmlSerializer xml = Xml.newSerializer();
@@ -104,9 +120,7 @@ public class SharepointListsClient2 extends ListClient {
             return sw.toString();
         }
         catch (Exception e) {
-            Log.e(TAG, "Error generating XML payload", e);
+            throw new Exception("Error generating XML payload", e);
         }
-        
-        return null;
     }
 }

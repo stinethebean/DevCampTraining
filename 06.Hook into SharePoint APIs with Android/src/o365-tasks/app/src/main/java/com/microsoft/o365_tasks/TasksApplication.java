@@ -1,7 +1,9 @@
 package com.microsoft.o365_tasks;
 
 import com.microsoft.o365_tasks.auth.AuthManager;
-import com.microsoft.o365_tasks.sharepoint.SharepointListsClient2;
+import com.microsoft.o365_tasks.sharepoint.ExtendedListClient;
+import com.microsoft.sharepointservices.Credentials;
+import com.microsoft.sharepointservices.ListClient;
 import com.microsoft.sharepointservices.http.OAuthCredentials;
 
 import android.app.Application;
@@ -28,11 +30,23 @@ public class TasksApplication extends Application {
         return mAuthManager;
     }
 
-    public SharepointListsClient2 createListsClient() {
-        
-        OAuthCredentials credentials = getAuthManager().getOAuthCredentials();
 
-        return new SharepointListsClient2(Constants.SHAREPOINT_URL, Constants.SHAREPOINT_SITE_PATH, credentials);
+    public ExtendedListClient createExtendedListClient() {
+
+        String accessToken = getAuthManager().getAccessToken();
+
+        Credentials credentials = new OAuthCredentials(accessToken);
+
+        return new ExtendedListClient(Constants.SHAREPOINT_URL, Constants.SHAREPOINT_SITE_PATH, credentials);
+    }
+
+    public ListClient createListClient() {
+
+        String accessToken = getAuthManager().getAccessToken();
+
+        Credentials credentials = new OAuthCredentials(accessToken);
+
+        return new ListClient(Constants.SHAREPOINT_URL, Constants.SHAREPOINT_SITE_PATH, credentials);
     }
 
 }

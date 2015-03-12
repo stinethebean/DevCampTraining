@@ -18,7 +18,7 @@ public class AuthUtil {
         final TasksApplication application = (TasksApplication) activity.getApplication();
         final AuthManager authManager = application.getAuthManager();
         
-        authManager.refresh(new AuthCallback() {
+        authManager.authenticateSilently(new AuthCallback() {
             @Override
             public void onFailure(String errorDescription) {
                 handler.onFailure(errorDescription);
@@ -31,6 +31,7 @@ public class AuthUtil {
                 if (BuildConfig.DEBUG) {
                     throw new RuntimeException("Invalid operation");
                 }
+                handler.onFailure("Cancelled");
             }
 
             @Override
