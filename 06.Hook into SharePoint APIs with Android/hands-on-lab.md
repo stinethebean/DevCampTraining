@@ -17,12 +17,12 @@ for adding a new feature to the app.
 
 - [Git version control tool][git-scm]
 - [Android Studio][android-studio]
-- You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
-- You must have completed [Module 04][module-four] and linked your Azure subscription with your O365 tenant.
+- You must have completed [Module 02][module-two] and have access to both an
+  Azure subscription and a test O365 tenant.
 
 [git-scm]: http://git-scm.com
 [android-studio]: http://developer.android.com/sdk/index.html
-[module-four]: ../04.Hook%20into%20Office%20365%20APIs/hands-on-lab.md
+[module-two]: ../02.Setting%20up%20the%20Environments/hands-on-lab.md
 
 ##Exercises
 
@@ -251,14 +251,55 @@ In this task we will configure and launch the Android emulator, and deploy the a
     **Note:** you can leave the emulator running in the background - now whenever you
     **Run** or **Debug** your app it will automatically deploy your code to this emulator.
 
-08. When the android emulator has started the Tasks app should be automatically deployed and launched.
+08. When the android emulator has started the Tasks app should be automatically
+    deployed and launched.
 
     ![](img/0035_emulator_running.png)
 
-Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
-the app to work against your own O365 tenant.
+Finally! The application is running. Unfortunately it's not yet properly configured. 
+In the next few tasks we'll configure the app to work against your own O365 tenant.
 
-###Task 6 - Configure the code for your own O365 tenant
+
+###Task 6 - Add your Azure user account as an admin of your O365 tenant Active Directory
+
+Skip this task if you have already added your Azure user account as an admin of your
+O365 tenant Active Directory.
+
+01. Navigate your web browser to the [Azure portal](http://manage.windowsazure.com).
+
+02. From the action bar click **New**.
+
+    ![](img/0040_azure_add_new.png)
+
+03. Select **Services > Active Directory > Directory > Custom Create**
+
+    ![](img/0041_azure_add_new_directory.png)
+
+04. Select **Use existing directory**, and then check **I am ready to be signed out now**.
+    Click the **Ok** button to continue.
+
+    ![](img/0042_use_existing_directory.png)
+
+05. You will be signed out of the portal and redirected to a sign-in page. 
+    Sign in using the credentials for a global administrator in your O365 tenant.
+
+    ![](img/0043_sign_in_as_directory_global_admin.png)
+
+06. When authenticated click **continue**. This will add your Azure account as a
+    global administrator of the O365 directory.
+
+    ![](img/0044_accept_confirmation_dialog.png)
+
+07. Click **Sign out now** and when prompted sign back into your Azure account.
+
+    ![](img/0045_sign_out_and_sign_back_in.png)
+
+You have successfully associated your Azure account with your O365 tenant as a 
+global administrator. This gives you the ability to manage the O365 directory 
+using the Azure portal.
+
+
+###Task 7 - Configure the code for your own O365 tenant
 
 In this task we will create an Application in Azure AD to represent our android app.
 
@@ -266,7 +307,7 @@ In this task we will create an Application in Azure AD to represent our android 
 
 02. Navigate to the **Active Directory** extension.
 
-    ![](img/0045_active_directory_extension.png)
+    ![](img/0047_active_directory_extension.png)
 
 03. Navigate to the AD instance for your O365 tenant.
 
@@ -326,7 +367,7 @@ In this task we will create an Application in Azure AD to represent our android 
 Done! The **Client Id** we created above will be used to configure the Android app in the next task.
 
 
-###Task 7 - Configure the code for your own O365 tenant
+###Task 8 - Configure the code for your own O365 tenant
 
 In this task we will configure the app to work agains your own O365 tenant.
 
@@ -378,7 +419,7 @@ mAuthContext.acquireToken(currentActivity,
 The "access token" can now be used when communicating with O365 SharePoint.
 
 
-###Task 8 - Launch the application
+###Task 9 - Launch the application
 
 We're ready to launch the app now.
 
