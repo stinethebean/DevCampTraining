@@ -59,7 +59,43 @@ By default it is installed in your local appdata folder, e.g.:
     C:\Users\<user>\AppData\Local\Android\sdk
 
 
-###Task 2 - Import the code into Android Studio
+###Task 2 - Clone the Git repository
+
+Skip this task if you've already cloned the `DevCampTraining` repository to your local machine.
+
+These instructions assume you have the Git SCM tool installed and available in on
+the command line.
+
+01. Open a command prompt.
+
+02. Navigate to the directory where you would like to place the `DevCampTraining` source code.
+
+    ```batch
+    C:\> cd C:\My\Dev\Dir
+    ```
+
+03. Clone this repository with the following Git command:
+
+    ```batch
+    C:\My\Dev\Dir> git clone https://github.com/OfficeDev/DevCampTraining.git
+    ```
+
+    Git will clone the repository into a folder named "DevCampTraining"
+
+    ```
+    Cloning into 'DevCampTraining'...
+    ```
+
+04. Navigate to the Module 06 directory
+
+    ```batch
+    C:\My\Dev\Dir> cd "DevCampTraining\06.Hook into SharePoint APIs with Android"
+    ```
+
+This directory contains this hands-on lab. All the source code you will need
+to continue with the next tasks is in the `/src` directory.
+
+###Task 3 - Import the code into Android Studio
 
 Follow these steps to get the source code ready to build on your machine and 
 learn the layout of the code within the Android Studio IDE.
@@ -85,6 +121,10 @@ learn the layout of the code within the Android Studio IDE.
 
 05. Before continuing, take a moment to expand the **app** node in the
     Project window. Application code is organized under this node.
+
+    **Note:** If the Project window is not visible, open it using the **View > Tool Windows > Project**
+
+    ![](img/0008_open_project_window.png)
     
     *  The **manifests** folder contains your Android manifest: `AndroidManifest.xml`
 
@@ -98,7 +138,7 @@ learn the layout of the code within the Android Studio IDE.
 
     ![](img/0010_res_folder_note.png)
 
-###Task 3 - Add missing dependencies
+###Task 4 - Add missing dependencies
 
 In this task we will add the missing dependencies to the app.
 
@@ -152,7 +192,7 @@ In this task we will add the missing dependencies to the app.
 
 [o365-sdk-android]: https://github.com/OfficeDev/Office-365-SDK-for-Android
 
-###Task 4 - Create and launch the emulator
+###Task 5 - Create and launch the emulator
 
 In this task we will configure and launch the Android emulator, and deploy the app.
 
@@ -218,7 +258,7 @@ In this task we will configure and launch the Android emulator, and deploy the a
 Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
 the app to work against your own O365 tenant.
 
-###Task 5 - Configure the code for your own O365 tenant
+###Task 6 - Configure the code for your own O365 tenant
 
 In this task we will create an Application in Azure AD to represent our android app.
 
@@ -286,7 +326,7 @@ In this task we will create an Application in Azure AD to represent our android 
 Done! The **Client Id** we created above will be used to configure the Android app in the next task.
 
 
-###Task 6 - Configure the code for your own O365 tenant
+###Task 7 - Configure the code for your own O365 tenant
 
 In this task we will configure the app to work agains your own O365 tenant.
 
@@ -338,7 +378,7 @@ mAuthContext.acquireToken(currentActivity,
 The "access token" can now be used when communicating with O365 SharePoint.
 
 
-###Task 7 - Launch the application
+###Task 8 - Launch the application
 
 We're ready to launch the app now.
 
