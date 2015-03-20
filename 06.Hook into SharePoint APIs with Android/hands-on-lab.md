@@ -3,47 +3,49 @@
 
 ##Overview
 
-The lab lets students configure and run an Android App which allows the user to edit items in a
-SharePoint Task list. The lab also has instructions for adding a new feature to the App.
+The lab instructs students in configuring and running an Android app which allows 
+the user to edit items in a SharePoint Task list. The lab also has instructions
+for adding a new feature to the app.
 
 ##Objectives
 
 - Learn how to authenticate with Azure AD from Android using the **Azure Active Directory AuthenticationLibrary (ADAL) for Android**
 - Learn how to consume SharePoint APIs from Android using the **Office 365 SDK for Android**
-- Implement a new feature in the Android App
+- Implement a new feature in the Android app
 
 ##Prerequisites
 
-- [Git version control tool](http://git-scm.com)
-- [Eclipse with the Android Developer Tools](http://developer.android.com/sdk/index.html)
-- Android API Level 19 installed [using the Android SDK Manager](http://developer.android.com/tools/help/sdk-manager.html)
-- You must have an Office 365 tenant and Windows Azure subscription to complete this lab.
-- You must have completed Module 04 and linked your Azure subscription with your O365 tenant.
+- [Git version control tool][git-scm]
+- [Android Studio][android-studio]
+- You must have completed [Module 02][module-two] and have access to both an
+  Azure subscription and a test O365 tenant.
+
+[git-scm]: http://git-scm.com
+[android-studio]: http://developer.android.com/sdk/index.html
+[module-two]: ../02.Setting%20up%20the%20Environments/hands-on-lab.md
 
 ##Exercises
 
 The hands-on lab includes the following exercises:
 
-- [Set up your workspace and configure and run the Android app](#exercise1)
-- [Add a "delete" shortcup feature to the app](#exercise2)
-- [Add a "filter" feature to the app](#exercise3)
+- Set up your workspace and configure and run the Android app
+- Implement the missing "delete" feature
+- Add a "filter" feature
 
-<a name="exercise1"></a>
-##Exercise 1: Set up your workspace and configure and run the Android app
-In this exercise you will set up your Eclipse workspace and then configure and run the
-**Tasks for SharePoint O365** Android app.
+##Exercise 1: Import and configure the base O365-Tasks
+In this exercise you will import the **Tasks for SharePoint O365** Android app into
+Android Studio, and configure it for your SharePoint instance.
 
 ###Task 1 - Preparation
-Prepare the Android SDK by downloading Android API Level 19.
+Prepare the Android SDK by downloading Android API Level 21.
 
-01. Launch Eclipse. Launch the Android SDK Manager via **Window > Android SDK Manager**
+01. Launch Android Studio. From the launch menu, select **Configure > SDK Manager**
 
     ![](img/0001_launch_sdk_manager.png)
 
-02. Install the following components from **Android 4.4.2 (API 19)**
+02. Install the following components from **Android 5.0.1 (API 21)**
 
     - SDK Platform
-    - ARM EABI v7a System Image
     - Intel x86 Atom System Image
     - Sources for Android SDK
 
@@ -52,174 +54,252 @@ Prepare the Android SDK by downloading Android API Level 19.
 03. Click **Install packages...** and wait for the install to complete.
 
 **Note:** The android SDK install location will be referred to later using "`ANDROID_SDK`".
-By default it is included in the package with Eclipse:
+By default it is installed in your local appdata folder, e.g.:
 
-![](img/0003_android_sdk_location.png)
-
-
-###Task 2 - Set up your Eclipse workspace
-Follow these steps to get the source code ready to build on your machine.
+    C:\Users\<user>\AppData\Local\Android\sdk
 
 
-01. Launch Eclipse and create a new workspace (if you have not already done so).
-    Remember where you create your workspace as we will be working within it extensively.
+###Task 2 - Clone the Git repository
 
-    For the purposes of this this lab we will refer to the workspace path using "`C:\Android`".
+Skip this task if you've already cloned the `DevCampTraining` repository to your local machine.
 
-    ![](img/0004_eclipse_create_workspace_dialog.png)
+These instructions assume you have the Git SCM tool installed and available in on
+the command line.
 
-02. Start a git command prompt and navigate to your Eclipse workspace.
+01. Open a command prompt.
 
-        C:\> cd Android
+02. Navigate to the directory where you would like to place the `DevCampTraining` source code.
 
-    ![](img/0005_cd_android.png)
+    ```batch
+    C:\> cd C:\My\Dev\Dir
+    ```
 
-03. Clone the **Office 365 SDK for Android** into your workspace from github, then checkout
-    the revision we're targeting in this lab.
-   
-        C:\Android> git clone https://github.com/AzureAD/azure-activedirectory-library-for-android.git adal
-        C:\Android> cd adal
-        C:\Android\adal> git checkout v1.0.1
+03. Clone this repository with the following Git command:
 
-    ![](img/0006_clone_adal.png)
+    ```batch
+    C:\My\Dev\Dir> git clone https://github.com/OfficeDev/DevCampTraining.git
+    ```
 
-    ![](img/0007_checkout_adal_v101.png)
+    Git will clone the repository into a folder named "DevCampTraining"
 
-04. Clone the **Azure AD Authentication Library for Android** into your workspace from github, then checkout
-    the revision we're targeting in this lab.
+    ```
+    Cloning into 'DevCampTraining'...
+    ```
 
-        C:\Android\adal> cd ..
-        C:\Android> git clone https://github.com/OfficeDev/Office-365-SDK-for-Android.git o365-android-sdk
-        C:\Android> cd o365-android-sdk
-        C:\Android\o365-android-sdk> git checkout v1.0
+04. Navigate to the Module 06 directory
 
-    ![](img/0008_clone_o365_sdk.png)
+    ```batch
+    C:\My\Dev\Dir> cd "DevCampTraining\06.Hook into SharePoint APIs with Android"
+    ```
 
-    ![](img/0009_checkout_o365_sdk_v1.png)
+This directory contains this hands-on lab. All the source code you will need
+to continue with the next tasks is in the `/src` directory.
 
-05. Copy the `o365-tasks` folder from `src` directory of this hands-on lab into your workspace. This
-    contains the source code for the **Tasks for SharePoint O365** app.
+###Task 3 - Import the code into Android Studio
 
-    **Copy from hands-on lab:**
+Follow these steps to get the source code ready to build on your machine and 
+learn the layout of the code within the Android Studio IDE.
 
-    ![](img/0010_copy_o365_tasks.png)
+01. From the Launch menu, select **Open an existing Android Studio project**
 
-    **Paste into workspace:**
+    ![](img/0005_import_existing_android_project.png)
 
-    ![](img/0011_paste_o365_tasks.png)
+02. Navigate to the `/src` directory and select `o365-tasks`. Click **OK**.
+    
+    ![](img/0006_find_o365_tasks_project_folder.png)
 
-06. Next we will return to Eclipse to import the source code from your workspace.
+03. Wait for the project to load. You may be prompted with an error message like
+    the following:
 
-    Select **File > Import**.
+    ![](img/0007_install_missing_dependencies.png)
 
-    ![](img/0012_menu_import.png)
+    If so, follow the suggested action by clicking on (e.g.) **Install missing platform(s) and sync content**,
+    and wait for the install to finish.
 
-07. Expand **Android** and select **Existing Android Code Into Workspace**.
-    Finally, click **Next**.
+04. The application won't compile yet - it relies on some libraries which have
+    not yet been added as dependencies. We'll cover that in the next task.
 
-    ![](img/0013_existing_workspace.png)
+05. Before continuing, take a moment to expand the **app** node in the
+    Project window. Application code is organized under this node.
 
-08. For **Root Directory** enter the path to your workspace. Click **Refresh** to search for Android code within
-    the workspace.
+    **Note:** If the Project window is not visible, open it using the **View > Tool Windows > Project**
 
-08. Click **Deselect All** to clear all selections, then select the following projects:
+    ![](img/0008_open_project_window.png)
+    
+    *  The **manifests** folder contains your Android manifest: `AndroidManifest.xml`
 
-    - `adal\src`
-    - `o365-android-sdk\sdk\office-365-base-sdk`
-    - `o365-android-sdk\sdk\office-365-lists-sdk`
-    - `o365-tasks\src`
+    *  The **java** folder contains application code.
+    
+    *  The **res** folder contains resources like layouts, images and strings.
+       
+    Note that the nodes in this folder are virtualized - they do not map
+    directly to files and folders on disk. Keep this in mind if you are navigating
+    the source tree outside Android Studio!
 
-    ![](img/0014_eclipse_import_code_dialog.png)
+    ![](img/0010_res_folder_note.png)
 
-    The rest of these projects are test and sample code and can be ignored.
+###Task 4 - Add missing dependencies
 
-09. Finally, click **Finish**
-
-10. We now need to fix some missing dependencies. 
-    Execute the "`C:\Android\adal\src\libs\getLibs.ps1`" script to download Gson 2.2.2.
-
-        C:\Android> powershell adal\src\libs\getLibs.ps1
-
-    ![](img/0015_download_gson.png)
-
-11. Copy `%ANDROID_SDK%\extras\android\support\v4\android-support-v4.jar` into `C:\Android\adal\src\libs`.
-
-    (Where **`%ANDROID_SDK%`** refers to the location of the Android SDK on your machine)
-
-    ![](img/0016_copy_v4_support_lib.png)
-
-13. Execute the "`C:\Android\o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1`" script to download Guava 16.0.1.
-
-        C:\Android> powershell o365-android-sdk\sdk\office365-base-sdk\libs\getLibs.ps1
-
-    ![](img/0017_download_guava.png)
-
-14. Return to Eclipse and press **F5** to refresh. Wait a moment as Eclipse re-compiles the code. If everything
-    has been done correctly, then there should be no more red entries in the **Problems** window.
-
-    If there are any remaining error messages in the **Problems** window, please troubleshoot them before continuing.
+In this task we will add the missing dependencies to the app.
 
 
-In this task we created an Eclipse workspace, copied our code into it and got it into a working state.
+01. Expand the **Gradle scripts** node. All gradle scripts in the project are
+    organized under this node.
 
+02. Open the file **build.gradle (Module: app)**. This file describes all the
+    dependencies the project has, and also defines things such as the app ID, app
+    version number, min and max SDK versions, build tools version, etc.
 
-###Task 3 - Create and launch the emulator
+    ![](img/0011_open_build_gradle.png)
+
+03. Add the following code to the `dependencies` section:
+
+    ```groovy
+    //Active Directory Authentication Library - used to authenticate with SharePoint via Azure AD
+    compile group: 'com.microsoft.aad', name: 'adal', version: '1.0.5'
+
+    //Sharepoint Services - client classes for consuming Sharepoint's API
+    compile group: 'com.microsoft.services', name: 'sharepoint-services', version: '0.12.0', ext:'aar'
+
+    //Dependencies required by sharepoint-services
+    //TODO: This dependency should be automatically included by Gradle,
+    //TODO: but using the 'aar' version of sharepoint-services seems to interfere with this
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    ```
+
+    This code describes the app dependencies:
+
+    *  `com.microsoft.aad:adal` - The Active Directory Authentication Library for Android
+    *  `com.microsoft.services:sharepoint-services` - The O365 SharePoint SDK for Android
+    *  `com.google.guava` - A utility library by Google which is required by the O365 SharePoint SDK
+
+    You can find more information about the O365 SharePoint SDK on the project's [Github page][o365-sdk-android].
+
+04. Android Studio needs to keep it's own project files in sync with our `build.gradle` file. It lets us know
+    by showing the following warning message:
+
+    ![](img/0012_android_studio_sync_warning.png)
+
+    Click **Sync now** to fix the problem.
+
+    **Note:** You can also force Android Studio to sync with your Gradle files 
+    using the command **Tools > Android > Sync project with Gradle files**.
+
+05. You should now be able to successfully build the project.
+    To do so, select **Build > Make Module 'app'**.
+
+    ![](img/0014_build_module_app.png)
+
+[o365-sdk-android]: https://github.com/OfficeDev/Office-365-SDK-for-Android
+
+###Task 5 - Create and launch the emulator
 
 In this task we will configure and launch the Android emulator, and deploy the app.
 
-02. Launch the Android Device Manager from **Window > Android Virtual Device Manager**.
+01. Launch the Android Device Manager from **Tools > Android > AVD Manager**.
+
+    ![](img/0015_launch_avd_manager.png)
+
+02. Select **Create a virtual device**
     
-    Click **Create** to create a new virtual device.
+    ![](img/0016_create_new_avd.png)
 
-    ![](img/0019_avd_manager.png)
-
-    **Note** please be patient - launching the emulator will take some time.
-
-03. Fill out the dialog.
-
-    - For **Device** select "Nexus 4"
-    - For **Target** select "API Level 19"
-    - For **CPU/ABI** select "Intel Atom (x86)" if available, otherwise "ARM"
-    - For **Skin** select "Skin with dynamic hardware controls"
+03. Select the **Nexus 5** hardware profile, in the **Phone Category**. Click **Next**.
     
-    Internal storage should be at least 200mb, and no SD card is required.
+    ![](img/0017_select_nexus_5.png)
 
-    **Note:** if you select the x86 image, and have the [Intel HAXM driver][haxm-driver] installed then the Android emulator will be
-    emulated natively using your machine's virtualization hardware. This significantly improves performance of the emulator.
+04. Select an "Api Level 21" image, e.g. **Lollipop (API Level 21) x86**. Click **Next**.
+    
+    ![](img/0018_select_api_21_x86_image.png)
 
-[haxm-driver]: https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager
+05. Because the Nexus 5 hardware profile is very high resolution (1080x1920), the emulated
+    device may not fit on your monitor. 
 
-    ![](img/0020_create_new_avd.png)
+    We can scale it down though:
 
-04. Click **OK** to create the device.
+    a)  Set "Scale" to **2db on device = 1px on screen**.
 
-05. Dismiss the AVD manager. In the Package Explorer, right-click on **o365-tasks** and select **Debug as > Android Application**.
+    b)  Click **Show Advanced Settings**.
 
-    ![](img/0025_start_as_android_app.png)
+    c)  Scroll down and set "Custom skin definition" to **No Skin**.
+    
+    This should fit the emulator comfortably on a 1920x1080 monitor. Finally, 
+    click **Finish** to create the device.
 
-    This will launch the Android Device Chooser.
+    ![](img/0019_complete_create_avd_form.png)
 
-06. Select **Launch a new Android Virtual Device**. 
-    Select the AVD you created in the previous steps.
-    Finally, select **OK**.
+06. When the virtual device has been created, click the **Start** button to start it.
 
-    ![](img/0030_android_device_chooser.png)
+    ![](img/0020_start_emulator.png)
 
-07. The android emulator will launch and Android will boot (this may take some time).
+    **Note** please be patient - starting the emulator will take some time.
 
     ![](img/0035_emulator_launching.png)
 
-08. When the android emulator has started the Tasks app should be automatically deployed and launched. If it
-    is not, try executing **Debug as > Android Application** again. This time, select the already-running emulator.
-    There is no need to restart the emulator.
+07. Dismiss the AVD manager. From the menu, select **Run > Debug 'app'**.
+
+    ![](img/0021_start_debugging.png)
+
+    This will launch the Android Device Chooser.
+
+06. From the device list select the emulator we just started.
+
+    Check the **Use the same device for future launches**. Finally, select **OK**.
+
+    ![](img/0030_choose_device.png)
+
+    **Note:** you can leave the emulator running in the background - now whenever you
+    **Run** or **Debug** your app it will automatically deploy your code to this emulator.
+
+08. When the android emulator has started the Tasks app should be automatically
+    deployed and launched.
 
     ![](img/0035_emulator_running.png)
 
+Finally! The application is running. Unfortunately it's not yet properly configured. 
+In the next few tasks we'll configure the app to work against your own O365 tenant.
 
-Finally! The application is running. Unfortunately it's not yet properly configured. In the next step we'll configure
-the app to work against your own O365 tenant.
 
-###Task 4 - Configure the code for your own O365 tenant
+###Task 6 - Add your Azure user account as an admin of your O365 tenant Active Directory
+
+Skip this task if you have already added your Azure user account as an admin of your
+O365 tenant Active Directory.
+
+01. Navigate your web browser to the [Azure portal](http://manage.windowsazure.com).
+
+02. From the action bar click **New**.
+
+    ![](img/0040_azure_add_new.png)
+
+03. Select **Services > Active Directory > Directory > Custom Create**
+
+    ![](img/0041_azure_add_new_directory.png)
+
+04. Select **Use existing directory**, and then check **I am ready to be signed out now**.
+    Click the **Ok** button to continue.
+
+    ![](img/0042_use_existing_directory.png)
+
+05. You will be signed out of the portal and redirected to a sign-in page. 
+    Sign in using the credentials for a global administrator in your O365 tenant.
+
+    ![](img/0043_sign_in_as_directory_global_admin.png)
+
+06. When authenticated click **continue**. This will add your Azure account as a
+    global administrator of the O365 directory.
+
+    ![](img/0044_accept_confirmation_dialog.png)
+
+07. Click **Sign out now** and when prompted sign back into your Azure account.
+
+    ![](img/0045_sign_out_and_sign_back_in.png)
+
+You have successfully associated your Azure account with your O365 tenant as a 
+global administrator. This gives you the ability to manage the O365 directory 
+using the Azure portal.
+
+
+###Task 7 - Configure the code for your own O365 tenant
 
 In this task we will create an Application in Azure AD to represent our android app.
 
@@ -227,7 +307,7 @@ In this task we will create an Application in Azure AD to represent our android 
 
 02. Navigate to the **Active Directory** extension.
 
-    ![](img/0045_active_directory_extension.png)
+    ![](img/0047_active_directory_extension.png)
 
 03. Navigate to the AD instance for your O365 tenant.
 
@@ -247,7 +327,7 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/0060_create_application_1.png)
 
-07. For the Redirect Uri field enter "`http://android/complete`", then click **Next**.
+07. For the Redirect Uri field enter "`http://android/complete`", then click **Done**.
 
     ![](img/0060_create_application_2.png)
 
@@ -264,14 +344,22 @@ In this task we will create an Application in Azure AD to represent our android 
 
     ![](img/0075_copy_client_id.png)
 
-10. Scroll down to the to the _Permissions to other applications_ section and add the following Delegated Permissions 
-    for "Office 365 SharePoint Online".
+10. Scroll down to the to the _Permissions to other applications_ section and click **Add application**.
 
-    - Create or delete items and lists in all site collections
+    ![](img/0076_add_application.png)
+
+11. From the **Show** drop down, select "Microsoft Apps". From the list below click **Add** on "Office 365 SharePoint Online".
+    The application appears in the _Selected_ list on the right-hand side. Click **Done** to continue.
+
+    ![](img/0077_add_o365_sharepoint.png)
+
+12. Add the following Delegated Permissions for "Office 365 SharePoint Online".
+
+    - _Create or delete items and lists in all site collections_
 
     ![](img/0080_set_application_permissions.png)
 
-11. Click **Save** to apply the changes.
+13. Click **Save** to apply the changes.
 
     ![](img/0085_save_button.png)
 
@@ -279,14 +367,13 @@ In this task we will create an Application in Azure AD to represent our android 
 Done! The **Client Id** we created above will be used to configure the Android app in the next task.
 
 
-###Task 5 - Configure the code for your own O365 tenant
+###Task 8 - Configure the code for your own O365 tenant
 
 In this task we will configure the app to work agains your own O365 tenant.
 
-01. Return to Eclipse. Locate the Java class `com.microsoft.o365_tasks.Constants`. This can be found by expanding 
-    the nodes **o365-tasks**, **src** and **com.microsoft.o365_tasks** in the Package Explorer.
+01. Return to Android Studio. Locate and open the Java class file `com.microsoft.o365_tasks.Constants`.
 
-    ![](img/0040_open_constants.png)
+    ![](img/0086_open_constants.png)
 
 02. Change the constants in this class to suit your own tenancy.
 
@@ -296,13 +383,47 @@ In this task we will configure the app to work agains your own O365 tenant.
 
     ![](img/0090_set_java_constants.png)
 
+In this task you provided the configuration values required to authenticate with O365 SharePoint via
+Azure Active directory.
 
-###Task 6 - Launch the application
+The library we are using to authenticate with AD is called the Active Directory Authentication Library (ADAL).
+Our code which calls into this library can be found in the `AuthManager` class, and looks something like this:
+
+```java
+mAuthContext = new AuthenticationContext(context, Constants.AAD_AUTHORITY, false);
+
+//Asks the user to authenticate directly only if the ADAL cannot locate a refresh token
+mAuthContext.acquireToken(currentActivity,
+    /* Resource         */ Constants.SHAREPOINT_URL,
+    /* Client Id        */ Constants.AAD_CLIENT_ID,
+    /* Redirect Uri     */ Constants.AAD_REDIRECT_URL,
+    /* Login Hint       */ Constants.AAD_LOGIN_HINT,
+    /* Prompt Behaviour */ PromptBehavior.Always,
+    /* Extra            */ null,
+    new AuthenticationCallback<AuthenticationResult>() {
+        public void onSuccess(AuthenticationResult authResult) {
+            
+            String accessToken = authResult.getAccessToken();
+
+            //continue with application code...
+        }
+
+        public void onError(Exception ex) {
+             
+             //report error to the user...
+        }
+    }
+);
+```
+
+The "access token" can now be used when communicating with O365 SharePoint.
+
+
+###Task 9 - Launch the application
 
 We're ready to launch the app now.
 
-01. Once again, right-click on **o365-tasks** and use **Debug as > Android Application** to launch the application.
-    If the emulator is already running there is no need to restart it.
+01. Once again, use **Run > Debug 'app'** to deploy the app to the emulator.
 
 02. When the application launches, click **Sign in**.
 
@@ -325,169 +446,92 @@ Using the **Clear auth token** function from the menu on this screen will clear 
 to the server (e.g. when you refresh the list or create a new task) will trigger a dialog asking you to re-authenticate.
 
 
-<a name="exercise2"></a>
-##Exercise 2: Add a "delete" shortcup feature to the app
+##Exercise 2: Implement the "delete" feature for the app
 
-In this exercise we will add a "Delete" context action to the List Tasks activity.
+In this exercise we will implement the "Delete" action for this activity.
 
-###Task 1 - Write the new Delete feature
+###Task 1 - Implement the unimplemented data method
 
-01. Return to Eclipse.
+01. Return to Android Studio.
 
-02. First we will create a "menu template" which defines the items in our new context menu.
-    In the Package Explorer, expand the `res/menu` folders.
+02. Navigate to the `com.microsoft.o365_tasks.data.TaskListItemDataSource` class. This class contains
+    all the code in the project which communicates with the SharePoint API.
 
-03. Right-click `menu` and select **New > Android XML file**.
+    ![](img/0110_open_TaskListItemDataSource.png)
 
-    ![](img/0110_new_android_xml_file.png)
+03. Scroll down to the `deleteTask(TaskModel model)` method, at the bottom of the file.
+    It is currently unimplemented.
 
-04. Name the file `list_tasks_context`. The root element type should be `menu`. Click **Finish** to continue.
+04. Delete the `throw` statement and insert the following code:
 
-    ![](img/0115_new_android_xml_file_dialog.png)
+    ```java
+    AuthManager authManager = mApplication.getAuthManager();
 
-05. Click the `list_tasks_context.xml` tab to switch to XML mode, and paste in the following XML:
+    String accessToken = authManager.getAccessToken();
 
-        <item
-            android:id="@+id/action_delete"
-            android:orderInCategory="200"
-            android:showAsAction="ifRoom"
-            android:icon="@drawable/ic_action_discard"
-            android:title="@string/action_delete" />
+    OAuthCredentials credentials = new OAuthCredentials(accessToken);
 
-    ![](img/0120_edit_list_tasks_context_xml.png)
+    ListClient client = new ListClient(Constants.SHAREPOINT_URL, Constants.SHAREPOINT_SITE_PATH, credentials);
+    ```
 
-    Save the file. This xml defines a button with the label "Delete" (defined in `res/values/strings.xml`) and the 
-    id `action_delete`.
+    These instructions, in order:
 
-06. Navigate to the java class `com.microsoft.o365_tasks.ListTasksActivity` (this is located in the `src` folder).
+    1.  Get the current Access Token, previously acquired using the ADAL (covered [earlier](#adal_explanation)).
+    2.  Create an `OAuthCredentials` instance.
+    3.  Construct a new `ListClient`, passing in the configuration variables you set earlier.
 
-    In this class we need to add a number of callbacks to inflate the context menu and hook up handler functions for
-    the buttons defined in this menu.
+05. Next, add the following code:
 
-    ![](img/0125_open_ListTasksActivity.png)
+    ```java
+    SPListItem listItem = model.getListItem();
 
-07. At the top of the file, add the following imports:
-        
-        import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.view.ContextMenu;
-        import android.view.ContextMenu.ContextMenuInfo;
-        import android.widget.AdapterView.AdapterContextMenuInfo;
+    ListenableFuture<Void> result = client.deleteListItem(listItem, Constants.SHAREPOINT_LIST_NAME);
 
-    The result should look like this:
+    result.get();
+    ```
 
-    ![0128_add_missing_imports.png](img/0128_add_missing_imports.png)
+    These instructions, in order:
 
+    1.  Get an instance of `SPListItem` to delete. In this case, the `TaskModel` class contains the object
+        we need. Alternatively, we could query SharePoint for a list item using the `ListClient`.
+    2.  Make a call to SharePoint using the `deleteListItem` function. This returns a "future", which represents
+        the eventual completion of the operation.
+    3.  Wait for the result synchronously by calling `result.get()`.
 
-07. In the `onCreate` function, just before the call to `optionsActionRefresh`, paste the following:
+    **Note** the `get()` call blocks the thread! You can also wait on this result asynchronously using
+    the `Futures.addCallback` function, e.g.
 
-        registerForContextMenu(mListView);
-
-    The result should look like this:
-
-    ![](img/0130_update_onCreate.png)
-
-    This function registers the `mListView` view for a context menu.
-
-08. Under the comment "`//#### Context menu ####`" paste the following:
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-            getMenuInflater().inflate(R.menu.list_tasks_context, menu);
+    ```java
+    Futures.addCallback(result, new FutureCallback<Void>() {
+        public void onSuccess(Void result) {
+            //Handle success
         }
 
-    This function is invoked by Android to _inflate_ a menu for the given view element `v`, when v has been registered
-    for a context menu.
-   
-09. Next, add this block:
-    
-        public boolean onContextItemSelected(MenuItem item) {
-            AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-            switch (item.getItemId()) {
-            case R.id.action_delete:
-                contextActionDelete(info);
-                return true;
-            }
-            return super.onContextItemSelected(item);
+        public void onFailure(Throwable t) {
+            //Handle failure
         }
+    });
+    ```
 
-    This function is invoked by android whenever a context menu item is long-pressed. We use it to link menu items up with
-    behaviours. Here we are invoking `contextActionDelete` whenever the users taps the `action_delete` menu item.
-
-    The `getItemId()` call returns the tools-generated integer id of the menu item. We compare this to the tools-generated
-    static class field `R.id.action_delete` which was auto-generated based on the XML we added to `list_tasks_context.xml`.
-
-10. Next, add this block:
-
-        private void contextActionDelete(AdapterContextMenuInfo info) {
-            final TaskModel task = (TaskModel) mListView.getItemAtPosition(info.position);
-            //Launch confirmation dialog
-            new AlertDialog.Builder(this)
-                .setTitle(R.string.dialog_confirm_title)
-                .setMessage(R.string.dialog_delete_confirm_message)
-                .setNegativeButton(R.string.label_cancel, null)
-                .setPositiveButton(R.string.label_delete, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int which) {
-                        //user has confirmed
-                        ensureAuthenticated(new Runnable() {
-                            @Override public void run() {
-                                deleteTask(task);
-                            }
-                        });
-                    }
-                })
-                .create()
-                .show();
-        }
-    
-    This function handles launching a confirmation dialog for the user. If the user selects the "Delete" button, then
-    we ensure that the user is still authenticated and invoke `deleteTask`.
-
-11. Finally, add this block:
-    
-        protected void deleteTask(final TaskModel model) {
-           //Launch a background task to delete the current task
-           final String message = getString(R.string.edit_task_working);
-           new ProgressDialogAsyncTask<Void>(this, message) {
-                // Executes on a background thread. We can safely block here.
-                @Override protected Void doInBackground(Void... params) {
-                    try {
-                        new TaskListItemDataSource(mApplication).deleteTask(model);
-                    }
-                    catch (Exception ex) {
-                        Log.e(TAG, "Error deleting task", ex);
-                    }
-                    return null;
-                }
-                // Executes on the UI thread after the background thread completes.
-                @Override protected void onResult(Void result) {
-                    //all done - refresh the list
-                    refresh();
-                }
-           }
-           .execute();
-        }
-
-    This function launches an "in progress" dialog and deletes the given task via the API. When finished it starts
-    a refresh.
-
-12. **Note:** before continuing make sure that there are not errors in the file.
+06. **Note:** before continuing make sure that there are not errors in the file.
     Errors will be marked with a red squiggle automatically:
 
-    ![](img/0135_eclipse_java_error.png)
+    ![](img/0135_android_studio_java_error.png)
 
-    If you find any errors, hover the mouse over them to see if Eclipse can provide a quick fix:
+    If you find any errors place the caret on them and press **Alt + Enter** to see if 
+    Android Studio offers to fix them automatically.
 
-    ![](img/0140_eclipse_java_error_fix.png)
+    ![](img/0140_android_studio_java_error_fix.png)
 
-
-Done! We've just added the ability for the user to delete a task item directly from the List Tasks activity.
+    Here I've used the **Import class** function to add the missing `import` statement to
+    the top of the file.
 
 ###Task 2 - Test the new Delete feature
 
-In this task we will test the "Delete" feature we just added.
+In this task we will test the "Delete" feature we just added. The `deleteTask` function is currently
+called from one place - the "Delete" context menu item in the List Tasks activity.
 
-01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
+01. Start debugging the **o365-tasks** app with **Run > Debug 'app'**. When the app launches, sign in.
 
 02. Long-press on any task in the list - a context menu will appear. Select **Delete**.
 
@@ -499,144 +543,156 @@ In this task we will test the "Delete" feature we just added.
 
 04. The item will be deleted and the view will refresh.
 
-Done! You've successfully added a feature to this app.
+Done! You've successfully implemented the missing Delete feature.
 
+In review, you've learnt how to:
 
-<a name="exercise3"></a>
+*  Construct
+
 ##Exercise 3: Add a "filter" feature to the app
 In this exercise we will add a "Filter" option to the List Tasks activity.
 
 ###Task 1 - Write the new filter feature
 
-01. Return to Eclipse.
+01. Return to Android Studio.
 
 02. First we will update the List Tasks activity options menu.
     Navigate to the "`list_tasks_options.xml`" menu template.
 
     ![](img/0155_open_list_tasks_options_xml.png)
 
-03. Switch to the XML view.
-
-    ![](img/0160_switch_to_xml_view.png)
 
 04. Add the following XML:
 
-        <item
-            android:id="@+id/action_filter_completed"
-            android:orderInCategory="800"
-            android:showAsAction="never"
-            android:checkable="true"
-            android:title="@string/action_filter_completed" />
+    ```xml
+    <item
+        android:id="@+id/action_filter_completed"
+        android:orderInCategory="800"
+        android:showAsAction="never"
+        android:checkable="true"
+        android:title="@string/action_filter_completed" />
+    ```
 
-    The result should look like this:
-
-    ![](img/0165_add_menu_item_xml.png)
-
-05. Navigate to the "`strings.xml`" resouce file and switch to the XML view.
-
-    ![](img/0170_open_strings_xml.png)
-
-06. Add the following XML:
-
-        <string name="action_filter_completed">Filter completed tasks</string>
-
-    The result should look like this:
-
-    ![](img/0175_add_new_string_resource.png)
-
-07. Navigate back to the java class `com.microsoft.o365_tasks.ListTasksActivity`. Add the following import
-    statements to the top of the file:
+07. Navigate back to the java class `com.microsoft.o365_tasks.ListTasksActivity`. 
+    Add the following import statements to the top of the file:
         
-        import com.microsoft.office365.Query;
-        import android.content.SharedPreferences;
-
-    The result should look like this:
-
-    ![](img/0180_add_missing_imports.png)
+    ```java
+    import com.microsoft.sharepointservices.Query;
+    import android.content.SharedPreferences;
+    ```
 
 09. At the bottom of the `ListTasksActivity` class add the following block:
     
-        private static class PreferencesWrapper {
-            private static final String PREFS_FILTER_COMPLETED = "filter_completed";
-            private SharedPreferences mPreferences;
-            public PreferencesWrapper(SharedPreferences preferences) {
-                mPreferences = preferences;
-            }
-            public boolean getFilterCompleted() {
-                return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
-            }
-            public void setFilterCompleted(boolean completed) {
-                mPreferences.edit()
-                            .putBoolean(PREFS_FILTER_COMPLETED, completed)
-                            .apply();
-            }
+    ```java
+    private static class PreferencesWrapper {
+        private static final String PREFS_FILTER_COMPLETED = "filter_completed";
+        private SharedPreferences mPreferences;
+        public PreferencesWrapper(SharedPreferences preferences) {
+            mPreferences = preferences;
         }
+        public boolean getFilterCompleted() {
+            return mPreferences.getBoolean(PREFS_FILTER_COMPLETED, false);
+        }
+        public void setFilterCompleted(boolean completed) {
+            mPreferences.edit()
+                        .putBoolean(PREFS_FILTER_COMPLETED, completed)
+                        .apply();
+        }
+    }
+    ```
 
-    This internal static class wraps the android `SharedPreferences` utility to give us a nice strongly-typed
-    interface.
+    This internal static class wraps the android `SharedPreferences` utility to give us 
+    a nice strongly-typed interface to it.
 
     **Note:** this block must be pasted **inside** the final brace in the file - Java does not support multiple
     seperate class definitions per file.
 
 10. At the top of the class add the following member variable:
 
-        private PreferencesWrapper mPreferences;
-
-    The result should look like this:
-
-    ![](img/0185_add_preferences_member_variable.png)
+    ```java
+    private PreferencesWrapper mPreferences;
+    ```
 
 12. Next, initialize the variable in the "`onCreate`" function:
 
-        mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
-
-    The result should look like this:
-
-    ![](img/0190_initialize_preferences.png)
+    ```java
+    mPreferences = new PreferencesWrapper(mApplication.getSharedPreferences("listtasks_prefs", Context.MODE_PRIVATE));
+    ```
 
 13. In the "`onCreateOptionsMenu`" function we must retrieve and initialize the `action_filter_completed` checkbox we
-    defined earlier. Add the following line before the final `return`.
+    defined earlier. Add the following line before the final return statement.
 
-        menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
-
-    The result should look like this:
-
-    ![](img/0195_initialize_action_filter_completed.png)
+    ```java
+    menu.findItem(R.id.action_filter_completed).setChecked(mPreferences.getFilterCompleted());
+    ```
 
 14. In the "`onOptionsItemSelected`" function we must add code to handle taps on the new menu option. Add the following
     switch case:
 
-        case R.id.action_filter_completed:
-            optionsActionFilterCompleted(item);
-            return true;
-
-    The result should look like this:
-
-    ![](img/0200_handle_action_filter_completed.png)
+    ```java
+    case R.id.action_filter_completed:
+        optionsActionFilterCompleted(item);
+        return true;
+    ```
 
 15. Next add the "`optionsActionFilterCompleted`" function which will handle updating the `action_filter_completed` menu
     item and refreshing the screen.
 
-        private void optionsActionFilterCompleted(MenuItem item) {   
-            boolean flag = !item.isChecked();
-            item.setChecked(flag);
-            mPreferences.setFilterCompleted(flag);
-            //refresh
-            optionsActionRefresh();
-        }
+    ```java
+    private void optionsActionFilterCompleted(MenuItem item) {   
+        boolean flag = !item.isChecked();
+        item.setChecked(flag);
+        mPreferences.setFilterCompleted(flag);
+        //refresh
+        optionsActionRefresh();
+    }
+    ```
 
-16. Finally, navigate to the "`refresh``" function and add the following code to the "`doInBackground`" inner function:
+16. Finally, navigate to the "`refresh`" function and add the following code to the "`doInBackground`" inner function:
 
-        Query query = new Query();
-        if (mPreferences.getFilterCompleted()) {
-            query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
-        }
-        
-    Change the `getTasksByQuery` function call to pass the new `query` variable in argument.
+    ```java
+    Query query = new Query();
+    if (mPreferences.getFilterCompleted()) {
+        query.field("PercentComplete").lt(TaskModel.COMPLETED_MAX);
+    }
+    ```
+       
+    This creates and configures new `Query` object. The Query class is used to programatically
+    build OData query strings. It can be used to create fairly complicated queries!
 
-    The result should look like this:
+    This query is simple: Filter to items where the "PercentComplete" field is less than `COMPLETED_MAX` - 
+    i.e. return only tasks which are less than 100% complete.
 
-    ![](img/0205_update_refresh_function.png)
+    The resulting query string would be something like: `$filter=PercentComplete lt 100`.
+
+    Try exploring the Query class to see what other operations you can perform.
+
+17. Finally, change the `getTasksByQuery` function call to pass the new `query` variable in argument.
+
+    ```java
+    return new TaskListItemDataSource(mApplication).getTasksByQuery(query);
+    ```
+
+    Android Studio should report an error - `getTasksByQuery` does not accept any arguments!
+    We're going to change that next.
+
+18. Return to the `com.microsoft.o365_tasks.data.TaskListItemDataSource` class and locate the 
+    `getTasksByQuery` function.
+
+
+19. Change the function signature to add the `Query` argument:
+
+    ```java
+    public List<TaskModel> getTasksByQuery(Query query) throws Exception
+    ```
+
+20. Delete the statement `Query query = new Query();` and replace it with this:
+
+    ```java
+    if (query == null) {
+        query = new Query();
+    }
+    ```
 
 
 Done! These changes add a filter on the `PercentComplete` field to the OData query sent to SharePoint when the
@@ -649,7 +705,7 @@ Note that this setting is automatically persisted thanks to our use of the Andro
 
 In this task we will test the "Filter" function we just implemented.
 
-01. Start debugging the **o365-tasks** app with **Debug as > Android Application**. When the app launches, sign in.
+01. Start debugging the **o365-tasks** app with **Run > Debug 'app'**. When the app launches, sign in.
 
 02. When the List Tasks activity has loaded, tap the **Options menu** button in the top-right.
     Next, tap **Filter completed tasks** to confirm.
