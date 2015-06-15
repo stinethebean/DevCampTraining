@@ -10,7 +10,7 @@ In this lab, you will create a cloud development environment and build a cloud-h
 - Create a basic cloud-hosted app to test the environment
 
 ##Prerequisites
-- Visual Studio 2013 for Windows 8
+- Visual Studio 2013 for Windows 8.1 with O365 dev tools installed
 
 ##Exercises
 The hands-on lab includes the following exercises:<br/>
@@ -29,22 +29,87 @@ Follow these steps to sign up for an Office 365 developer subscription.
 1. Navigate to the [Office Dev Center](http://msdn.microsoft.com/en-us/library/office/fp179924(v=office.15).aspx)
 2. Under the heading **Sign up for an Office 365 Developer Site** click **Try It Free**.<br/>
   ![](img/1.png?raw=true "Figure 1")
-3. Fill out the form to obtain your trial Office 365 subscription.
-4. When completed, you will have a developer site in the [subscription].sharepoint.com domain located at the root of your subscription (e.g. https://mysubscription.sharepoint.com)
+3. Fill out the form with your personal information accordingly (phone number, email address , company name etc.) and click the ** next ** button below the form to move to next step. 
+    ![Configuration HTML](Images/1.png)
+
+4.  Choose your username and password and click the ** Next ** button below then move to next step. 
+    ![Configuration HTML](Images/1.1.png)
+
+5.  Enter your mobile phone number, click **Text me**
+    ![Configuration HTML](Images/1.2.png)
+6.  You should be able to recive a register code in a few minutes. Put the code to text box click **Create my account**
+    ![Configuration HTML](Images/1.3.png)
+
+7.  Remember the information and click the ** You're ready to go ** button below to start the provisioning process. 
+  a.  Notice that this is a trial tenant which does not cause you any additional costs, and you don’t have to continue using it afterwards.
+    ![Configuration HTML](Images/1.4.png)
+ 
+ 
+8.  Wait for the initial provisioning actions to be completed. This could take anywhere from a few minutes to a half an hour.
+    ![Configuration HTML](Images/1.6.png)
+
+9.  Click on **SharePoint** from the **Admin** menu. The SharePoint option will be available from the menu, when the tenant provisioning is completed.
+    ![Configuration HTML](Images/1.5.png)
+
+10.  Choose **Private Site Collection** from the **New** menu.
+    ![Configuration HTML](Images/4.png)
+
+11.  Request new site collection with following settings and click **OK** to proceed with the developer site collection creation
+  a.  Title – **Developer**
+  b.  Web Site Address – **http://[yourtenant].sharepoint.com/sites/dev**
+  c.  Template Selection – **Developer Site**
+  d.  Administrator – Your admin account which was provisioned during the tenant provisioning
+  e.  Storage Quota – **200 MB**
+    ![Configuration HTML](Images/5.png)
+ 
+12.  Creation of the site collection will take a while, but after it has been created, you are ready to proceed with the actual training exercises.
+  a.  Each of the exercise will use the just created developer site collection URL as the target site collection for testing and deploying, so you want to remember this URL during the exercises.
+
+You now have an Office 365 developer subscription to use with the remaining labs.
 
 You now have an Office 365 developer subscription to use with the remaining labs.
 
 ###Task 2 - Sign up for a Microsoft Azure trial subscription
 Follow these steps to sign up for an Azure trial subscription.
-
 1. Navigate to the [Azure Management Portal](https://manage.windowsazure.com)
-2. If prompted, log in using the credentials you created for your Office 365 subscription.
-3. After logging in, you should see a screen notifying you that you do not have a subscription<br/>
-   ![](img/2.png?raw=true "Figure 2")
-4. Click Sign Up for Microsoft Azure.
-5. Fill out the form to obtain your free trial.
+2. Log in with your account, or create one if you don't have one
+Here we will associate your Azure account with your O365 tenant as a global administrator.
+This gives you the ability to manage the O365 directory using the Azure portal.
 
-You now have a Microsoft Azure trial subscription to use with the remaining labs.
+
+01. Sign into the [Azure Portal](https://manage.windowsazure.com/)
+
+02. Click **+ New**
+
+    ![](img/0001_azure_portal_new_button.png)
+
+03. Select **App Services > Active Directory > Directory > Custom Create**
+
+    ![](img/0005_custom_create_active_directory.png)
+
+04. Select **Use existing directory**, and then **I am ready to be signed out now**
+
+    ![](img/00010_use_existing_directory.png)
+
+05. You will be signed out of the portal and redirected to a sign-in page. Sign in using the credentials for a global
+    administrator in your O365 tenant.
+
+    ![](img/00015_sign_in_as_directory_global_admin.png)
+
+06. When authenticated click **continue**. This will add your Azure account as a global administrator of the O365
+    directory.
+
+    ![](img/00020_accept_confirmation_dialog.png)
+
+07. Click **Sign out now** and when prompted sign back into your Azure account.
+
+    ![](img/00025_sign_out_and_sign_back_in.png)
+
+
+You have successfully associated your Azure account with your O365 tenant as a global administrator.
+This gives you the ability to manage the O365 directory using the Azure portal.
+
+You now can now use your Microsoft Azure  subscription to use with the remaining labs.
 
 <a name="Exercise2"></a>
 ##Exercise 2: Create a Provider-Hosted App
