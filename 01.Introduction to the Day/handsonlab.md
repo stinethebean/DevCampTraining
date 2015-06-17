@@ -1,6 +1,6 @@
 ##Create an Excel add-in using the Napa Development Tools
 ### Go to the Napa Tools
-1. Navigate to [http://www.napacloudapp.com/](http://napacloudapp.com)
+1. Navigate to [https://www.napacloudapp.com/](https://napacloudapp.com)
 2. Log in ![](http://i.imgur.com/S3g6syA.jpg)
 
 ### Create an add-in for Excel
